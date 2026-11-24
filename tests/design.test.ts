@@ -272,7 +272,7 @@ describe('Design Tokens, 53×7 Grid Geometry & Components (src/design/tokens.ts 
       y: 200,
       width: 400,
       height: 300,
-      bg: '#F4F03A',
+      bg: '#6BE8F2',
       fg: '#111111',
       label: 'LEFT THERE',
       valueFormatted: '2,184',
@@ -312,8 +312,8 @@ describe('Design Tokens, 53×7 Grid Geometry & Components (src/design/tokens.ts 
     expect(streakSvg).toContain('<svg');
 
     const compSvg = renderComparisonBarsSvg([
-      { label: 'January Purchase', valueFormatted: 'US$1,850', ratio: 1, color: '#F4F03A' },
-      { label: 'Typical Week', valueFormatted: 'US$420', ratio: 0.23, color: '#FFA8E4' },
+      { label: 'January Purchase', valueFormatted: 'US$1,850', ratio: 1, color: '#6BE8F2' },
+      { label: 'Typical Week', valueFormatted: 'US$420', ratio: 0.23, color: '#C9B8F0' },
     ]);
     expect(compSvg).toContain('JANUARY PURCHASE');
   });

@@ -12,29 +12,29 @@ export type RGBTuple = [number, number, number];
 
 export const CORE_COLORS = {
   ink: '#111111',
-  bone: '#F3F0E6',
-  paper: '#E6E4DE',
-  ghostOnInk: '#1C1C1B',
-  ghostOnBone: '#DCD8CA',
-  emptyCell: '#232322',
-  dimCell: '#1B1B1A',
-  quietCell: '#2C2C2A',
-  ruleDark: '#3A3A38',
-  ruleLight: '#C9C5BA',
-  mutedTextOnInk: '#B8B4A9',
-  mutedTextOnBone: '#4A4842',
-  solar: '#F4F03A',
-  rose: '#FFA8E4',
-  olive: '#B9B744',
-  ember: '#FF5A14',
-  ochre: '#E3A83C',
-  coral: '#FF6B57',
+  bone: '#E8EEF2',
+  paper: '#DDE6EE',
+  ghostOnInk: '#161E26',
+  ghostOnBone: '#C7D2DD',
+  emptyCell: '#232A33',
+  dimCell: '#141A21',
+  quietCell: '#2A323D',
+  ruleDark: '#3A4552',
+  ruleLight: '#C7D2DD',
+  mutedTextOnInk: '#AEBAC7',
+  mutedTextOnBone: '#4A5568',
+  solar: '#6BE8F2',
+  rose: '#C9B8F0',
+  olive: '#2DD4BF',
+  ember: '#6E8BFF',
+  ochre: '#38BDF8',
+  coral: '#E8799B',
   lavender: '#A9A2E0',
   mint: '#B9F0C6',
   cobalt: '#6E8BFF',
-  lime: '#D7F246',
+  lime: '#7DD3FC',
   cyan: '#6BE8F2',
-  peach: '#FFB58A',
+  peach: '#A8C6F0',
 } as const;
 
 /**
@@ -130,23 +130,23 @@ export interface CategoryMeta {
 }
 
 export const CATEGORY_COLORS: Record<Category, string> = {
-  groceries: '#B9B744', // Olive
-  'eating out': '#FF6B57', // Vermilion Coral
-  takeaway: '#FF884D', // Tangerine
-  coffee: '#E3A83C', // Warm Ochre
+  groceries: '#2DD4BF', // Teal
+  'eating out': '#E8799B', // Cool Rose Red
+  takeaway: '#38BDF8', // Sky Blue
+  coffee: '#7AA8F5', // Steel Blue
   transport: '#A9A2E0', // Lavender
   travel: '#6E8BFF', // Electric Cobalt
-  shopping: '#FFA8E4', // Rose Pink
-  fun: '#F4F03A', // Solar Yellow
-  subscriptions: '#6BE8F2', // Cyan Ice
+  shopping: '#C9B8F0', // Lilac
+  fun: '#C084FC', // Cool Violet
+  subscriptions: '#7CE0C3', // Aqua
   bills: '#B9F0C6', // Mint
-  rent: '#D7F246', // Acid Lime
-  health: '#98E690', // Sage Green
-  gifts: '#FFB58A', // Warm Peach
-  fees: '#D4CFC2', // Stone Bone
-  savings: '#8FD6FF', // Sky Blue
-  transfers: '#A8A49B', // Neutral Warm Grey
-  income: '#FF5A14', // Payday Ember Orange
+  rent: '#8FD6FF', // Sky Blue
+  health: '#7ED9B0', // Mint Teal
+  gifts: '#EC9FD8', // Cool Pink
+  fees: '#B9C9D9', // Slate Blue-Grey
+  savings: '#93C5FD', // Light Blue
+  transfers: '#8A99A8', // Neutral Slate Grey
+  income: '#22D3EE', // Bright Cyan
 };
 
 export const CATEGORY_LABELS: Record<Category, string> = {
@@ -191,11 +191,11 @@ export const CATEGORY_META: Record<Category, CategoryMeta> = Object.fromEntries(
  * matching the Blocks v2 visual direction.
  */
 export const GRID_INTENSITY_STEPS_RGB: readonly RGBTuple[] = [
-  hexToRgb('#2C2C2A'), // Step 0: Quiet / near-zero
-  mixRgb(hexToRgb('#262626'), hexToRgb(CORE_COLORS.solar), 0.3), // Step 1: Low
-  mixRgb(hexToRgb('#262626'), hexToRgb(CORE_COLORS.solar), 0.62), // Step 2: Medium
-  hexToRgb(CORE_COLORS.solar), // Step 3: High (Solar Yellow)
-  hexToRgb(CORE_COLORS.bone), // Step 4: Loudest (Warm Bone)
+  hexToRgb('#2A323D'), // Step 0: Quiet / near-zero
+  mixRgb(hexToRgb('#1F2833'), hexToRgb(CORE_COLORS.solar), 0.3), // Step 1: Low
+  mixRgb(hexToRgb('#1F2833'), hexToRgb(CORE_COLORS.solar), 0.62), // Step 2: Medium
+  hexToRgb(CORE_COLORS.solar), // Step 3: High (Ice Cyan)
+  hexToRgb(CORE_COLORS.bone), // Step 4: Loudest (Cool Bone)
 ];
 
 export const GRID_INTENSITY_STEPS_HEX: readonly string[] = GRID_INTENSITY_STEPS_RGB.map(rgbToHex);
@@ -220,31 +220,31 @@ export function getIntensityBucket(spendMinor: number, p97Minor: number): 0 | 1 
 export const PALETTES: Record<string, PaletteTheme> = {
   ink_solar: {
     id: 'ink_solar',
-    name: 'Ink & Solar Yellow',
+    name: 'Ink & Ice Cyan',
     bg: '#111111',
-    fg: '#F3F0E6',
-    accent: '#F4F03A',
-    secondary: '#FF5A14',
-    muted: '#B8B4A9',
+    fg: '#E8EEF2',
+    accent: '#6BE8F2',
+    secondary: '#6E8BFF',
+    muted: '#AEBAC7',
     blocks: {
-      primary: { bg: '#F4F03A', fg: '#111111' },
-      secondary: { bg: '#FFA8E4', fg: '#111111' },
-      tertiary: { bg: '#FF5A14', fg: '#111111' },
+      primary: { bg: '#6BE8F2', fg: '#111111' },
+      secondary: { bg: '#C9B8F0', fg: '#111111' },
+      tertiary: { bg: '#6E8BFF', fg: '#111111' },
       quaternary: { bg: '#A9A2E0', fg: '#111111' },
     },
   },
   solar_ember: {
     id: 'solar_ember',
-    name: 'Solar & Ember Poster',
+    name: 'Ice Cyan & Cobalt Poster',
     bg: '#111111',
-    fg: '#F3F0E6',
-    accent: '#F4F03A',
-    secondary: '#FF5A14',
-    muted: '#B8B4A9',
+    fg: '#E8EEF2',
+    accent: '#6BE8F2',
+    secondary: '#6E8BFF',
+    muted: '#AEBAC7',
     blocks: {
-      primary: { bg: '#F4F03A', fg: '#111111' },
-      secondary: { bg: '#FF5A14', fg: '#111111' },
-      tertiary: { bg: '#FFA8E4', fg: '#111111' },
+      primary: { bg: '#6BE8F2', fg: '#111111' },
+      secondary: { bg: '#6E8BFF', fg: '#111111' },
+      tertiary: { bg: '#C9B8F0', fg: '#111111' },
       quaternary: { bg: '#A9A2E0', fg: '#111111' },
     },
   },
@@ -252,105 +252,105 @@ export const PALETTES: Record<string, PaletteTheme> = {
     id: 'ink_rose',
     name: 'Ink & Rose Matrix',
     bg: '#111111',
-    fg: '#F3F0E6',
-    accent: '#FFA8E4',
-    secondary: '#F4F03A',
-    muted: '#B8B4A9',
+    fg: '#E8EEF2',
+    accent: '#C9B8F0',
+    secondary: '#6BE8F2',
+    muted: '#AEBAC7',
     blocks: {
-      primary: { bg: '#FFA8E4', fg: '#111111' },
-      secondary: { bg: '#F4F03A', fg: '#111111' },
+      primary: { bg: '#C9B8F0', fg: '#111111' },
+      secondary: { bg: '#6BE8F2', fg: '#111111' },
       tertiary: { bg: '#B9F0C6', fg: '#111111' },
       quaternary: { bg: '#6E8BFF', fg: '#111111' },
     },
   },
   paper_studio: {
     id: 'paper_studio',
-    name: 'Warm Bone & Studio Ink',
+    name: 'Cool Bone & Studio Cobalt',
     bg: '#111111',
-    fg: '#F3F0E6',
-    accent: '#FF5A14',
-    secondary: '#B9B744',
-    muted: '#B8B4A9',
+    fg: '#E8EEF2',
+    accent: '#6E8BFF',
+    secondary: '#2DD4BF',
+    muted: '#AEBAC7',
     blocks: {
-      primary: { bg: '#F3F0E6', fg: '#111111' },
-      secondary: { bg: '#FF5A14', fg: '#111111' },
-      tertiary: { bg: '#B9B744', fg: '#111111' },
-      quaternary: { bg: '#F4F03A', fg: '#111111' },
+      primary: { bg: '#E8EEF2', fg: '#111111' },
+      secondary: { bg: '#6E8BFF', fg: '#111111' },
+      tertiary: { bg: '#2DD4BF', fg: '#111111' },
+      quaternary: { bg: '#6BE8F2', fg: '#111111' },
     },
   },
   olive_lime: {
     id: 'olive_lime',
-    name: 'Olive & Acid Lime',
+    name: 'Sky & Teal',
     bg: '#111111',
-    fg: '#F3F0E6',
-    accent: '#D7F246',
-    secondary: '#B9B744',
-    muted: '#B8B4A9',
+    fg: '#E8EEF2',
+    accent: '#7DD3FC',
+    secondary: '#2DD4BF',
+    muted: '#AEBAC7',
     blocks: {
-      primary: { bg: '#D7F246', fg: '#111111' },
-      secondary: { bg: '#B9B744', fg: '#111111' },
-      tertiary: { bg: '#E3A83C', fg: '#111111' },
+      primary: { bg: '#7DD3FC', fg: '#111111' },
+      secondary: { bg: '#2DD4BF', fg: '#111111' },
+      tertiary: { bg: '#38BDF8', fg: '#111111' },
       quaternary: { bg: '#B9F0C6', fg: '#111111' },
     },
   },
   lavender_night: {
     id: 'lavender_night',
-    name: 'Lavender & Coral Night',
+    name: 'Lavender & Rose Night',
     bg: '#111111',
-    fg: '#F3F0E6',
+    fg: '#E8EEF2',
     accent: '#A9A2E0',
-    secondary: '#FFA8E4',
-    muted: '#B8B4A9',
+    secondary: '#C9B8F0',
+    muted: '#AEBAC7',
     blocks: {
       primary: { bg: '#A9A2E0', fg: '#111111' },
-      secondary: { bg: '#FFA8E4', fg: '#111111' },
-      tertiary: { bg: '#F4F03A', fg: '#111111' },
-      quaternary: { bg: '#FF6B57', fg: '#111111' },
+      secondary: { bg: '#C9B8F0', fg: '#111111' },
+      tertiary: { bg: '#6BE8F2', fg: '#111111' },
+      quaternary: { bg: '#E8799B', fg: '#111111' },
     },
   },
   cobalt_bone: {
     id: 'cobalt_bone',
     name: 'Electric Cobalt & Bone',
     bg: '#111111',
-    fg: '#F3F0E6',
+    fg: '#E8EEF2',
     accent: '#6E8BFF',
-    secondary: '#F4F03A',
-    muted: '#B8B4A9',
+    secondary: '#6BE8F2',
+    muted: '#AEBAC7',
     blocks: {
       primary: { bg: '#6E8BFF', fg: '#111111' },
-      secondary: { bg: '#F3F0E6', fg: '#111111' },
-      tertiary: { bg: '#F4F03A', fg: '#111111' },
+      secondary: { bg: '#E8EEF2', fg: '#111111' },
+      tertiary: { bg: '#6BE8F2', fg: '#111111' },
       quaternary: { bg: '#B9F0C6', fg: '#111111' },
     },
   },
   crimson_ink: {
     id: 'crimson_ink',
-    name: 'Vermilion Coral & Ochre',
+    name: 'Rose Red & Sky',
     bg: '#111111',
-    fg: '#F3F0E6',
-    accent: '#FF6B57',
-    secondary: '#E3A83C',
-    muted: '#B8B4A9',
+    fg: '#E8EEF2',
+    accent: '#E8799B',
+    secondary: '#38BDF8',
+    muted: '#AEBAC7',
     blocks: {
-      primary: { bg: '#FF6B57', fg: '#111111' },
-      secondary: { bg: '#E3A83C', fg: '#111111' },
-      tertiary: { bg: '#F4F03A', fg: '#111111' },
-      quaternary: { bg: '#F3F0E6', fg: '#111111' },
+      primary: { bg: '#E8799B', fg: '#111111' },
+      secondary: { bg: '#38BDF8', fg: '#111111' },
+      tertiary: { bg: '#6BE8F2', fg: '#111111' },
+      quaternary: { bg: '#E8EEF2', fg: '#111111' },
     },
   },
   mint_obsidian: {
     id: 'mint_obsidian',
     name: 'Mint & Obsidian',
     bg: '#111111',
-    fg: '#F3F0E6',
+    fg: '#E8EEF2',
     accent: '#B9F0C6',
-    secondary: '#F4F03A',
-    muted: '#B8B4A9',
+    secondary: '#6BE8F2',
+    muted: '#AEBAC7',
     blocks: {
       primary: { bg: '#B9F0C6', fg: '#111111' },
-      secondary: { bg: '#F4F03A', fg: '#111111' },
+      secondary: { bg: '#6BE8F2', fg: '#111111' },
       tertiary: { bg: '#A9A2E0', fg: '#111111' },
-      quaternary: { bg: '#FF5A14', fg: '#111111' },
+      quaternary: { bg: '#6E8BFF', fg: '#111111' },
     },
   },
 };

@@ -24,23 +24,23 @@ export const GRID_PRESETS: Record<
 };
 
 export const CATEGORY_COLORS: Record<Category, string> = {
-  groceries: '#B9B744',
-  'eating out': '#FF6B57',
-  takeaway: '#FF8552',
-  coffee: '#E3A83C',
+  groceries: '#2DD4BF',
+  'eating out': '#E8799B',
+  takeaway: '#38BDF8',
+  coffee: '#7AA8F5',
   transport: '#A9A2E0',
   travel: '#6E8BFF',
-  shopping: '#FFA8E4',
+  shopping: '#C9B8F0',
   bills: '#B9F0C6',
   subscriptions: '#7CE0C3',
-  health: '#8FD6FF',
-  fun: '#F4F03A',
-  gifts: '#FFB8D1',
-  rent: '#8E8A7F',
-  fees: '#9E6B6B',
-  savings: '#A3D977',
-  transfers: '#555552',
-  income: '#FF5A14',
+  health: '#7ED9B0',
+  fun: '#C084FC',
+  gifts: '#EC9FD8',
+  rent: '#8FD6FF',
+  fees: '#B9C9D9',
+  savings: '#93C5FD',
+  transfers: '#8A99A8',
+  income: '#22D3EE',
 };
 
 export const DISPLAY_CATEGORIES: readonly { key: Category; label: string; color: string }[] = [
@@ -172,20 +172,20 @@ export interface RingVisual {
 
 export const RGB_PALETTE = {
   ink: hexToRgb('#111111'),
-  bone: hexToRgb('#F3F0E6'),
-  c1: hexToRgb('#F4F03A'),
-  c2: hexToRgb('#FFA8E4'),
-  c3: hexToRgb('#B9B744'),
-  c4: hexToRgb('#FF5A14'),
+  bone: hexToRgb('#E8EEF2'),
+  c1: hexToRgb('#6BE8F2'),
+  c2: hexToRgb('#C9B8F0'),
+  c3: hexToRgb('#2DD4BF'),
+  c4: hexToRgb('#6E8BFF'),
   lav: hexToRgb('#A9A2E0'),
-  empty: hexToRgb('#232322'),
-  dim: hexToRgb('#1B1B1A'),
+  empty: hexToRgb('#232A33'),
+  dim: hexToRgb('#141A21'),
 };
 
 export const SPEND_STEPS_RGB: readonly RGB[] = [
-  hexToRgb('#2C2C2A'),
-  mixRgb(hexToRgb('#262626'), RGB_PALETTE.c1, 0.3),
-  mixRgb(hexToRgb('#262626'), RGB_PALETTE.c1, 0.62),
+  hexToRgb('#2A323D'),
+  mixRgb(hexToRgb('#1F2833'), RGB_PALETTE.c1, 0.3),
+  mixRgb(hexToRgb('#1F2833'), RGB_PALETTE.c1, 0.62),
   RGB_PALETTE.c1,
   RGB_PALETTE.bone,
 ];
@@ -419,7 +419,7 @@ export class InteractiveGrid {
     const particleSource = transactions.filter((t) => !t.is_transfer);
     particleSource.forEach((t, idx) => {
       const dayIdx = dateToIndex.get(t.date) ?? 0;
-      const catRgb = hexToRgb(CATEGORY_COLORS[t.category] ?? '#F3F0E6');
+      const catRgb = hexToRgb(CATEGORY_COLORS[t.category] ?? '#E8EEF2');
       this.particles.push({
         txn: t,
         dayIndex: dayIdx,
@@ -578,7 +578,7 @@ export class InteractiveGrid {
       d: opts.d ?? 0.6,
       r0: opts.r0 ?? 14,
       r1: opts.r1 ?? 90,
-      c: opts.c ?? '#FF5A14',
+      c: opts.c ?? '#6E8BFF',
       lw: opts.lw ?? 2,
       sq: opts.sq !== false,
     });
@@ -724,7 +724,7 @@ export class InteractiveGrid {
       catTxns.length > 0
         ? catTxns.reduce((acc, t) => acc + t.amount_minor, 0) / catTxns.length
         : 2500;
-    const catRgb = category ? hexToRgb(CATEGORY_COLORS[category] ?? '#F4F03A') : RGB_PALETTE.c1;
+    const catRgb = category ? hexToRgb(CATEGORY_COLORS[category] ?? '#6BE8F2') : RGB_PALETTE.c1;
 
     this.days.forEach((v, i) => {
       const dist = Math.hypot(v.x - originX, v.y - originY);
@@ -748,7 +748,7 @@ export class InteractiveGrid {
           count += matching.length;
           for (const t of matching) matchingTxnIds.push(t.id);
           const q = Math.min(1, Math.sqrt(dayCatMinor / (avgCatTxnMinor * 2.2)));
-          const col = mixRgb(hexToRgb('#2A2A28'), catRgb, 0.35 + 0.65 * q);
+          const col = mixRgb(hexToRgb('#232A33'), catRgb, 0.35 + 0.65 * q);
           this.tweenColor(v, col, 0.24, delay);
         } else {
           this.tweenColor(v, RGB_PALETTE.dim, 0.24, delay);
@@ -765,7 +765,7 @@ export class InteractiveGrid {
         r0: 10,
         r1: 1500,
         d: 1500 * waveSpeed * 1.05,
-        c: category ? (CATEGORY_COLORS[category] ?? '#F3F0E6') : '#F3F0E6',
+        c: category ? (CATEGORY_COLORS[category] ?? '#E8EEF2') : '#E8EEF2',
         lw: 2,
         sq: false,
       });
@@ -816,7 +816,7 @@ export class InteractiveGrid {
           return {
             key: cat,
             label,
-            color: CATEGORY_COLORS[cat] ?? '#F4F03A',
+            color: CATEGORY_COLORS[cat] ?? '#6BE8F2',
           };
         });
       if (active.length > 0) {
@@ -864,7 +864,7 @@ export class InteractiveGrid {
 
     if (opts.dows !== false) {
       'MTWTFSS'.split('').forEach((ch, r) => {
-        html += `<div class="lab dt" style="position:absolute;left:${geom.x - 24}px;top:${geom.y + r * geom.p + geom.c / 2 - 9}px;font-size:11px;color:#C9C5BA">${ch}</div>`;
+        html += `<div class="lab dt" style="position:absolute;left:${geom.x - 24}px;top:${geom.y + r * geom.p + geom.c / 2 - 9}px;font-size:11px;color:#C7D2DD">${ch}</div>`;
       });
     }
 
@@ -876,7 +876,7 @@ export class InteractiveGrid {
         const isPay = v.day.is_payday;
         const w = isPay ? 2 : 1;
         const h = isPay ? 22 : isMonthStart ? 14 : 6;
-        const fill = isPay ? '#FF5A14' : '#F3F0E6';
+        const fill = isPay ? '#6E8BFF' : '#E8EEF2';
         const op = isPay || isMonthStart ? '' : 'opacity="0.55"';
         rects += `<rect x="${x}" y="0" width="${w}" height="${h}" fill="${fill}" ${op}/>`;
       });
@@ -899,7 +899,7 @@ export class InteractiveGrid {
         .join('');
       html += `<div class="lab dt" style="position:absolute;left:${geom.x}px;top:${y}px;font-size:12px;display:flex;gap:18px;align-items:center;white-space:nowrap">
         <span style="display:flex;gap:4px;align-items:center">QUIET&nbsp;${stepSwatches}&nbsp;LOUD</span>
-        <span data-milestone-label="${this.milestoneLabel}" style="display:flex;gap:7px;align-items:center"><i style="display:inline-block;width:13px;height:13px;background:#FF5A14"></i>${milestoneDisplay}</span>
+        <span data-milestone-label="${this.milestoneLabel}" style="display:flex;gap:7px;align-items:center"><i style="display:inline-block;width:13px;height:13px;background:#6E8BFF"></i>${milestoneDisplay}</span>
         <span>1 SQUARE = 1 DAY · MONDAY ON TOP${opts.note ? ' · ' + opts.note.toUpperCase() : ''}</span>
       </div>
       <div class="lab dt" data-testid="grid-category-legend" style="position:absolute;left:${geom.x}px;top:${y + 22}px;font-size:10px;display:flex;gap:14px;align-items:center;white-space:nowrap;opacity:0.82">
@@ -1094,7 +1094,7 @@ export class InteractiveGrid {
   private drawLensBracket(): void {
     const ctx = this.ctx;
     ctx.globalAlpha = this.lensBracketAlpha;
-    ctx.strokeStyle = '#F4F03A';
+    ctx.strokeStyle = '#6BE8F2';
     ctx.lineWidth = 1.5;
     const x = 2 * 174.5 + 2;
     const y = 30 * 13.5 - 2;
@@ -1148,7 +1148,7 @@ export class InteractiveGrid {
         ctx.lineTo(x + h, y + h);
       }
     }
-    ctx.strokeStyle = '#F3F0E6';
+    ctx.strokeStyle = '#E8EEF2';
     ctx.lineWidth = 2.5;
     ctx.setLineDash([9, 6]);
     ctx.lineDashOffset = -this.clockSec * 48;

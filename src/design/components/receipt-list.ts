@@ -53,7 +53,7 @@ export function renderReceiptListHtml(
     .map((tx) => {
       const meta = CATEGORY_META[tx.category];
       const swatch = showSwatch
-        ? `<i class="sw" style="background:${meta?.color ?? '#F4F03A'}"></i>`
+        ? `<i class="sw" style="background:${meta?.color ?? '#6BE8F2'}"></i>`
         : '';
       const dateCol = showDate ? `<span class="dt-col">${escapeHtml(formatShortIsoDate(tx.date))}</span>` : '';
       const amtFormatted = formatMoneyMinor(tx.amount_minor, {

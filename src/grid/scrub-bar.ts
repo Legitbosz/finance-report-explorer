@@ -134,7 +134,7 @@ export class ScrubBar {
       if (!seenMonths.has(v.month)) {
         seenMonths.add(v.month);
         const col = Math.floor((i + firstWeekday) / 7);
-        monthTicks += `<div style="position:absolute;left:${col * geom.p}px;top:12px;width:1px;height:16px;background:#77746C"></div>`;
+        monthTicks += `<div style="position:absolute;left:${col * geom.p}px;top:12px;width:1px;height:16px;background:#7A8A9B"></div>`;
       }
     });
 
@@ -148,7 +148,7 @@ export class ScrubBar {
 
     return `
       <div class="dt" id="scrub" data-testid="scrub-track" style="position:absolute;left:${geom.x}px;top:600px;width:${53 * geom.p}px;height:40px;cursor:ew-resize;pointer-events:auto;">
-        <div style="position:absolute;left:0;right:0;top:19px;height:2px;background:#4A4A47"></div>
+        <div style="position:absolute;left:0;right:0;top:19px;height:2px;background:#46536A"></div>
         ${monthTicks}
         <div id="scrubfill" style="position:absolute;left:0;top:18px;height:4px;background:var(--bone);width:100%;transform-origin:0 50%"></div>
       </div>
@@ -199,8 +199,8 @@ export class ScrubBar {
     for (const btn of this.speedBtns) {
       const on = Number(btn.dataset.speed) === speed;
       btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-      btn.style.background = on ? 'var(--bone, #F3F0E6)' : 'transparent';
-      btn.style.color = on ? 'var(--ink, #111111)' : 'var(--bone, #F3F0E6)';
+      btn.style.background = on ? 'var(--bone, #E8EEF2)' : 'transparent';
+      btn.style.color = on ? 'var(--ink, #111111)' : 'var(--bone, #E8EEF2)';
     }
     this.callbacks.onLogEvent?.('explore.speed', speed);
   }
@@ -302,9 +302,9 @@ export class ScrubBar {
     );
     const sumMinor = matching.reduce((acc, t) => acc + t.amount_minor, 0);
     if (sumMinor <= 0) return RGB_PALETTE.dim;
-    const catRgb = hexToRgb(CATEGORY_COLORS[this.activeLens] ?? '#F4F03A');
+    const catRgb = hexToRgb(CATEGORY_COLORS[this.activeLens] ?? '#6BE8F2');
     const q = Math.min(1, Math.sqrt(sumMinor / 6000));
-    return mixRgb(hexToRgb('#2A2A28'), catRgb, 0.35 + 0.65 * q);
+    return mixRgb(hexToRgb('#232A33'), catRgb, 0.35 + 0.65 * q);
   }
 
   public drawScrubPlayhead(geom: GridGeometry = GRID_PRESETS.explore): void {

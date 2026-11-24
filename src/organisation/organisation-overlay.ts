@@ -42,7 +42,7 @@ export class OrganisationOverlay {
     this.layerEl.id = 'o-organisation';
     this.layerEl.dataset.testid = 'organisation-overlay';
     this.layerEl.style.cssText =
-      'position:absolute;inset:0;visibility:hidden;pointer-events:none;background:var(--ink, #111111);color:var(--bone, #F3F0E6);z-index:12;';
+      'position:absolute;inset:0;visibility:hidden;pointer-events:none;background:var(--ink, #111111);color:var(--bone, #E8EEF2);z-index:12;';
     overParent.appendChild(this.layerEl);
   }
 
@@ -102,13 +102,13 @@ export class OrganisationOverlay {
   private statusColor(status: OrganisationStatus): string {
     switch (status) {
       case 'over_budget':
-        return '#FF6B57';
+        return '#E8799B';
       case 'near_limit':
-        return '#F4F03A';
+        return '#6BE8F2';
       case 'on_track':
         return '#B9F0C6';
       default:
-        return '#8E8A7F';
+        return '#8A99A8';
     }
   }
 
@@ -142,7 +142,7 @@ export class OrganisationOverlay {
 
     this.layerEl.innerHTML = `
       <div class="lab" style="position:absolute;left:64px;top:92px;">ORGANISATION · STAFF, DEPARTMENTS & BRANCHES</div>
-      <div class="lab" style="position:absolute;left:64px;top:122px;font-size:12px;color:#B8B4A9;">${perf.totalStaff} STAFF · ${this.state.branches.length} BRANCHES · ${this.state.departments.length} DEPARTMENTS · ${this.state.units.length} UNITS · SAVED LOCALLY IN YOUR BROWSER</div>
+      <div class="lab" style="position:absolute;left:64px;top:122px;font-size:12px;color:#AEBAC7;">${perf.totalStaff} STAFF · ${this.state.branches.length} BRANCHES · ${this.state.departments.length} DEPARTMENTS · ${this.state.units.length} UNITS · SAVED LOCALLY IN YOUR BROWSER</div>
 
       <div style="position:absolute;right:64px;top:86px;display:flex;gap:10px;align-items:center;pointer-events:auto;">
         <button type="button" class="btn" id="org-budgets-btn" data-testid="org-budgets-btn" style="border-color:var(--bone);color:var(--bone)">Budgets [B]</button>
@@ -155,60 +155,60 @@ export class OrganisationOverlay {
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;">${this.escapeHtml(this.formatAmount(perf.totalAllocatedMinor))}</div>
           <div class="lab" style="font-size:11px;opacity:0.85;">ACROSS ALL UNITS</div>
         </div>
-        <div data-testid="org-summary-actual" style="background:#161615;border:1.5px solid #3A3A38;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
-          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#B8B4A9;">TOTAL ACTUAL SPEND</div>
+        <div data-testid="org-summary-actual" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#AEBAC7;">TOTAL ACTUAL SPEND</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;">${this.escapeHtml(this.formatAmount(perf.totalActualMinor))}</div>
-          <div class="lab" style="font-size:11px;color:#B8B4A9;">${perf.totalAllocatedMinor > 0 ? `${((perf.totalActualMinor / perf.totalAllocatedMinor) * 100).toFixed(1)}% OF ALLOCATED` : 'NO BUDGETS SET YET'}</div>
+          <div class="lab" style="font-size:11px;color:#AEBAC7;">${perf.totalAllocatedMinor > 0 ? `${((perf.totalActualMinor / perf.totalAllocatedMinor) * 100).toFixed(1)}% OF ALLOCATED` : 'NO BUDGETS SET YET'}</div>
         </div>
-        <div data-testid="org-summary-best" style="background:#161615;border:1.5px solid #3A3A38;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
-          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#B8B4A9;">BEST PERFORMING UNIT</div>
+        <div data-testid="org-summary-best" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#AEBAC7;">BEST PERFORMING UNIT</div>
           <div style="font-size:24px;font-weight:400;line-height:1.15;">${perf.bestUnits.length > 0 ? this.escapeHtml(perf.bestUnits[0]!.name) : '—'}</div>
           <div class="lab" style="font-size:11px;color:#B9F0C6;">${perf.bestUnits.length > 0 ? `${perf.bestUnits[0]!.percentUsed.toFixed(1)}% USED` : 'SET A UNIT BUDGET TO RANK'}</div>
         </div>
-        <div data-testid="org-summary-worst" style="background:#161615;border:1.5px solid #3A3A38;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
-          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#B8B4A9;">WORST PERFORMING UNIT</div>
+        <div data-testid="org-summary-worst" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#AEBAC7;">WORST PERFORMING UNIT</div>
           <div style="font-size:24px;font-weight:400;line-height:1.15;">${perf.worstUnits.length > 0 ? this.escapeHtml(perf.worstUnits[0]!.name) : '—'}</div>
-          <div class="lab" style="font-size:11px;color:#FF6B57;">${perf.worstUnits.length > 0 ? `${perf.worstUnits[0]!.percentUsed.toFixed(1)}% USED` : 'SET A UNIT BUDGET TO RANK'}</div>
+          <div class="lab" style="font-size:11px;color:#E8799B;">${perf.worstUnits.length > 0 ? `${perf.worstUnits[0]!.percentUsed.toFixed(1)}% USED` : 'SET A UNIT BUDGET TO RANK'}</div>
         </div>
       </div>
 
       <div data-testid="org-forms" style="position:absolute;left:64px;right:64px;top:330px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;">
-        <div style="background:#161615;border:1.5px solid #3A3A38;padding:14px;display:flex;flex-direction:column;gap:8px;">
-          <div class="lab" style="font-size:11px;color:#B8B4A9;">ADD BRANCH / REGION</div>
-          <input id="org-branch-name" data-testid="org-branch-name" type="text" placeholder="e.g. Lagos HQ" style="padding:9px 10px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;" />
-          <input id="org-branch-state" data-testid="org-branch-state" type="text" placeholder="State / region e.g. Lagos" style="padding:9px 10px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;" />
+        <div style="background:#131A21;border:1.5px solid #3A4552;padding:14px;display:flex;flex-direction:column;gap:8px;">
+          <div class="lab" style="font-size:11px;color:#AEBAC7;">ADD BRANCH / REGION</div>
+          <input id="org-branch-name" data-testid="org-branch-name" type="text" placeholder="e.g. Lagos HQ" style="padding:9px 10px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;" />
+          <input id="org-branch-state" data-testid="org-branch-state" type="text" placeholder="State / region e.g. Lagos" style="padding:9px 10px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;" />
           <button type="button" class="btn primary" id="org-add-branch-btn" data-testid="org-add-branch-btn" style="background:var(--c1);color:var(--ink);border-color:var(--c1)">Add branch</button>
         </div>
-        <div style="background:#161615;border:1.5px solid #3A3A38;padding:14px;display:flex;flex-direction:column;gap:8px;">
-          <div class="lab" style="font-size:11px;color:#B8B4A9;">ADD DEPARTMENT</div>
-          <select id="org-dept-branch" data-testid="org-dept-branch" style="padding:9px 10px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;">${branchOptions || '<option value="">Add a branch first</option>'}</select>
-          <input id="org-dept-name" data-testid="org-dept-name" type="text" placeholder="e.g. Operations" style="padding:9px 10px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;" />
+        <div style="background:#131A21;border:1.5px solid #3A4552;padding:14px;display:flex;flex-direction:column;gap:8px;">
+          <div class="lab" style="font-size:11px;color:#AEBAC7;">ADD DEPARTMENT</div>
+          <select id="org-dept-branch" data-testid="org-dept-branch" style="padding:9px 10px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;">${branchOptions || '<option value="">Add a branch first</option>'}</select>
+          <input id="org-dept-name" data-testid="org-dept-name" type="text" placeholder="e.g. Operations" style="padding:9px 10px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;" />
           <button type="button" class="btn primary" id="org-add-dept-btn" data-testid="org-add-dept-btn" style="background:var(--c1);color:var(--ink);border-color:var(--c1)">Add department</button>
         </div>
-        <div style="background:#161615;border:1.5px solid #3A3A38;padding:14px;display:flex;flex-direction:column;gap:8px;">
-          <div class="lab" style="font-size:11px;color:#B8B4A9;">ADD UNIT (BUDGET + ACTUAL)</div>
-          <select id="org-unit-dept" data-testid="org-unit-dept" style="padding:9px 10px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;">${deptOptions || '<option value="">Add a department first</option>'}</select>
-          <input id="org-unit-name" data-testid="org-unit-name" type="text" placeholder="e.g. Field Team" style="padding:9px 10px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;" />
+        <div style="background:#131A21;border:1.5px solid #3A4552;padding:14px;display:flex;flex-direction:column;gap:8px;">
+          <div class="lab" style="font-size:11px;color:#AEBAC7;">ADD UNIT (BUDGET + ACTUAL)</div>
+          <select id="org-unit-dept" data-testid="org-unit-dept" style="padding:9px 10px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;">${deptOptions || '<option value="">Add a department first</option>'}</select>
+          <input id="org-unit-name" data-testid="org-unit-name" type="text" placeholder="e.g. Field Team" style="padding:9px 10px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;" />
           <div style="display:flex;gap:8px;">
-            <input id="org-unit-allocated" data-testid="org-unit-allocated" type="number" min="0" step="any" placeholder="Budget" style="flex:1;min-width:0;padding:9px 10px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;" />
-            <input id="org-unit-actual" data-testid="org-unit-actual" type="number" min="0" step="any" placeholder="Actual" style="flex:1;min-width:0;padding:9px 10px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;" />
+            <input id="org-unit-allocated" data-testid="org-unit-allocated" type="number" min="0" step="any" placeholder="Budget" style="flex:1;min-width:0;padding:9px 10px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;" />
+            <input id="org-unit-actual" data-testid="org-unit-actual" type="number" min="0" step="any" placeholder="Actual" style="flex:1;min-width:0;padding:9px 10px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;" />
           </div>
           <button type="button" class="btn primary" id="org-add-unit-btn" data-testid="org-add-unit-btn" style="background:var(--c1);color:var(--ink);border-color:var(--c1)">Add unit</button>
         </div>
-        <div style="background:#161615;border:1.5px solid #3A3A38;padding:14px;display:flex;flex-direction:column;gap:8px;">
-          <div class="lab" style="font-size:11px;color:#B8B4A9;">ADD STAFF</div>
-          <input id="org-staff-name" data-testid="org-staff-name" type="text" placeholder="e.g. Ada Lovelace" style="padding:9px 10px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;" />
-          <select id="org-staff-unit" data-testid="org-staff-unit" style="padding:9px 10px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;">${unitOptions || '<option value="">Add a unit first</option>'}</select>
+        <div style="background:#131A21;border:1.5px solid #3A4552;padding:14px;display:flex;flex-direction:column;gap:8px;">
+          <div class="lab" style="font-size:11px;color:#AEBAC7;">ADD STAFF</div>
+          <input id="org-staff-name" data-testid="org-staff-name" type="text" placeholder="e.g. Ada Lovelace" style="padding:9px 10px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;" />
+          <select id="org-staff-unit" data-testid="org-staff-unit" style="padding:9px 10px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;">${unitOptions || '<option value="">Add a unit first</option>'}</select>
           <button type="button" class="btn primary" id="org-add-staff-btn" data-testid="org-add-staff-btn" style="background:var(--c1);color:var(--ink);border-color:var(--c1)">Add staff</button>
         </div>
-        ${this.formError ? `<div data-testid="org-form-error" style="grid-column:1 / -1;font-family:'JetBrains Mono',monospace;font-size:11px;color:#FF6B57;">${this.escapeHtml(this.formError)}</div>` : ''}
+        ${this.formError ? `<div data-testid="org-form-error" style="grid-column:1 / -1;font-family:'JetBrains Mono',monospace;font-size:11px;color:#E8799B;">${this.escapeHtml(this.formError)}</div>` : ''}
       </div>
 
       <div style="position:absolute;left:64px;right:64px;top:560px;bottom:84px;overflow-y:auto;">
         ${this.renderPerformanceTable('BRANCHES', perf.branches, 'branch')}
         ${this.renderPerformanceTable('DEPARTMENTS', perf.departments, 'department')}
         ${this.renderPerformanceTable('UNITS', perf.units, 'unit', staffByUnit)}
-        ${perf.units.length === 0 ? `<div style="padding:48px;border:1.5px solid #3A3A38;background:#161615;text-align:center;"><div style="font-size:24px;font-weight:400;margin-bottom:10px;">No units yet.</div><div class="lab" style="font-size:12px;color:#B8B4A9">Add a branch, then a department, then a unit with a budget and actual spend to see performance.</div></div>` : ''}
+        ${perf.units.length === 0 ? `<div style="padding:48px;border:1.5px solid #3A4552;background:#131A21;text-align:center;"><div style="font-size:24px;font-weight:400;margin-bottom:10px;">No units yet.</div><div class="lab" style="font-size:12px;color:#AEBAC7">Add a branch, then a department, then a unit with a budget and actual spend to see performance.</div></div>` : ''}
       </div>
     `;
 
@@ -224,17 +224,17 @@ export class OrganisationOverlay {
     if (rows.length === 0) return '';
     return `
       <div style="margin-bottom:22px;">
-        <div class="lab" style="font-size:11px;color:#B8B4A9;margin-bottom:10px;">${title} PERFORMANCE</div>
+        <div class="lab" style="font-size:11px;color:#AEBAC7;margin-bottom:10px;">${title} PERFORMANCE</div>
         <table data-testid="org-${kind}-table" style="width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:13px;">
           <thead>
-            <tr style="text-align:left;color:#B8B4A9;text-transform:uppercase;font-size:11px;letter-spacing:0.08em;">
-              <th style="padding:10px 12px;border-bottom:1.5px solid #3A3A38;">Name</th>
-              <th style="padding:10px 12px;border-bottom:1.5px solid #3A3A38;text-align:right;">Allocated</th>
-              <th style="padding:10px 12px;border-bottom:1.5px solid #3A3A38;text-align:right;">Actual</th>
-              <th style="padding:10px 12px;border-bottom:1.5px solid #3A3A38;text-align:right;">Remaining</th>
-              <th style="padding:10px 12px;border-bottom:1.5px solid #3A3A38;text-align:right;">% used</th>
-              <th style="padding:10px 12px;border-bottom:1.5px solid #3A3A38;text-align:right;">Status</th>
-              <th style="padding:10px 12px;border-bottom:1.5px solid #3A3A38;text-align:right;"></th>
+            <tr style="text-align:left;color:#AEBAC7;text-transform:uppercase;font-size:11px;letter-spacing:0.08em;">
+              <th style="padding:10px 12px;border-bottom:1.5px solid #3A4552;">Name</th>
+              <th style="padding:10px 12px;border-bottom:1.5px solid #3A4552;text-align:right;">Allocated</th>
+              <th style="padding:10px 12px;border-bottom:1.5px solid #3A4552;text-align:right;">Actual</th>
+              <th style="padding:10px 12px;border-bottom:1.5px solid #3A4552;text-align:right;">Remaining</th>
+              <th style="padding:10px 12px;border-bottom:1.5px solid #3A4552;text-align:right;">% used</th>
+              <th style="padding:10px 12px;border-bottom:1.5px solid #3A4552;text-align:right;">Status</th>
+              <th style="padding:10px 12px;border-bottom:1.5px solid #3A4552;text-align:right;"></th>
             </tr>
           </thead>
           <tbody>
@@ -242,9 +242,9 @@ export class OrganisationOverlay {
               .map(
                 (row) => `
               <tr data-testid="org-${kind}-row-${this.escapeHtml(row.id)}">
-                <td style="padding:10px 12px;border-bottom:1px solid #262625;">
+                <td style="padding:10px 12px;border-bottom:1px solid #232A33;">
                   ${this.escapeHtml(row.name)}
-                  <div style="font-size:11px;color:#8E8A7F;">${this.escapeHtml(row.parentName)}${row.staffCount > 0 ? ` · ${row.staffCount} staff` : ''}${
+                  <div style="font-size:11px;color:#8A99A8;">${this.escapeHtml(row.parentName)}${row.staffCount > 0 ? ` · ${row.staffCount} staff` : ''}${
                     kind === 'unit' && staffByUnit?.get(row.id)
                       ? ` · ${staffByUnit
                           .get(row.id)!
@@ -253,12 +253,12 @@ export class OrganisationOverlay {
                       : ''
                   }</div>
                 </td>
-                <td style="padding:10px 12px;border-bottom:1px solid #262625;text-align:right;">${this.escapeHtml(this.formatAmount(row.allocatedMinor))}</td>
-                <td style="padding:10px 12px;border-bottom:1px solid #262625;text-align:right;">${this.escapeHtml(this.formatAmount(row.actualMinor))}</td>
-                <td style="padding:10px 12px;border-bottom:1px solid #262625;text-align:right;color:${row.remainingMinor < 0 ? '#FF6B57' : '#B9F0C6'};">${this.escapeHtml(this.formatAmount(row.remainingMinor))}</td>
-                <td style="padding:10px 12px;border-bottom:1px solid #262625;text-align:right;">${row.allocatedMinor > 0 ? `${row.percentUsed.toFixed(1)}%` : '—'}</td>
-                <td style="padding:10px 12px;border-bottom:1px solid #262625;text-align:right;color:${this.statusColor(row.status)};">${this.escapeHtml(row.statusLabel)}</td>
-                <td style="padding:10px 12px;border-bottom:1px solid #262625;text-align:right;"><button type="button" data-action="remove-${kind}" data-id="${this.escapeHtml(row.id)}" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#FF6B57;text-transform:uppercase;">Remove</button></td>
+                <td style="padding:10px 12px;border-bottom:1px solid #232A33;text-align:right;">${this.escapeHtml(this.formatAmount(row.allocatedMinor))}</td>
+                <td style="padding:10px 12px;border-bottom:1px solid #232A33;text-align:right;">${this.escapeHtml(this.formatAmount(row.actualMinor))}</td>
+                <td style="padding:10px 12px;border-bottom:1px solid #232A33;text-align:right;color:${row.remainingMinor < 0 ? '#E8799B' : '#B9F0C6'};">${this.escapeHtml(this.formatAmount(row.remainingMinor))}</td>
+                <td style="padding:10px 12px;border-bottom:1px solid #232A33;text-align:right;">${row.allocatedMinor > 0 ? `${row.percentUsed.toFixed(1)}%` : '—'}</td>
+                <td style="padding:10px 12px;border-bottom:1px solid #232A33;text-align:right;color:${this.statusColor(row.status)};">${this.escapeHtml(row.statusLabel)}</td>
+                <td style="padding:10px 12px;border-bottom:1px solid #232A33;text-align:right;"><button type="button" data-action="remove-${kind}" data-id="${this.escapeHtml(row.id)}" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#E8799B;text-transform:uppercase;">Remove</button></td>
               </tr>`
               )
               .join('')}

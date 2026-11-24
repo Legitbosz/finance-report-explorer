@@ -51,7 +51,7 @@ export class BudgetsOverlay {
     this.layerEl.id = 'o-budgets';
     this.layerEl.dataset.testid = 'budgets-overlay';
     this.layerEl.style.cssText =
-      'position:absolute;inset:0;visibility:hidden;pointer-events:none;background:var(--ink, #111111);color:var(--bone, #F3F0E6);z-index:12;';
+      'position:absolute;inset:0;visibility:hidden;pointer-events:none;background:var(--ink, #111111);color:var(--bone, #E8EEF2);z-index:12;';
     overParent.appendChild(this.layerEl);
   }
 
@@ -133,13 +133,13 @@ export class BudgetsOverlay {
   } {
     switch (status) {
       case 'over_budget':
-        return { fg: '#FF6B57', barBg: '#FF6B57', border: '#FF6B57' };
+        return { fg: '#E8799B', barBg: '#E8799B', border: '#E8799B' };
       case 'near_limit':
-        return { fg: '#F4F03A', barBg: '#F4F03A', border: '#E3A83C' };
+        return { fg: '#6BE8F2', barBg: '#6BE8F2', border: '#38BDF8' };
       case 'on_track':
-        return { fg: '#B9F0C6', barBg: '#B9F0C6', border: '#3A3A38' };
+        return { fg: '#B9F0C6', barBg: '#B9F0C6', border: '#3A4552' };
       default:
-        return { fg: '#8E8A7F', barBg: '#3A3A38', border: '#3A3A38' };
+        return { fg: '#8A99A8', barBg: '#3A4552', border: '#3A4552' };
     }
   }
 
@@ -169,7 +169,7 @@ export class BudgetsOverlay {
       overview.configuredCount === 0
         ? 'var(--bone)'
         : overview.totalRemainingMinor < 0
-          ? '#FF6B57'
+          ? '#E8799B'
           : '#B9F0C6';
 
     const projectionSubtext =
@@ -181,15 +181,15 @@ export class BudgetsOverlay {
 
     const cardsHtml =
       overview.categories.length === 0
-        ? `<div style="grid-column:1 / -1;padding:48px;border:1.5px solid #3A3A38;background:#161615;text-align:center;">
+        ? `<div style="grid-column:1 / -1;padding:48px;border:1.5px solid #3A4552;background:#131A21;text-align:center;">
              <div style="font-size:24px;font-weight:400;margin-bottom:10px;">No expense categories found in this ledger.</div>
-             <div class="lab" style="font-size:12px;color:#B8B4A9">Upload a ledger with outgoing expenses to set monthly budgets.</div>
+             <div class="lab" style="font-size:12px;color:#AEBAC7">Upload a ledger with outgoing expenses to set monthly budgets.</div>
            </div>`
         : overview.categories.map((row) => this.renderCategoryCardHtml(row)).join('');
 
     this.layerEl.innerHTML = `
       <div class="lab" style="position:absolute;left:64px;top:92px;">MONTHLY BUDGETS</div>
-      <div class="lab" style="position:absolute;left:64px;top:122px;font-size:12px;color:#B8B4A9;">${this.escapeHtml(overview.selectedMonthLabel)} · ${this.escapeHtml(paceNote)} · Saved locally in your browser</div>
+      <div class="lab" style="position:absolute;left:64px;top:122px;font-size:12px;color:#AEBAC7;">${this.escapeHtml(overview.selectedMonthLabel)} · ${this.escapeHtml(paceNote)} · Saved locally in your browser</div>
 
       <div style="position:absolute;right:64px;top:86px;display:flex;gap:10px;align-items:center;pointer-events:auto;">
         <select id="budgets-month-select" data-testid="budgets-month-select" aria-label="Select budget month" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;padding:10px 14px;border:1.5px solid var(--bone);background:var(--ink);color:var(--bone);cursor:pointer;">
@@ -207,22 +207,22 @@ export class BudgetsOverlay {
           <div class="lab" style="font-size:11px;opacity:0.85;">${overview.configuredCount} OF ${overview.categories.length} CATEGORIES SET</div>
         </div>
 
-        <div data-testid="budgets-summary-spent" style="background:#161615;border:1.5px solid #3A3A38;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
-          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#B8B4A9;">ACTUAL SPENT (${this.escapeHtml(overview.selectedMonthLabel.toUpperCase())})</div>
+        <div data-testid="budgets-summary-spent" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#AEBAC7;">ACTUAL SPENT (${this.escapeHtml(overview.selectedMonthLabel.toUpperCase())})</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;">${this.escapeHtml(totalSpentStr)}</div>
-          <div class="lab" style="font-size:11px;color:#B8B4A9;">${overview.configuredCount > 0 ? `${this.escapeHtml(this.formatAmount(overview.totalBudgetedActualMinor))} IN BUDGETED CATEGORIES` : 'NO BUDGET CAPS SET YET'}</div>
+          <div class="lab" style="font-size:11px;color:#AEBAC7;">${overview.configuredCount > 0 ? `${this.escapeHtml(this.formatAmount(overview.totalBudgetedActualMinor))} IN BUDGETED CATEGORIES` : 'NO BUDGET CAPS SET YET'}</div>
         </div>
 
-        <div data-testid="budgets-summary-remaining" style="background:#161615;border:1.5px solid #3A3A38;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
-          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#B8B4A9;">REMAINING BUDGET</div>
+        <div data-testid="budgets-summary-remaining" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#AEBAC7;">REMAINING BUDGET</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;color:${remainingColor};">${this.escapeHtml(totalRemainingStr)}</div>
-          <div class="lab" style="font-size:11px;color:#B8B4A9;">${overview.overBudgetCount} OVER BUDGET · ${overview.nearLimitCount} NEAR LIMIT</div>
+          <div class="lab" style="font-size:11px;color:#AEBAC7;">${overview.overBudgetCount} OVER BUDGET · ${overview.nearLimitCount} NEAR LIMIT</div>
         </div>
 
-        <div data-testid="budgets-summary-projected" style="background:#161615;border:1.5px solid ${overview.projectedWarningCount > 0 ? '#FF6B57' : '#3A3A38'};color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
-          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#B8B4A9;">PROJECTED MONTH-END</div>
-          <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;color:${overview.projectedWarningCount > 0 ? '#FFB58A' : 'var(--bone)'};">${this.escapeHtml(totalProjectedStr)}</div>
-          <div class="lab" style="font-size:11px;color:${overview.projectedWarningCount > 0 ? '#FF6B57' : '#B8B4A9'};">${this.escapeHtml(projectionSubtext.toUpperCase())}</div>
+        <div data-testid="budgets-summary-projected" style="background:#131A21;border:1.5px solid ${overview.projectedWarningCount > 0 ? '#E8799B' : '#3A4552'};color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#AEBAC7;">PROJECTED MONTH-END</div>
+          <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;color:${overview.projectedWarningCount > 0 ? '#A8C6F0' : 'var(--bone)'};">${this.escapeHtml(totalProjectedStr)}</div>
+          <div class="lab" style="font-size:11px;color:${overview.projectedWarningCount > 0 ? '#E8799B' : '#AEBAC7'};">${this.escapeHtml(projectionSubtext.toUpperCase())}</div>
         </div>
       </div>
 
@@ -247,9 +247,9 @@ export class BudgetsOverlay {
 
     const remainingColor =
       row.remainingMinor === null
-        ? '#B8B4A9'
+        ? '#AEBAC7'
         : row.remainingMinor < 0
-          ? '#FF6B57'
+          ? '#E8799B'
           : '#B9F0C6';
 
     const actionsHtml = isEditing
@@ -257,7 +257,7 @@ export class BudgetsOverlay {
       : row.budgetMinor === null
         ? `<button type="button" data-action="edit-budget" data-budget-key="${this.escapeHtml(row.budgetKey)}" data-testid="budget-set-btn-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:7px 12px;border:1.5px solid var(--c1);background:var(--c1);color:var(--ink);font-weight:600;white-space:nowrap;">Set budget</button>`
         : `<button type="button" data-action="edit-budget" data-budget-key="${this.escapeHtml(row.budgetKey)}" data-testid="budget-edit-btn-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:7px 11px;border:1.5px solid var(--bone);color:var(--bone);white-space:nowrap;">Edit</button>
-           <button type="button" data-action="remove-budget" data-budget-key="${this.escapeHtml(row.budgetKey)}" data-testid="budget-remove-btn-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:7px 11px;border:1.5px solid #FF6B57;color:#FF6B57;white-space:nowrap;">Remove</button>`;
+           <button type="button" data-action="remove-budget" data-budget-key="${this.escapeHtml(row.budgetKey)}" data-testid="budget-remove-btn-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:7px 11px;border:1.5px solid #E8799B;color:#E8799B;white-space:nowrap;">Remove</button>`;
 
     const editFormHtml = isEditing
       ? `<div data-testid="budget-edit-form-${slug}" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 14px;background:#111111;border:1.5px solid var(--c1);">
@@ -271,11 +271,11 @@ export class BudgetsOverlay {
              data-testid="budget-amount-input"
              value="${this.escapeHtml(this.draftValue)}"
              placeholder="e.g. 100000"
-             style="flex:1;min-width:140px;padding:8px 12px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;"
+             style="flex:1;min-width:140px;padding:8px 12px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;"
            />
            <button type="button" data-action="save-budget" data-budget-key="${this.escapeHtml(row.budgetKey)}" data-testid="budget-save-btn" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:9px 14px;background:var(--c1);color:var(--ink);border:1.5px solid var(--c1);font-weight:600;white-space:nowrap;">Save</button>
-           <button type="button" data-action="cancel-budget" data-budget-key="${this.escapeHtml(row.budgetKey)}" data-testid="budget-cancel-btn" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:9px 12px;border:1.5px solid #8E8A7F;color:#B8B4A9;white-space:nowrap;">Cancel</button>
-           ${this.editError ? `<div data-testid="budget-edit-error" style="flex-basis:100%;font-family:'JetBrains Mono',monospace;font-size:11px;color:#FF6B57;">${this.escapeHtml(this.editError)}</div>` : ''}
+           <button type="button" data-action="cancel-budget" data-budget-key="${this.escapeHtml(row.budgetKey)}" data-testid="budget-cancel-btn" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:9px 12px;border:1.5px solid #8A99A8;color:#AEBAC7;white-space:nowrap;">Cancel</button>
+           ${this.editError ? `<div data-testid="budget-edit-error" style="flex-basis:100%;font-family:'JetBrains Mono',monospace;font-size:11px;color:#E8799B;">${this.escapeHtml(this.editError)}</div>` : ''}
          </div>`
       : '';
 
@@ -291,7 +291,7 @@ export class BudgetsOverlay {
           ? `Warning: Over budget by ${overByStr} · projected month-end spend ${projectedStr} (+${excessStr} vs budget).`
           : `Warning: Projected month-end spend (${projectedStr}) will exceed budget by ${excessStr}.`;
       warningHtml = `
-        <div data-testid="budget-projection-warning-${slug}" style="padding:10px 12px;border:1px solid #FF6B57;background:rgba(255,107,87,0.12);color:#FFB58A;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.4;">
+        <div data-testid="budget-projection-warning-${slug}" style="padding:10px 12px;border:1px solid #E8799B;background:rgba(232,121,155,0.12);color:#A8C6F0;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.4;">
           ${this.escapeHtml(warningText)}
         </div>
       `;
@@ -299,18 +299,18 @@ export class BudgetsOverlay {
 
     const receiptsLinkHtml =
       row.txnIds.length > 0
-        ? `<button type="button" data-action="view-category-receipts" data-budget-key="${this.escapeHtml(row.budgetKey)}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#B8B4A9;text-decoration:underline;cursor:pointer;">Receipts</button>`
+        ? `<button type="button" data-action="view-category-receipts" data-budget-key="${this.escapeHtml(row.budgetKey)}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#AEBAC7;text-decoration:underline;cursor:pointer;">Receipts</button>`
         : '';
 
     return `
-      <article class="budget-card" data-budget-key="${this.escapeHtml(row.budgetKey)}" data-testid="budget-card-${slug}" style="background:#161615;border:1.5px solid ${colors.border};padding:22px 24px;display:flex;flex-direction:column;gap:14px;">
+      <article class="budget-card" data-budget-key="${this.escapeHtml(row.budgetKey)}" data-testid="budget-card-${slug}" style="background:#131A21;border:1.5px solid ${colors.border};padding:22px 24px;display:flex;flex-direction:column;gap:14px;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
           <div style="min-width:0;">
             <div style="display:flex;align-items:center;gap:10px;">
               <span style="width:12px;height:12px;background:${this.safeCssColor(row.color)};flex:none;"></span>
               <h3 style="font-size:24px;font-weight:500;letter-spacing:-0.02em;color:var(--bone);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${this.escapeHtml(row.displayLabel)}</h3>
             </div>
-            <div style="display:flex;align-items:center;gap:10px;margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#B8B4A9;text-transform:uppercase;letter-spacing:0.06em;">
+            <div style="display:flex;align-items:center;gap:10px;margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#AEBAC7;text-transform:uppercase;letter-spacing:0.06em;">
               <span>${row.txnCount} purchase${row.txnCount === 1 ? '' : 's'}</span>
               ${receiptsLinkHtml ? `<span aria-hidden="true">·</span>${receiptsLinkHtml}` : ''}
             </div>
@@ -325,25 +325,25 @@ export class BudgetsOverlay {
 
         <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding-top:2px;">
           <div>
-            <div class="lab" style="font-size:10.5px;color:#8E8A7F;">BUDGET</div>
+            <div class="lab" style="font-size:10.5px;color:#8A99A8;">BUDGET</div>
             <div data-testid="budget-limit-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums;">${this.escapeHtml(budgetStr)}</div>
           </div>
           <div>
-            <div class="lab" style="font-size:10.5px;color:#8E8A7F;">ACTUAL SPENT</div>
+            <div class="lab" style="font-size:10.5px;color:#8A99A8;">ACTUAL SPENT</div>
             <div data-testid="budget-actual-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums;">${this.escapeHtml(actualStr)}</div>
           </div>
           <div>
-            <div class="lab" style="font-size:10.5px;color:#8E8A7F;">REMAINING</div>
+            <div class="lab" style="font-size:10.5px;color:#8A99A8;">REMAINING</div>
             <div data-testid="budget-remaining-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums;color:${remainingColor};">${this.escapeHtml(remainingStr)}</div>
           </div>
           <div>
-            <div class="lab" style="font-size:10.5px;color:#8E8A7F;">PROJECTED MONTH-END</div>
-            <div data-testid="budget-projected-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums;color:${row.projectedExceeds ? '#FFB58A' : 'var(--bone)'};">${this.escapeHtml(projectedStr)}</div>
+            <div class="lab" style="font-size:10.5px;color:#8A99A8;">PROJECTED MONTH-END</div>
+            <div data-testid="budget-projected-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums;color:${row.projectedExceeds ? '#A8C6F0' : 'var(--bone)'};">${this.escapeHtml(projectedStr)}</div>
           </div>
         </div>
 
         <div style="display:flex;align-items:center;gap:12px;">
-          <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.min(100, Math.round(row.percentUsed))}" style="flex:1;height:11px;background:#262625;border:1px solid #3A3A38;overflow:hidden;">
+          <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.min(100, Math.round(row.percentUsed))}" style="flex:1;height:11px;background:#232A33;border:1px solid #3A4552;overflow:hidden;">
             <div data-testid="budget-progress-fill-${slug}" style="width:${row.progressWidthPct.toFixed(1)}%;height:100%;background:${colors.barBg};transition:width 0.2s ease;"></div>
           </div>
           <span data-testid="budget-percent-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;min-width:44px;text-align:right;font-variant-numeric:tabular-nums;color:${colors.fg};">${this.escapeHtml(pctStr)}</span>
@@ -499,6 +499,6 @@ export class BudgetsOverlay {
   private safeCssColor(val: string): string {
     const s = val.trim();
     if (/^#[0-9a-fA-F]{3,8}$/.test(s) || /^var\(--[A-Za-z0-9_-]+\)$/.test(s)) return s;
-    return '#F4F03A';
+    return '#6BE8F2';
   }
 }

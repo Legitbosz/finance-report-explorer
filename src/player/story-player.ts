@@ -51,31 +51,31 @@ export interface StoryPlayerData {
 const DEFAULT_PALETTES: Record<string, PaletteTheme> = {
   ink_solar: {
     id: 'ink_solar',
-    name: 'Ink Solar',
+    name: 'Ink Ice',
     bg: '#111111',
-    fg: '#F3F0E6',
-    accent: '#F4F03A',
-    secondary: '#FF5A14',
-    muted: '#8E8A7F',
+    fg: '#E8EEF2',
+    accent: '#6BE8F2',
+    secondary: '#6E8BFF',
+    muted: '#AEBAC7',
     blocks: {
-      primary: { bg: '#F4F03A', fg: '#111111' },
-      secondary: { bg: '#FFA8E4', fg: '#111111' },
-      tertiary: { bg: '#FF5A14', fg: '#111111' },
+      primary: { bg: '#6BE8F2', fg: '#111111' },
+      secondary: { bg: '#C9B8F0', fg: '#111111' },
+      tertiary: { bg: '#6E8BFF', fg: '#111111' },
       quaternary: { bg: '#A9A2E0', fg: '#111111' },
     },
   },
   solar_ember: {
     id: 'solar_ember',
-    name: 'Solar Ember',
+    name: 'Ice Cobalt',
     bg: '#111111',
-    fg: '#F3F0E6',
-    accent: '#FF5A14',
-    secondary: '#F4F03A',
-    muted: '#8E8A7F',
+    fg: '#E8EEF2',
+    accent: '#6E8BFF',
+    secondary: '#6BE8F2',
+    muted: '#AEBAC7',
     blocks: {
-      primary: { bg: '#F4F03A', fg: '#111111' },
-      secondary: { bg: '#FF5A14', fg: '#111111' },
-      tertiary: { bg: '#FFA8E4', fg: '#111111' },
+      primary: { bg: '#6BE8F2', fg: '#111111' },
+      secondary: { bg: '#6E8BFF', fg: '#111111' },
+      tertiary: { bg: '#C9B8F0', fg: '#111111' },
       quaternary: { bg: '#A9A2E0', fg: '#111111' },
     },
   },
@@ -83,13 +83,13 @@ const DEFAULT_PALETTES: Record<string, PaletteTheme> = {
     id: 'ink_rose',
     name: 'Ink Rose',
     bg: '#111111',
-    fg: '#F3F0E6',
-    accent: '#FFA8E4',
-    secondary: '#F4F03A',
-    muted: '#8E8A7F',
+    fg: '#E8EEF2',
+    accent: '#C9B8F0',
+    secondary: '#6BE8F2',
+    muted: '#AEBAC7',
     blocks: {
-      primary: { bg: '#FFA8E4', fg: '#111111' },
-      secondary: { bg: '#F4F03A', fg: '#111111' },
+      primary: { bg: '#C9B8F0', fg: '#111111' },
+      secondary: { bg: '#6BE8F2', fg: '#111111' },
       tertiary: { bg: '#6E8BFF', fg: '#111111' },
     },
   },
@@ -97,14 +97,14 @@ const DEFAULT_PALETTES: Record<string, PaletteTheme> = {
     id: 'paper_studio',
     name: 'Paper Studio',
     bg: '#111111',
-    fg: '#F3F0E6',
-    accent: '#F3F0E6',
-    secondary: '#FF5A14',
-    muted: '#8E8A7F',
+    fg: '#E8EEF2',
+    accent: '#E8EEF2',
+    secondary: '#6E8BFF',
+    muted: '#AEBAC7',
     blocks: {
-      primary: { bg: '#F3F0E6', fg: '#111111' },
-      secondary: { bg: '#FF5A14', fg: '#111111' },
-      tertiary: { bg: '#B9B744', fg: '#111111' },
+      primary: { bg: '#E8EEF2', fg: '#111111' },
+      secondary: { bg: '#6E8BFF', fg: '#111111' },
+      tertiary: { bg: '#2DD4BF', fg: '#111111' },
     },
   },
 };
@@ -416,18 +416,18 @@ export class StoryPlayer {
     style.textContent = `
       :root {
         --ink: #111111;
-        --bone: #F3F0E6;
-        --paper: #E6E4DE;
-        --c1: #F4F03A;
-        --c2: #FFA8E4;
-        --c3: #B9B744;
-        --c4: #FF5A14;
-        --c5: #E3A83C;
-        --c6: #FF6B57;
+        --bone: #E8EEF2;
+        --paper: #DDE6EE;
+        --c1: #6BE8F2;
+        --c2: #C9B8F0;
+        --c3: #2DD4BF;
+        --c4: #6E8BFF;
+        --c5: #38BDF8;
+        --c6: #E8799B;
         --lav: #A9A2E0;
         --mint: #B9F0C6;
         --blue: #6E8BFF;
-        --ghost: #1C1C1B;
+        --ghost: #161E26;
       }
       * { box-sizing: border-box; margin: 0; padding: 0; }
       html, body { background: var(--ink); color: var(--bone); overflow: hidden; width: 100vw; height: 100vh; font-family: 'Inter Tight', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
@@ -483,25 +483,25 @@ export class StoryPlayer {
       .chip i { width: 10px; height: 10px; display: block; }
       .chip[aria-pressed="true"] { background: var(--bone); color: var(--ink); }
       #prog { position: absolute; left: 0; top: 0; right: 0; height: 6px; display: flex; gap: 4px; pointer-events: auto; }
-      #prog button { flex: 1; background: #2A2A29; position: relative; overflow: hidden; height: 6px; border: 0; padding: 0; cursor: pointer; }
+      #prog button { flex: 1; background: #232A33; position: relative; overflow: hidden; height: 6px; border: 0; padding: 0; cursor: pointer; }
       #prog button i { position: absolute; inset: 0; background: var(--bone); transform-origin: 0 50%; transform: scaleX(0); }
       #beatdot { display: inline-block; width: 9px; height: 9px; background: var(--c4); margin-right: 6px; }
-      #stage-hud-nav { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; align-items: center; background: rgba(17, 17, 17, 0.88); border: 1.5px solid #3A3A38; color: var(--bone); pointer-events: auto; z-index: 55; }
+      #stage-hud-nav { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; align-items: center; background: rgba(17, 17, 17, 0.88); border: 1.5px solid #3A4552; color: var(--bone); pointer-events: auto; z-index: 55; }
       #stage-hud-nav button { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 12px; color: var(--bone); transition: background-color 0.16s, color 0.16s; white-space: nowrap; }
-      #stage-hud-nav button + button { border-left: 1.5px solid #3A3A38; }
+      #stage-hud-nav button + button { border-left: 1.5px solid #3A4552; }
       #stage-hud-nav button:hover { background: var(--bone); color: var(--ink); }
       #stage-hud-nav button.hud-primary { background: var(--c1); color: var(--ink); font-weight: 600; }
       #stage-hud-nav button[aria-pressed="true"], #bar .btn[aria-pressed="true"] { background: var(--bone); color: var(--ink); font-weight: 600; }
       .currency-select-wrap { display: inline-flex; align-items: center; gap: 8px; }
       .currency-select-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.78; white-space: nowrap; }
-      .currency-select { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 10px; border: 1.5px solid #3A3A38; background: #181817; color: var(--bone); cursor: pointer; outline: none; }
+      .currency-select { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 10px; border: 1.5px solid #3A4552; background: #141A21; color: var(--bone); cursor: pointer; outline: none; }
       .currency-select:focus-visible { outline: 2px solid var(--c1); outline-offset: 2px; }
       #bar .currency-select { border-color: var(--ink); background: var(--bone); color: var(--ink); padding: 8px 10px; }
-      #stage-hud-nav .currency-select-wrap { border-left: 1.5px solid #3A3A38; padding: 0 8px; gap: 4px; }
+      #stage-hud-nav .currency-select-wrap { border-left: 1.5px solid #3A4552; padding: 0 8px; gap: 4px; }
       #stage-hud-nav .currency-select-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
-      #stage-hud-nav .currency-select { border: 1px solid #4A4A47; background: #141414; color: var(--bone); padding: 4px 8px; font-size: 11px; }
-      #start-currency-wrap { display: inline-flex; align-items: center; gap: 8px; padding: 5px 10px; background: rgba(243, 240, 230, 0.06); border: 1.5px solid #3A3A38; }
-      #start-currency-wrap .currency-select { border-color: #4A4A47; background: #141414; color: var(--c1); font-weight: 600; }
+      #stage-hud-nav .currency-select { border: 1px solid #46536A; background: #11161C; color: var(--bone); padding: 4px 8px; font-size: 11px; }
+      #start-currency-wrap { display: inline-flex; align-items: center; gap: 8px; padding: 5px 10px; background: rgba(232, 238, 242, 0.06); border: 1.5px solid #3A4552; }
+      #start-currency-wrap .currency-select { border-color: #46536A; background: #11161C; color: var(--c1); font-weight: 600; }
       body.film { padding: 0; background: var(--ink); overflow: hidden; }
       body.film #bar { display: none; }
       body.film #stage-hud-nav { display: none !important; }
@@ -643,7 +643,7 @@ export class StoryPlayer {
             </div>
             <div id="fclick" style="position:absolute;left:0;top:0;width:60px;height:60px;margin:-30px 0 0 -30px;border:2px solid var(--bone);border-radius:50%;opacity:0;pointer-events:none;z-index:60"></div>
             <div id="fcur" data-testid="fake-cursor" style="position:absolute;left:0;top:0;pointer-events:none;opacity:0;z-index:65">
-              <svg width="34" height="40" viewBox="0 0 34 40"><path d="M4 3 L4 33 L12 25 L18 38 L24 35.5 L18 23 L29 23 Z" fill="#F3F0E6" stroke="#111" stroke-width="2.4" stroke-linejoin="round"/></svg>
+              <svg width="34" height="40" viewBox="0 0 34 40"><path d="M4 3 L4 33 L12 25 L18 38 L24 35.5 L18 23 L29 23 Z" fill="#E8EEF2" stroke="#111" stroke-width="2.4" stroke-linejoin="round"/></svg>
             </div>
           </div>
 
@@ -727,7 +727,7 @@ export class StoryPlayer {
                       <span id="byo-progress-label" style="color:var(--c1);font-weight:600;">Processing dataset...</span>
                       <span id="byo-progress-pct">0%</span>
                     </div>
-                    <div style="width:100%;height:6px;background:#2A2A29;margin-top:8px;overflow:hidden;">
+                    <div style="width:100%;height:6px;background:#232A33;margin-top:8px;overflow:hidden;">
                       <div id="byo-progress-fill" style="width:0%;height:100%;background:var(--c1);transition:width 0.22s ease-out;"></div>
                     </div>
                   </div>
@@ -783,7 +783,7 @@ export class StoryPlayer {
       return;
     }
     msgEl.style.display = 'block';
-    msgEl.style.color = isError ? '#FF6B57' : 'var(--c1)';
+    msgEl.style.color = isError ? '#E8799B' : 'var(--c1)';
     msgEl.textContent = message;
   }
 

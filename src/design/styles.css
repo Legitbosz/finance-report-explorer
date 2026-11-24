@@ -9,25 +9,25 @@
 
 :root {
   --ink: #111111;
-  --bone: #f3f0e6;
-  --paper: #e6e4de;
-  --c1: #f4f03a;
-  --c2: #ffa8e4;
-  --c3: #b9b744;
-  --c4: #ff5a14;
-  --c5: #e3a83c;
-  --c6: #ff6b57;
+  --bone: #e8eef2;
+  --paper: #dde6ee;
+  --c1: #6be8f2;
+  --c2: #c9b8f0;
+  --c3: #2dd4bf;
+  --c4: #6e8bff;
+  --c5: #38bdf8;
+  --c6: #e8799b;
   --lav: #a9a2e0;
   --mint: #b9f0c6;
   --blue: #6e8bff;
-  --lime: #d7f246;
+  --lime: #7dd3fc;
   --cyan: #6be8f2;
-  --peach: #ffb58a;
-  --ghost: #1c1c1b;
-  --ghost-bone: #dcd8ca;
-  --rule-dark: #3a3a38;
-  --rule-light: #c9c5ba;
-  --muted-bone: #b8b4a9;
+  --peach: #a8c6f0;
+  --ghost: #161e26;
+  --ghost-bone: #c7d2dd;
+  --rule-dark: #3a4552;
+  --rule-light: #c7d2dd;
+  --muted-bone: #aebac7;
   --font-display: 'Inter Tight', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --s: 1;
@@ -470,7 +470,7 @@ body.show-dev-bar #bar {
   height: 13.5px;
   font: 500 10.5px/13.5px var(--font-mono);
   white-space: pre;
-  color: #8e8a7f;
+  color: #8a99a8;
   contain: strict;
 }
 
@@ -519,7 +519,7 @@ body.show-dev-bar #bar {
 }
 
 .chip:hover {
-  background: rgba(243, 240, 230, 0.1);
+  background: rgba(232, 238, 242, 0.1);
 }
 
 .chip:active {
@@ -630,7 +630,7 @@ body.show-dev-bar #bar {
 #prog div,
 .stage-prog div {
   flex: 1;
-  background: #2a2a29;
+  background: #232a33;
   position: relative;
   overflow: hidden;
 }

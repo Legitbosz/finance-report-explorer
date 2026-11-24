@@ -124,8 +124,8 @@ export class GenericBespokeChapter implements ChapterModule {
       const bx = 16 + m * colW + colW * 0.15;
       const bw = colW * 0.7;
       const by = svgH - 26 - bh;
-      barsSvg += `<rect x="${bx.toFixed(1)}" y="${by.toFixed(1)}" width="${bw.toFixed(1)}" height="${bh.toFixed(1)}" fill="${v === maxMonth && v > 0 ? '#FF5A14' : '#F4F03A'}"/>`;
-      barsSvg += `<text x="${(bx + bw / 2).toFixed(1)}" y="${svgH - 8}" fill="#C9C5BA" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">${MONTH_INITIALS[m]}</text>`;
+      barsSvg += `<rect x="${bx.toFixed(1)}" y="${by.toFixed(1)}" width="${bw.toFixed(1)}" height="${bh.toFixed(1)}" fill="${v === maxMonth && v > 0 ? '#6E8BFF' : '#6BE8F2'}"/>`;
+      barsSvg += `<text x="${(bx + bw / 2).toFixed(1)}" y="${svgH - 8}" fill="#C7D2DD" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">${MONTH_INITIALS[m]}</text>`;
     });
 
     const topTxns = txns
@@ -188,23 +188,23 @@ export class GenericBespokeChapter implements ChapterModule {
 
     const badgeDisplayStyle = badgeText ? 'inline-flex' : 'none';
     const takeawayPrefixHtml = takeawayPrefix
-      ? `<span style="font-family:'JetBrains Mono',monospace;font-size:${isPhone ? '9px' : '10.5px'};font-weight:700;letter-spacing:${isPhone ? '0.1em' : '0.12em'};color:#F4F03A;text-transform:uppercase;margin-right:${isPhone ? '6px' : '8px'};">${takeawayPrefix}</span>`
+      ? `<span style="font-family:'JetBrains Mono',monospace;font-size:${isPhone ? '9px' : '10.5px'};font-weight:700;letter-spacing:${isPhone ? '0.1em' : '0.12em'};color:#6BE8F2;text-transform:uppercase;margin-right:${isPhone ? '6px' : '8px'};">${takeawayPrefix}</span>`
       : '';
 
     if (isPhone) {
       container.innerHTML = `
         <div class="generic-bespoke-phone-stage" data-testid="generic-bespoke-stage" data-viewport="phone" style="position:relative;width:390px;height:844px;overflow:hidden;">
           <div class="tx" style="position:absolute;left:16px;top:36px;right:16px;display:flex;align-items:center;justify-content:space-between;gap:8px;">
-            <span class="badge-bespoke" data-testid="bespoke-badge" style="display:${badgeDisplayStyle};align-items:center;gap:6px;padding:4px 8px;background:#111111;color:#F4F03A;border:1.5px solid #F4F03A;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">${this.escapeHtml(badgeText)}</span>
-            <span class="lab" style="position:static;font-size:10px;color:#C9C5BA;">${this.escapeHtml(kickerText)}</span>
+            <span class="badge-bespoke" data-testid="bespoke-badge" style="display:${badgeDisplayStyle};align-items:center;gap:6px;padding:4px 8px;background:#111111;color:#6BE8F2;border:1.5px solid #6BE8F2;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">${this.escapeHtml(badgeText)}</span>
+            <span class="lab" style="position:static;font-size:10px;color:#C7D2DD;">${this.escapeHtml(kickerText)}</span>
           </div>
           <div class="ch-header-stack" style="left:16px;right:16px;top:60px;max-height:126px;gap:6px;">
             <div class="split tx" data-testid="chapter-headline" style="width:358px;font-size:26px;font-weight:300;letter-spacing:-0.04em;line-height:1.04;color:var(--bone);">${this.escapeHtml(headlineText)}</div>
-            <div class="tx" data-testid="chapter-body" style="width:358px;padding:6px 10px;background:#1C1C1B;border-left:3px solid #F4F03A;font-family:'Space Grotesk',sans-serif;font-size:11.5px;line-height:1.3;color:var(--bone);">
+            <div class="tx" data-testid="chapter-body" style="width:358px;padding:6px 10px;background:#161E26;border-left:3px solid #6BE8F2;font-family:'Space Grotesk',sans-serif;font-size:11.5px;line-height:1.3;color:var(--bone);">
               ${takeawayPrefixHtml}${this.escapeHtml(bodyText)}
             </div>
           </div>
-          <div class="blk ia" data-ax="b" style="position:absolute;left:16px;top:194px;width:358px;height:186px;background:#1C1C1B;color:var(--bone);border:1.5px solid #3A3A38;transform-origin:50% 100%;pointer-events:auto;">
+          <div class="blk ia" data-ax="b" style="position:absolute;left:16px;top:194px;width:358px;height:186px;background:#161E26;color:var(--bone);border:1.5px solid #3A4552;transform-origin:50% 100%;pointer-events:auto;">
             <svg data-testid="generic-bespoke-svg" width="${svgW}" height="${svgH}" style="position:absolute;left:16px;top:28px;">${barsSvg}</svg>
           </div>
           ${metricBlocksHtml}
@@ -215,19 +215,19 @@ export class GenericBespokeChapter implements ChapterModule {
         <div class="generic-bespoke-desktop-stage" data-testid="generic-bespoke-stage" data-viewport="desktop" style="position:absolute;inset:0;">
           <div class="ch-header-stack" style="left:60px;top:64px;max-width:1040px;max-height:252px;">
             <div class="tx" style="display:flex;align-items:center;gap:16px;">
-              <span class="badge-bespoke" data-testid="bespoke-badge" style="display:${badgeDisplayStyle};align-items:center;gap:8px;padding:6px 12px;background:#111111;color:#F4F03A;border:1.5px solid #F4F03A;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;">${this.escapeHtml(badgeText)}</span>
-              <span class="lab" style="position:static;color:#C9C5BA;">${this.escapeHtml(kickerText)}</span>
+              <span class="badge-bespoke" data-testid="bespoke-badge" style="display:${badgeDisplayStyle};align-items:center;gap:8px;padding:6px 12px;background:#111111;color:#6BE8F2;border:1.5px solid #6BE8F2;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;">${this.escapeHtml(badgeText)}</span>
+              <span class="lab" style="position:static;color:#C7D2DD;">${this.escapeHtml(kickerText)}</span>
             </div>
             <div class="split tx" data-testid="chapter-headline" style="font-size:62px;font-weight:300;letter-spacing:-0.04em;line-height:1.04;color:var(--bone);">${this.escapeHtml(headlineText)}</div>
-            <div class="tx" data-testid="chapter-body" style="padding:12px 18px;background:#1C1C1B;border:1px solid #3A3A38;border-left:4px solid #F4F03A;font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:400;line-height:1.35;color:var(--bone);">
+            <div class="tx" data-testid="chapter-body" style="padding:12px 18px;background:#161E26;border:1px solid #3A4552;border-left:4px solid #6BE8F2;font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:400;line-height:1.35;color:var(--bone);">
               ${takeawayPrefixHtml}${this.escapeHtml(bodyText)}
             </div>
           </div>
 
-          <div class="blk ia" data-ax="b" style="position:absolute;left:64px;top:330px;width:1040px;height:474px;background:#1C1C1B;color:var(--bone);border:1.5px solid #3A3A38;transform-origin:50% 100%;pointer-events:auto;">
+          <div class="blk ia" data-ax="b" style="position:absolute;left:64px;top:330px;width:1040px;height:474px;background:#161E26;color:var(--bone);border:1.5px solid #3A4552;transform-origin:50% 100%;pointer-events:auto;">
             <div class="lab tx" style="position:absolute;left:28px;top:20px;right:28px;display:flex;justify-content:space-between;align-items:center;">
               <span>SIGNATURE PATTERN TIMELINE</span>
-              <button type="button" class="receipt-trigger" data-fact-id="${this.escapeHtml(facts[0]!.id)}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:5px 10px;border:1.5px solid #F4F03A;background:#111111;color:#F4F03A;cursor:pointer;">Receipts (${facts[0]!.txn_ids.length})</button>
+              <button type="button" class="receipt-trigger" data-fact-id="${this.escapeHtml(facts[0]!.id)}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:5px 10px;border:1.5px solid #6BE8F2;background:#111111;color:#6BE8F2;cursor:pointer;">Receipts (${facts[0]!.txn_ids.length})</button>
             </div>
             <svg data-testid="generic-bespoke-svg" width="${svgW}" height="${svgH}" style="position:absolute;left:28px;top:60px;">${barsSvg}</svg>
             <div class="tx" style="position:absolute;left:28px;top:316px;right:28px;">${receiptRowsHtml}</div>

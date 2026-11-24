@@ -82,7 +82,7 @@ export class PersonalityChapter implements ChapterModule {
       return {
         key: catKey,
         label: rawLabel !== catKey ? rawLabel : defaultLabel,
-        color: CATEGORY_COLORS[catKey] ?? '#F4F03A',
+        color: CATEGORY_COLORS[catKey] ?? '#6BE8F2',
         share: sum / totalOutMinor,
       };
     };
@@ -167,7 +167,7 @@ export class PersonalityChapter implements ChapterModule {
       <div class="ch-header-stack" style="left:60px;top:172px;max-width:860px;max-height:540px;gap:14px">
         <div class="lab tx" style="font-size:16px">${youAreLabel}</div>
         <div class="split tx" data-testid="chapter-headline" style="font-size:${titleFontSize}px;font-weight:300;letter-spacing:-0.045em;line-height:1.04;max-width:860px">${splitTitle}</div>
-        <div class="tx" data-testid="chapter-body" style="max-width:840px;font-size:16px;line-height:1.35;color:#F3F0E6;background:#1C1C1B;border-left:4px solid #F4F03A;padding:12px 18px">${takeawayDisplay ? `<strong style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#F4F03A;margin-right:8px">${takeawayDisplay}</strong>` : ''}${this.escapeHtml(bodyText)}</div>
+        <div class="tx" data-testid="chapter-body" style="max-width:840px;font-size:16px;line-height:1.35;color:#E8EEF2;background:#161E26;border-left:4px solid #6BE8F2;padding:12px 18px">${takeawayDisplay ? `<strong style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#6BE8F2;margin-right:8px">${takeawayDisplay}</strong>` : ''}${this.escapeHtml(bodyText)}</div>
       </div>
       <div class="lab dt" style="position:absolute;left:64px;top:836px;font-size:12px">${sprintsLabel}</div>
 
@@ -325,7 +325,7 @@ export class PersonalityChapter implements ChapterModule {
     c.stroke();
 
     // 3. Payday spikes in orange
-    c.strokeStyle = '#FF5A14';
+    c.strokeStyle = '#6E8BFF';
     c.lineWidth = 6;
     c.beginPath();
     for (let i = 0; i < n; i++) {

@@ -285,7 +285,7 @@ class TestDomElement {
   public offsetHeight = 60;
   public autoAlpha = 1;
   public opacity = 1;
-  public color = '#1C1C1B';
+  public color = '#161E26';
   public clipPath = 'none';
   public scaleX = 1;
   public scaleY = 1;

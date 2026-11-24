@@ -275,7 +275,7 @@ export function mountDesignPrototype(
   const remapBarsSvg = weeklySeconds
     .map((sec, c) => {
       const h = (sec / maxWeekSec) * 40;
-      return `<rect class="remap-bar" x="${c * 32}" y="${(44 - h).toFixed(1)}" width="28" height="${h.toFixed(1)}" fill="#3A3A38"/>`;
+      return `<rect class="remap-bar" x="${c * 32}" y="${(44 - h).toFixed(1)}" width="28" height="${h.toFixed(1)}" fill="#3A4552"/>`;
     })
     .join('');
 
@@ -356,7 +356,7 @@ export function mountDesignPrototype(
   for (let v = 0; v <= shL.topDollars; v += 2000) {
     const y = shL.baseY - v * shL.scale;
     shatterAxesHtml += `
-      <div class="dt sx" style="left:120px;top:${y.toFixed(1)}px;width:1690px;height:1px;background:#3A3A38;transform-origin:0 50%"></div>
+      <div class="dt sx" style="left:120px;top:${y.toFixed(1)}px;width:1690px;height:1px;background:#3A4552;transform-origin:0 50%"></div>
       <div class="lab dt" style="left:64px;top:${(y - 9).toFixed(1)}px;font-size:11px">${v ? `${v / 1000}K` : 'US$0'}</div>
     `;
   }
@@ -511,7 +511,7 @@ export function mountDesignPrototype(
               ${Array.from({ length: 365 }, (_, i) => {
                 const col = Math.floor((i + JAN_1_2025_WEEKDAY) / 7);
                 const row = (i + JAN_1_2025_WEEKDAY) % 7;
-                return `<rect x="${col * 10.5}" y="${row * 10.5}" width="8" height="8" fill="${cpDayIndices.has(i) ? CORE_COLORS.solar : '#3A3A38'}"/>`;
+                return `<rect x="${col * 10.5}" y="${row * 10.5}" width="8" height="8" fill="${cpDayIndices.has(i) ? CORE_COLORS.solar : '#3A4552'}"/>`;
               }).join('')}
             </svg>
           </div>
@@ -597,7 +597,7 @@ export function mountDesignPrototype(
       phoneStageEl.innerHTML = `
         <div class="lab" style="left:20px;top:20px">SAM · 2025 · 01 / THE POUR</div>
         <div style="position:absolute;left:18px;top:46px;font-size:62px;font-weight:300;letter-spacing:-0.045em;line-height:0.95">Your 2025.</div>
-        <div class="lab" style="left:20px;top:116px;font-size:9.5px;color:#C9C5BA">1,000 RAW BANK ROWS UNSCRAMBLED INTO CLEAN NAMES</div>
+        <div class="lab" style="left:20px;top:116px;font-size:9.5px;color:#C7D2DD">1,000 RAW BANK ROWS UNSCRAMBLED INTO CLEAN NAMES</div>
         <div class="blk" style="left:0;top:144px;width:390px;height:282px;background:var(--c1);color:var(--ink)">
           <div class="lab" style="left:20px;top:16px">RAW → CLEAN</div>
           <div class="lab" style="right:20px;top:16px">7 OF ${totalTxCount} ROWS</div>
@@ -619,7 +619,7 @@ export function mountDesignPrototype(
           <div class="lab" style="left:16px;top:16px">PAYDAYS</div>
           <div class="num" style="position:absolute;left:14px;bottom:14px;font-size:78px">${paydayCount}</div>
         </div>
-        <div class="blk" style="left:0;top:640px;width:390px;height:204px;background:var(--ink);color:var(--bone);border-top:2px solid #2A2A29">
+        <div class="blk" style="left:0;top:640px;width:390px;height:204px;background:var(--ink);color:var(--bone);border-top:2px solid #232A33">
           <div class="lab" style="left:20px;top:16px;font-size:9.5px">365 DAYS · EVERY SQUARE IS A DAY OF 2025</div>
           <svg style="position:absolute;left:20px;top:48px" width="350" height="126" viewBox="0 0 530 140">
             ${Array.from({ length: 365 }, (_, i) => {
@@ -643,7 +643,7 @@ export function mountDesignPrototype(
       phoneStageEl.innerHTML = `
         <div class="lab" style="position:absolute;left:20px;top:20px">SAM · 2025 · 04 / THE SHATTER</div>
         <div style="position:absolute;left:18px;top:46px;font-size:48px;font-weight:300;letter-spacing:-0.04em;line-height:0.98">Where US$${totalSpendFormatted}<br>went.</div>
-        <div class="lab" style="position:absolute;left:20px;top:154px;font-size:9.5px;color:#C9C5BA">${totalTxCount} PURCHASES STACKED BY CATEGORY</div>
+        <div class="lab" style="position:absolute;left:20px;top:154px;font-size:9.5px;color:#C7D2DD">${totalTxCount} PURCHASES STACKED BY CATEGORY</div>
         <div style="position:absolute;left:0;top:186px;width:390px;bottom:0;display:flex;flex-direction:column;gap:5px">
           ${topCats
             .map((cat) => {
@@ -675,7 +675,7 @@ export function mountDesignPrototype(
         <div class="lab" style="right:20px;top:16px">DAY 365 / 365</div>
         <div class="num" style="position:absolute;left:16px;bottom:14px;font-size:78px"><sup>US$</sup>${totalSpendFormatted}</div>
       </div>
-      <div class="lab" style="left:20px;top:284px;font-size:9px;color:#C9C5BA">M T W T F S S · 53 WEEKS</div>
+      <div class="lab" style="left:20px;top:284px;font-size:9px;color:#C7D2DD">M T W T F S S · 53 WEEKS</div>
       <canvas id="ph-grid" width="104" height="534" style="position:absolute;left:20px;top:302px;width:104px;height:534px"></canvas>
       <div class="blk" style="left:134px;top:280px;width:256px;height:182px;background:var(--c2);color:var(--ink)">
         <div class="lab" style="left:18px;top:16px">PURCHASES</div>
@@ -798,7 +798,7 @@ export function mountDesignPrototype(
       const ttl = chapters[0]!.o.querySelector<HTMLElement>('#ttl');
       if (ttl) {
         engine.computeTitlePoints(ttl);
-        gsap.set(ttl, { opacity: 1, color: '#1C1C1B' });
+        gsap.set(ttl, { opacity: 1, color: '#161E26' });
       }
       engine.daysVisible = true;
       engine.setGrid(GRID_PRESETS.opener, { instant: true });
@@ -881,7 +881,7 @@ export function mountDesignPrototype(
 
       const remapRects = Array.from(chapters[1]!.o.querySelectorAll<SVGRectElement>('.remap-bar'));
       remapRects.forEach((r, col) => {
-        r.setAttribute('fill', col <= cutDayView.col ? CORE_COLORS.bone : '#3A3A38');
+        r.setAttribute('fill', col <= cutDayView.col ? CORE_COLORS.bone : '#3A4552');
       });
 
       engine.renderFrame(0, 10);

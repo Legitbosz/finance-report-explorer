@@ -86,7 +86,7 @@ export class ShareExporter {
     ctx.fillRect(0, 0, width, height);
 
     // 2. Top Header Strip
-    ctx.fillStyle = '#F3F0E6';
+    ctx.fillStyle = '#E8EEF2';
     ctx.font = '500 20px "JetBrains Mono", monospace';
     const rawRightTag = chapter?.params.kicker?.toUpperCase() ?? 'YEAR SUMMARY POSTER';
     const rightTag = this.truncateTextToWidth(ctx, rawRightTag, Math.floor(width * 0.42));
@@ -101,7 +101,7 @@ export class ShareExporter {
     // 3. Primary Hero Yellow Block
     const heroY = 92;
     const heroH = isTall ? 520 : 390;
-    ctx.fillStyle = '#F4F03A';
+    ctx.fillStyle = '#6BE8F2';
     ctx.fillRect(48, heroY, width - 96, heroH);
 
     // Giant cropped ghost year inside yellow block
@@ -166,7 +166,7 @@ export class ShareExporter {
     const rawSpendFormatted = stripCurrencyPrefix(totalSpendFact?.formatted ?? `${currencySym}0`);
 
     // Block 1: Orange (Total Spend)
-    ctx.fillStyle = '#FF5A14';
+    ctx.fillStyle = '#6E8BFF';
     ctx.fillRect(48, rowY, colW, rowH);
     ctx.fillStyle = '#111111';
     ctx.font = '500 16px "JetBrains Mono", monospace';
@@ -193,7 +193,7 @@ export class ShareExporter {
 
     // Block 2: Pink (Purchases / Movements)
     const col2X = 48 + colW + 16;
-    ctx.fillStyle = '#FFA8E4';
+    ctx.fillStyle = '#C9B8F0';
     ctx.fillRect(col2X, rowY, colW, rowH);
     ctx.fillStyle = '#111111';
     ctx.font = '500 16px "JetBrains Mono", monospace';
@@ -245,13 +245,13 @@ export class ShareExporter {
     // 5. 53x7 Year Grid Block
     const gridBlockY = rowY + rowH + 16;
     const gridBlockH = isTall ? 740 : 470;
-    ctx.fillStyle = '#191918';
+    ctx.fillStyle = '#12181F';
     ctx.fillRect(48, gridBlockY, width - 96, gridBlockH);
-    ctx.strokeStyle = '#3A3A38';
+    ctx.strokeStyle = '#3A4552';
     ctx.lineWidth = 2;
     ctx.strokeRect(48, gridBlockY, width - 96, gridBlockH);
 
-    ctx.fillStyle = '#F3F0E6';
+    ctx.fillStyle = '#E8EEF2';
     ctx.font = '500 16px "JetBrains Mono", monospace';
     const milestoneBase = plan.business_meta?.milestone_label?.trim().toUpperCase();
     const milestonePlural = milestoneBase
@@ -285,7 +285,7 @@ export class ShareExporter {
 
     // Legend & Footer inside Grid Block
     const footerY = gridBlockY + gridBlockH - 36;
-    ctx.fillStyle = '#C9C5BA';
+    ctx.fillStyle = '#C7D2DD';
     ctx.font = '500 14px "JetBrains Mono", monospace';
     const leftLegend = '1 SQUARE = 1 DAY · MONDAY ON TOP · BRIGHTER = LOUDER';
     ctx.fillText(leftLegend, 84, footerY);

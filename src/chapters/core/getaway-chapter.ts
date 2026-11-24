@@ -96,7 +96,7 @@ export class GetawayChapter implements ChapterModule {
       <div class="ch-header-stack" style="left:60px;top:84px;max-width:940px;max-height:330px">
         <div class="lab tx">${this.escapeHtml(ctx.chapter.params.kicker ?? 'THE GETAWAY')}</div>
         <div class="split tx" data-testid="chapter-headline" style="font-size:66px;font-weight:300;letter-spacing:-0.04em;line-height:1.04;max-width:940px">${this.escapeHtml(headlineText)}</div>
-        <div class="tx" data-testid="chapter-body" style="max-width:940px;font-size:16px;line-height:1.35;color:${isB2B ? '#C9C5BA' : '#F3F0E6'};${isB2B ? '' : 'background:#1C1C1B;border-left:4px solid #F4F03A;padding:12px 18px'}">${takeawayPrefix ? `<strong style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#F4F03A;margin-right:8px">${takeawayPrefix}</strong>` : ''}${this.escapeHtml(bodyText)}</div>
+        <div class="tx" data-testid="chapter-body" style="max-width:940px;font-size:16px;line-height:1.35;color:${isB2B ? '#C7D2DD' : '#E8EEF2'};${isB2B ? '' : 'background:#161E26;border-left:4px solid #6BE8F2;padding:12px 18px'}">${takeawayPrefix ? `<strong style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#6BE8F2;margin-right:8px">${takeawayPrefix}</strong>` : ''}${this.escapeHtml(bodyText)}</div>
       </div>
 
       <div class="blk ia" data-ax="b" data-testid="getaway-primary-block" style="position:absolute;left:1040px;top:76px;width:410px;height:360px;background:#6E8BFF;color:var(--ink);transform-origin:50% 100%;pointer-events:auto;">

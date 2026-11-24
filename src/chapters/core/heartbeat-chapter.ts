@@ -72,7 +72,7 @@ export class HeartbeatChapter implements ChapterModule {
     const barsSvg = avgByOffset
       .map((val, k) => {
         const h = Math.max(8, (val / maxAvg) * 260);
-        const fill = k < 5 ? '#FF5A14' : '#111111';
+        const fill = k < 5 ? '#6E8BFF' : '#111111';
         return `<rect class="pb" x="${k * 34}" y="${(280 - h).toFixed(1)}" width="26" height="${h.toFixed(1)}" fill="${fill}"/>`;
       })
       .join('');
@@ -85,7 +85,7 @@ export class HeartbeatChapter implements ChapterModule {
       <div class="ch-header-stack" style="left:60px;top:84px;max-width:1400px;max-height:290px">
         <div class="lab tx">${this.escapeHtml(ctx.chapter.params.kicker ?? 'THE HEARTBEAT')}</div>
         <div class="split tx" data-testid="chapter-headline" style="font-size:68px;font-weight:300;letter-spacing:-0.04em;line-height:1.04;max-width:1400px">${this.escapeHtml(headlineText)}</div>
-        <div class="tx" data-testid="chapter-body" style="max-width:1400px;font-size:16px;line-height:1.35;color:${isB2B ? '#C9C5BA' : '#F3F0E6'};${isB2B ? '' : 'background:#1C1C1B;border-left:4px solid #F4F03A;padding:12px 18px'}">${takeawayPrefix ? `<strong style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#F4F03A;margin-right:8px">${takeawayPrefix}</strong>` : ''}${this.escapeHtml(bodyText)}</div>
+        <div class="tx" data-testid="chapter-body" style="max-width:1400px;font-size:16px;line-height:1.35;color:${isB2B ? '#C7D2DD' : '#E8EEF2'};${isB2B ? '' : 'background:#161E26;border-left:4px solid #6BE8F2;padding:12px 18px'}">${takeawayPrefix ? `<strong style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#6BE8F2;margin-right:8px">${takeawayPrefix}</strong>` : ''}${this.escapeHtml(bodyText)}</div>
       </div>
 
       <div class="blk ia" data-ax="b" data-testid="heartbeat-waveform-block" style="position:absolute;left:64px;top:410px;width:1040px;height:400px;background:var(--c1);color:var(--ink);transform-origin:50% 100%;pointer-events:auto;">

@@ -46,7 +46,7 @@ export class AllocationOverlay {
     this.layerEl.id = 'o-allocation';
     this.layerEl.dataset.testid = 'allocation-overlay';
     this.layerEl.style.cssText =
-      'position:absolute;inset:0;visibility:hidden;pointer-events:none;background:var(--ink, #111111);color:var(--bone, #F3F0E6);z-index:12;';
+      'position:absolute;inset:0;visibility:hidden;pointer-events:none;background:var(--ink, #111111);color:var(--bone, #E8EEF2);z-index:12;';
     overParent.appendChild(this.layerEl);
   }
 
@@ -115,9 +115,9 @@ export class AllocationOverlay {
 
     const rowsHtml =
       computed.rows.length === 0
-        ? `<div style="grid-column:1 / -1;padding:48px;border:1.5px solid #3A3A38;background:#161615;text-align:center;">
+        ? `<div style="grid-column:1 / -1;padding:48px;border:1.5px solid #3A4552;background:#131A21;text-align:center;">
              <div style="font-size:24px;font-weight:400;margin-bottom:10px;">No departments added yet.</div>
-             <div class="lab" style="font-size:12px;color:#B8B4A9">Set a total budget, then add departments and give each one a % share or a fixed amount.</div>
+             <div class="lab" style="font-size:12px;color:#AEBAC7">Set a total budget, then add departments and give each one a % share or a fixed amount.</div>
            </div>`
         : computed.rows
             .map((row) => {
@@ -126,20 +126,20 @@ export class AllocationOverlay {
                   ? `${row.entry.percent}%`
                   : this.formatAmount(row.entry.amountMinor ?? 0);
               return `
-              <article data-testid="allocation-row-${this.escapeHtml(row.entry.id)}" style="background:#161615;border:1.5px solid ${computed.isOver ? '#FF6B57' : '#3A3A38'};padding:22px 24px;display:flex;flex-direction:column;gap:14px;">
+              <article data-testid="allocation-row-${this.escapeHtml(row.entry.id)}" style="background:#131A21;border:1.5px solid ${computed.isOver ? '#E8799B' : '#3A4552'};padding:22px 24px;display:flex;flex-direction:column;gap:14px;">
                 <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
                   <div>
                     <h3 style="font-size:24px;font-weight:500;letter-spacing:-0.02em;">${this.escapeHtml(row.entry.name)}</h3>
-                    <div class="lab" style="font-size:11px;color:#B8B4A9;margin-top:6px;">SHARE ${this.escapeHtml(shareStr)} · ${row.percentOfTotal.toFixed(1)}% OF TOTAL</div>
+                    <div class="lab" style="font-size:11px;color:#AEBAC7;margin-top:6px;">SHARE ${this.escapeHtml(shareStr)} · ${row.percentOfTotal.toFixed(1)}% OF TOTAL</div>
                   </div>
                   <div style="display:flex;gap:8px;flex-shrink:0;">
                     <button type="button" data-action="edit-department" data-dept-id="${this.escapeHtml(row.entry.id)}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:7px 11px;border:1.5px solid var(--bone);color:var(--bone);">Edit</button>
-                    <button type="button" data-action="remove-department" data-dept-id="${this.escapeHtml(row.entry.id)}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:7px 11px;border:1.5px solid #FF6B57;color:#FF6B57;">Remove</button>
+                    <button type="button" data-action="remove-department" data-dept-id="${this.escapeHtml(row.entry.id)}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:7px 11px;border:1.5px solid #E8799B;color:#E8799B;">Remove</button>
                   </div>
                 </div>
                 <div style="display:flex;align-items:center;gap:12px;">
-                  <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.min(100, Math.round(row.percentOfTotal))}" style="flex:1;height:11px;background:#262625;border:1px solid #3A3A38;overflow:hidden;">
-                    <div style="width:${Math.min(100, row.percentOfTotal).toFixed(1)}%;height:100%;background:${computed.isOver ? '#FF6B57' : 'var(--c1)'};"></div>
+                  <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.min(100, Math.round(row.percentOfTotal))}" style="flex:1;height:11px;background:#232A33;border:1px solid #3A4552;overflow:hidden;">
+                    <div style="width:${Math.min(100, row.percentOfTotal).toFixed(1)}%;height:100%;background:${computed.isOver ? '#E8799B' : 'var(--c1)'};"></div>
                   </div>
                   <span style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;font-variant-numeric:tabular-nums;">${this.escapeHtml(this.formatAmount(row.computedMinor))}</span>
                 </div>
@@ -150,7 +150,7 @@ export class AllocationOverlay {
     const warningsHtml = computed.warnings
       .map(
         (w) => `
-        <div data-testid="allocation-warning" style="padding:10px 12px;border:1px solid ${computed.isOver ? '#FF6B57' : '#E3A83C'};background:rgba(255,107,87,0.12);color:#FFB58A;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.4;">
+        <div data-testid="allocation-warning" style="padding:10px 12px;border:1px solid ${computed.isOver ? '#E8799B' : '#38BDF8'};background:rgba(232,121,155,0.12);color:#A8C6F0;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.4;">
           ${this.escapeHtml(w)}${computed.isOver ? '' : ` Remaining: ${this.escapeHtml(this.formatAmount(computed.remainingMinor))} (${computed.remainingPct.toFixed(1)}%).`}
         </div>`
       )
@@ -158,7 +158,7 @@ export class AllocationOverlay {
 
     this.layerEl.innerHTML = `
       <div class="lab" style="position:absolute;left:64px;top:92px;">BUDGET ALLOCATION · DEPARTMENTS & UNITS</div>
-      <div class="lab" style="position:absolute;left:64px;top:122px;font-size:12px;color:#B8B4A9;">SPLIT A TOTAL BUDGET ACROSS DEPARTMENTS · SAVED LOCALLY IN YOUR BROWSER</div>
+      <div class="lab" style="position:absolute;left:64px;top:122px;font-size:12px;color:#AEBAC7;">SPLIT A TOTAL BUDGET ACROSS DEPARTMENTS · SAVED LOCALLY IN YOUR BROWSER</div>
 
       <div style="position:absolute;right:64px;top:86px;display:flex;gap:10px;align-items:center;pointer-events:auto;">
         <button type="button" class="btn" id="allocation-budgets-btn" data-testid="allocation-budgets-btn" style="border-color:var(--bone);color:var(--bone)">Budgets [B]</button>
@@ -171,18 +171,18 @@ export class AllocationOverlay {
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;">${this.escapeHtml(totalStr)}</div>
           <div class="lab" style="font-size:11px;opacity:0.85;">${computed.rows.length} DEPARTMENT${computed.rows.length === 1 ? '' : 'S'}</div>
         </div>
-        <div data-testid="allocation-summary-allocated" style="background:#161615;border:1.5px solid #3A3A38;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
-          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#B8B4A9;">ALLOCATED</div>
+        <div data-testid="allocation-summary-allocated" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#AEBAC7;">ALLOCATED</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;">${this.escapeHtml(this.formatAmount(computed.totalAllocatedMinor))}</div>
-          <div class="lab" style="font-size:11px;color:#B8B4A9;">${computed.totalAllocatedPct.toFixed(1)}% OF TOTAL</div>
+          <div class="lab" style="font-size:11px;color:#AEBAC7;">${computed.totalAllocatedPct.toFixed(1)}% OF TOTAL</div>
         </div>
-        <div data-testid="allocation-summary-remaining" style="background:#161615;border:1.5px solid ${computed.isOver ? '#FF6B57' : '#3A3A38'};color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
-          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#B8B4A9;">REMAINING UNALLOCATED</div>
-          <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;color:${computed.isOver ? '#FF6B57' : '#B9F0C6'};">${this.escapeHtml(this.formatAmount(computed.remainingMinor))}</div>
-          <div class="lab" style="font-size:11px;color:${computed.isOver ? '#FF6B57' : '#B8B4A9'};">${computed.isOver ? 'OVER-ALLOCATED' : `${computed.remainingPct.toFixed(1)}% UNALLOCATED`}</div>
+        <div data-testid="allocation-summary-remaining" style="background:#131A21;border:1.5px solid ${computed.isOver ? '#E8799B' : '#3A4552'};color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#AEBAC7;">REMAINING UNALLOCATED</div>
+          <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;color:${computed.isOver ? '#E8799B' : '#B9F0C6'};">${this.escapeHtml(this.formatAmount(computed.remainingMinor))}</div>
+          <div class="lab" style="font-size:11px;color:${computed.isOver ? '#E8799B' : '#AEBAC7'};">${computed.isOver ? 'OVER-ALLOCATED' : `${computed.remainingPct.toFixed(1)}% UNALLOCATED`}</div>
         </div>
-        <div style="background:#161615;border:1.5px solid #3A3A38;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
-          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#B8B4A9;">SHARE THIS SPLIT</div>
+        <div style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#AEBAC7;">SHARE THIS SPLIT</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
             <button type="button" class="btn" id="allocation-copy-btn" data-testid="allocation-copy-btn" style="border-color:var(--bone);color:var(--bone);text-align:left;">Copy text summary</button>
             <button type="button" class="btn" id="allocation-csv-btn" data-testid="allocation-csv-btn" style="border-color:var(--bone);color:var(--bone);text-align:left;">Download CSV</button>
@@ -193,29 +193,29 @@ export class AllocationOverlay {
       </div>
 
       <div style="position:absolute;left:64px;right:64px;top:330px;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
-        <label class="lab" style="font-size:11px;color:#B8B4A9;display:flex;flex-direction:column;gap:6px;">TOTAL BUDGET (${this.escapeHtml(this.currencySymbol)})
-          <input id="allocation-total-input" data-testid="allocation-total-input" type="number" min="1" step="any" value="${this.state.totalMinor > 0 ? this.escapeHtml(String(this.state.totalMinor / 100)) : ''}" placeholder="e.g. 310000" style="padding:10px 12px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;width:200px;" />
+        <label class="lab" style="font-size:11px;color:#AEBAC7;display:flex;flex-direction:column;gap:6px;">TOTAL BUDGET (${this.escapeHtml(this.currencySymbol)})
+          <input id="allocation-total-input" data-testid="allocation-total-input" type="number" min="1" step="any" value="${this.state.totalMinor > 0 ? this.escapeHtml(String(this.state.totalMinor / 100)) : ''}" placeholder="e.g. 310000" style="padding:10px 12px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;width:200px;" />
         </label>
         <button type="button" class="btn primary" id="allocation-total-save-btn" data-testid="allocation-total-save-btn" style="background:var(--c1);color:var(--ink);border-color:var(--c1)">Set total</button>
         ${warningsHtml}
       </div>
 
-      <div data-testid="allocation-form" style="position:absolute;left:64px;right:64px;top:412px;display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;padding:14px;background:#161615;border:1.5px solid #3A3A38;">
-        <label class="lab" style="font-size:11px;color:#B8B4A9;display:flex;flex-direction:column;gap:6px;flex:1;min-width:180px;">DEPARTMENT / UNIT NAME
-          <input id="allocation-name-input" data-testid="allocation-name-input" type="text" value="${editing ? this.escapeHtml(editing.name) : ''}" placeholder="e.g. Operations" style="padding:10px 12px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;" />
+      <div data-testid="allocation-form" style="position:absolute;left:64px;right:64px;top:412px;display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;padding:14px;background:#131A21;border:1.5px solid #3A4552;">
+        <label class="lab" style="font-size:11px;color:#AEBAC7;display:flex;flex-direction:column;gap:6px;flex:1;min-width:180px;">DEPARTMENT / UNIT NAME
+          <input id="allocation-name-input" data-testid="allocation-name-input" type="text" value="${editing ? this.escapeHtml(editing.name) : ''}" placeholder="e.g. Operations" style="padding:10px 12px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;" />
         </label>
-        <label class="lab" style="font-size:11px;color:#B8B4A9;display:flex;flex-direction:column;gap:6px;">SHARE TYPE
-          <select id="allocation-mode-select" data-testid="allocation-mode-select" style="padding:10px 12px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;">
+        <label class="lab" style="font-size:11px;color:#AEBAC7;display:flex;flex-direction:column;gap:6px;">SHARE TYPE
+          <select id="allocation-mode-select" data-testid="allocation-mode-select" style="padding:10px 12px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;">
             <option value="percent" ${!editing || editing.mode === 'percent' ? 'selected' : ''}>% of total</option>
             <option value="amount" ${editing?.mode === 'amount' ? 'selected' : ''}>Fixed amount</option>
           </select>
         </label>
-        <label class="lab" style="font-size:11px;color:#B8B4A9;display:flex;flex-direction:column;gap:6px;">VALUE
-          <input id="allocation-value-input" data-testid="allocation-value-input" type="number" min="0" step="any" value="${editing ? this.escapeHtml(String(editing.mode === 'percent' ? (editing.percent ?? '') : editing.amountMinor !== null ? editing.amountMinor / 100 : '')) : ''}" placeholder="e.g. 50 or 100000" style="padding:10px 12px;border:1.5px solid var(--bone);background:#1C1C1B;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;width:160px;" />
+        <label class="lab" style="font-size:11px;color:#AEBAC7;display:flex;flex-direction:column;gap:6px;">VALUE
+          <input id="allocation-value-input" data-testid="allocation-value-input" type="number" min="0" step="any" value="${editing ? this.escapeHtml(String(editing.mode === 'percent' ? (editing.percent ?? '') : editing.amountMinor !== null ? editing.amountMinor / 100 : '')) : ''}" placeholder="e.g. 50 or 100000" style="padding:10px 12px;border:1.5px solid var(--bone);background:#161E26;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;width:160px;" />
         </label>
         <button type="button" class="btn primary" id="allocation-add-btn" data-testid="allocation-add-btn" style="background:var(--c1);color:var(--ink);border-color:var(--c1)">${editing ? 'Save changes' : 'Add department'}</button>
-        ${editing ? `<button type="button" class="btn" id="allocation-cancel-edit-btn" data-testid="allocation-cancel-edit-btn" style="border-color:#8E8A7F;color:#B8B4A9;">Cancel</button>` : ''}
-        ${this.formError ? `<div data-testid="allocation-form-error" style="flex-basis:100%;font-family:'JetBrains Mono',monospace;font-size:11px;color:#FF6B57;">${this.escapeHtml(this.formError)}</div>` : ''}
+        ${editing ? `<button type="button" class="btn" id="allocation-cancel-edit-btn" data-testid="allocation-cancel-edit-btn" style="border-color:#8A99A8;color:#AEBAC7;">Cancel</button>` : ''}
+        ${this.formError ? `<div data-testid="allocation-form-error" style="flex-basis:100%;font-family:'JetBrains Mono',monospace;font-size:11px;color:#E8799B;">${this.escapeHtml(this.formError)}</div>` : ''}
       </div>
 
       <div id="allocation-rows-grid" data-testid="allocation-rows-grid" style="position:absolute;left:64px;right:64px;top:512px;bottom:84px;overflow-y:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-content:start;padding-right:4px;padding-bottom:16px;">
@@ -393,17 +393,17 @@ export class AllocationOverlay {
     if (!ctx) return;
     ctx.fillStyle = '#111111';
     ctx.fillRect(0, 0, 1080, 1350);
-    ctx.fillStyle = '#F3F0E6';
+    ctx.fillStyle = '#E8EEF2';
     ctx.font = '500 20px "JetBrains Mono", monospace';
     ctx.fillText('BUDGET ALLOCATION', 56, 62);
-    ctx.fillStyle = '#F4F03A';
+    ctx.fillStyle = '#6BE8F2';
     ctx.fillRect(48, 92, 984, 220);
     ctx.fillStyle = '#111111';
     ctx.font = '500 18px "JetBrains Mono", monospace';
     ctx.fillText('TOTAL BUDGET', 72, 140);
     ctx.font = '300 96px "Inter Tight", sans-serif';
     ctx.fillText(this.formatAmount(this.state.totalMinor), 72, 260);
-    ctx.fillStyle = '#F3F0E6';
+    ctx.fillStyle = '#E8EEF2';
     ctx.font = '500 20px "JetBrains Mono", monospace';
     let y = 380;
     for (const row of computed.rows) {
@@ -413,11 +413,11 @@ export class AllocationOverlay {
         y
       );
       y += 16;
-      ctx.fillStyle = '#262625';
+      ctx.fillStyle = '#232A33';
       ctx.fillRect(56, y, 968, 14);
-      ctx.fillStyle = computed.isOver ? '#FF6B57' : '#F4F03A';
+      ctx.fillStyle = computed.isOver ? '#E8799B' : '#6BE8F2';
       ctx.fillRect(56, y, Math.max(0, Math.min(968, (968 * row.percentOfTotal) / 100)), 14);
-      ctx.fillStyle = '#F3F0E6';
+      ctx.fillStyle = '#E8EEF2';
       y += 56;
     }
     ctx.font = '500 20px "JetBrains Mono", monospace';

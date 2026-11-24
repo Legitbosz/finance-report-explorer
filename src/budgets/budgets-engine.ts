@@ -197,7 +197,7 @@ export function extractBudgetCategories(
         category: t.category,
         rawLabel,
         displayLabel,
-        color: CATEGORY_COLORS[t.category] ?? '#F4F03A',
+        color: CATEGORY_COLORS[t.category] ?? '#6BE8F2',
       });
     }
   }

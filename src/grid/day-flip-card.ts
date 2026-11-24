@@ -46,7 +46,7 @@ export class DayFlipCard {
     this.backEl = document.createElement('div');
     this.backEl.className = 'b';
     this.backEl.style.cssText =
-      'position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);background:var(--bone, #F3F0E6);color:var(--ink, #111111);padding:22px 24px;overflow:hidden;border:2px solid var(--ink, #111111);display:flex;flex-direction:column;';
+      'position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);background:var(--bone, #E8EEF2);color:var(--ink, #111111);padding:22px 24px;overflow:hidden;border:2px solid var(--ink, #111111);display:flex;flex-direction:column;';
 
     this.innerEl.appendChild(this.frontEl);
     this.innerEl.appendChild(this.backEl);
@@ -106,7 +106,7 @@ export class DayFlipCard {
       visibleTxns.length > 0
         ? visibleTxns
             .map((t) => {
-              const swatchColor = CATEGORY_COLORS[t.category] ?? '#F4F03A';
+              const swatchColor = CATEGORY_COLORS[t.category] ?? '#6BE8F2';
               const amtStr = formatMoneyMinor(t.amount_minor, {
                 showCents: true,
                 prefix: '',
@@ -138,7 +138,7 @@ export class DayFlipCard {
       <div style="margin-top:12px;flex:1;overflow:hidden">${rowsHtml}${moreHtml}</div>
       <div class="rc rr" style="font:600 15px/1 'JetBrains Mono',monospace;display:flex;gap:8px;border-top:1.5px solid #111;margin-top:8px;padding-top:12px;align-items:center;justify-content:space-between">
         <span>TOTAL · <span data-testid="flip-total-amount">${this.escapeHtml(this.currencySymbol)}${totalFormatted}</span></span>
-        <button type="button" data-action="open-day-receipts" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:6px 10px;background:#111;color:#F3F0E6;cursor:pointer;pointer-events:auto;">Receipts (${dayVisual.day.txn_ids.length})</button>
+        <button type="button" data-action="open-day-receipts" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:6px 10px;background:#111;color:#E8EEF2;cursor:pointer;pointer-events:auto;">Receipts (${dayVisual.day.txn_ids.length})</button>
       </div>
     `;
 
