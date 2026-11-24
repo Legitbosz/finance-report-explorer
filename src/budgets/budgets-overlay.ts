@@ -201,25 +201,25 @@ export class BudgetsOverlay {
       </div>
 
       <div style="position:absolute;left:64px;right:64px;top:174px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;">
-        <div data-testid="budgets-summary-total" style="background:var(--c1);color:var(--ink);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+        <div data-testid="budgets-summary-total" style="background:var(--c1);color:var(--ink);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:148px;">
           <div class="lab" style="font-size:14px;letter-spacing:0.12em;">TOTAL MONTHLY BUDGET</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;">${this.escapeHtml(totalBudgetStr)}</div>
           <div class="lab" style="font-size:14px;opacity:0.85;">${overview.configuredCount} OF ${overview.categories.length} CATEGORIES SET</div>
         </div>
 
-        <div data-testid="budgets-summary-spent" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+        <div data-testid="budgets-summary-spent" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:148px;">
           <div class="lab" style="font-size:14px;letter-spacing:0.12em;color:#AEBAC7;">ACTUAL SPENT (${this.escapeHtml(overview.selectedMonthLabel.toUpperCase())})</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;">${this.escapeHtml(totalSpentStr)}</div>
           <div class="lab" style="font-size:14px;color:#AEBAC7;">${overview.configuredCount > 0 ? `${this.escapeHtml(this.formatAmount(overview.totalBudgetedActualMinor))} IN BUDGETED CATEGORIES` : 'NO BUDGET CAPS SET YET'}</div>
         </div>
 
-        <div data-testid="budgets-summary-remaining" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+        <div data-testid="budgets-summary-remaining" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:148px;">
           <div class="lab" style="font-size:14px;letter-spacing:0.12em;color:#AEBAC7;">REMAINING BUDGET</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;color:${remainingColor};">${this.escapeHtml(totalRemainingStr)}</div>
           <div class="lab" style="font-size:14px;color:#AEBAC7;">${overview.overBudgetCount} OVER BUDGET · ${overview.nearLimitCount} NEAR LIMIT</div>
         </div>
 
-        <div data-testid="budgets-summary-projected" style="background:#131A21;border:1.5px solid ${overview.projectedWarningCount > 0 ? '#E8799B' : '#3A4552'};color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+        <div data-testid="budgets-summary-projected" style="background:#131A21;border:1.5px solid ${overview.projectedWarningCount > 0 ? '#E8799B' : '#3A4552'};color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:148px;">
           <div class="lab" style="font-size:14px;letter-spacing:0.12em;color:#AEBAC7;">PROJECTED MONTH-END</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;color:${overview.projectedWarningCount > 0 ? '#A8C6F0' : 'var(--bone)'};">${this.escapeHtml(totalProjectedStr)}</div>
           <div class="lab" style="font-size:14px;color:${overview.projectedWarningCount > 0 ? '#E8799B' : '#AEBAC7'};">${this.escapeHtml(projectionSubtext.toUpperCase())}</div>
@@ -326,19 +326,19 @@ export class BudgetsOverlay {
         <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding-top:2px;">
           <div>
             <div class="lab" style="font-size:13px;color:#8A99A8;">BUDGET</div>
-            <div data-testid="budget-limit-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums;">${this.escapeHtml(budgetStr)}</div>
+            <div data-testid="budget-limit-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;margin-top:8px;font-variant-numeric:tabular-nums;">${this.escapeHtml(budgetStr)}</div>
           </div>
           <div>
             <div class="lab" style="font-size:13px;color:#8A99A8;">ACTUAL SPENT</div>
-            <div data-testid="budget-actual-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums;">${this.escapeHtml(actualStr)}</div>
+            <div data-testid="budget-actual-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;margin-top:8px;font-variant-numeric:tabular-nums;">${this.escapeHtml(actualStr)}</div>
           </div>
           <div>
             <div class="lab" style="font-size:13px;color:#8A99A8;">REMAINING</div>
-            <div data-testid="budget-remaining-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums;color:${remainingColor};">${this.escapeHtml(remainingStr)}</div>
+            <div data-testid="budget-remaining-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;margin-top:8px;font-variant-numeric:tabular-nums;color:${remainingColor};">${this.escapeHtml(remainingStr)}</div>
           </div>
           <div>
             <div class="lab" style="font-size:13px;color:#8A99A8;">PROJECTED MONTH-END</div>
-            <div data-testid="budget-projected-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums;color:${row.projectedExceeds ? '#A8C6F0' : 'var(--bone)'};">${this.escapeHtml(projectedStr)}</div>
+            <div data-testid="budget-projected-${slug}" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;margin-top:8px;font-variant-numeric:tabular-nums;color:${row.projectedExceeds ? '#A8C6F0' : 'var(--bone)'};">${this.escapeHtml(projectedStr)}</div>
           </div>
         </div>
 

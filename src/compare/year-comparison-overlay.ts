@@ -123,7 +123,7 @@ export class YearComparisonOverlay {
       <div style="position:absolute;left:64px;right:64px;top:174px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;">
         ${this.renderTotalCard(`THIS YEAR (${this.escapeHtml(currentLabel)})`, comparison.current, true)}
         ${this.renderTotalCard(`LAST YEAR (${this.escapeHtml(previousLabel)})`, comparison.previous, false)}
-        <div data-testid="compare-change-card" style="background:#131A21;border:1.5px solid ${comparison.netImproved ? '#B9F0C6' : '#E8799B'};color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+        <div data-testid="compare-change-card" style="background:#131A21;border:1.5px solid ${comparison.netImproved ? '#B9F0C6' : '#E8799B'};color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:148px;">
           <div class="lab" style="font-size:14px;letter-spacing:0.12em;color:#AEBAC7;">CHANGE VS LAST YEAR</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;color:${comparison.netImproved ? '#B9F0C6' : '#E8799B'};">${comparison.netDeltaMinor >= 0 ? '+' : ''}${this.escapeHtml(this.formatAmount(comparison.netDeltaMinor))}</div>
           <div class="lab" style="font-size:14px;color:#AEBAC7;">INCOME ${this.escapeHtml(this.formatPct(comparison.incomeDeltaPct))} · EXPENSES ${this.escapeHtml(this.formatPct(comparison.expenseDeltaPct))}</div>
@@ -203,7 +203,7 @@ export class YearComparisonOverlay {
     const fg = isCurrent ? 'var(--ink)' : 'var(--bone)';
     const border = isCurrent ? 'var(--c1)' : '#3A4552';
     return `
-      <div data-testid="compare-total-${isCurrent ? 'current' : 'previous'}" style="background:${accent};border:1.5px solid ${border};color:${fg};padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+      <div data-testid="compare-total-${isCurrent ? 'current' : 'previous'}" style="background:${accent};border:1.5px solid ${border};color:${fg};padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:148px;">
         <div class="lab" style="font-size:14px;letter-spacing:0.12em;${isCurrent ? '' : 'color:#AEBAC7;'}">${this.escapeHtml(title)}</div>
         <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;">${this.escapeHtml(this.formatAmount(summary.netMinor))} net</div>
         <div class="lab" style="font-size:14px;${isCurrent ? 'opacity:0.85;' : 'color:#AEBAC7;'}">${this.escapeHtml(this.formatAmount(summary.incomeMinor))} IN · ${this.escapeHtml(this.formatAmount(summary.expenseMinor))} OUT · ${summary.txnCount} TXNS</div>

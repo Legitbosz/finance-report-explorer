@@ -150,22 +150,22 @@ export class OrganisationOverlay {
       </div>
 
       <div style="position:absolute;left:64px;right:64px;top:174px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;">
-        <div data-testid="org-summary-allocated" style="background:var(--c1);color:var(--ink);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+        <div data-testid="org-summary-allocated" style="background:var(--c1);color:var(--ink);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:148px;">
           <div class="lab" style="font-size:14px;letter-spacing:0.12em;">TOTAL ALLOCATED</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;">${this.escapeHtml(this.formatAmount(perf.totalAllocatedMinor))}</div>
           <div class="lab" style="font-size:14px;opacity:0.85;">ACROSS ALL UNITS</div>
         </div>
-        <div data-testid="org-summary-actual" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+        <div data-testid="org-summary-actual" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:148px;">
           <div class="lab" style="font-size:14px;letter-spacing:0.12em;color:#AEBAC7;">TOTAL ACTUAL SPEND</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;">${this.escapeHtml(this.formatAmount(perf.totalActualMinor))}</div>
           <div class="lab" style="font-size:14px;color:#AEBAC7;">${perf.totalAllocatedMinor > 0 ? `${((perf.totalActualMinor / perf.totalAllocatedMinor) * 100).toFixed(1)}% OF ALLOCATED` : 'NO BUDGETS SET YET'}</div>
         </div>
-        <div data-testid="org-summary-best" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+        <div data-testid="org-summary-best" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:148px;">
           <div class="lab" style="font-size:14px;letter-spacing:0.12em;color:#AEBAC7;">BEST PERFORMING UNIT</div>
           <div style="font-size:24px;font-weight:400;line-height:1.15;">${perf.bestUnits.length > 0 ? this.escapeHtml(perf.bestUnits[0]!.name) : '—'}</div>
           <div class="lab" style="font-size:14px;color:#B9F0C6;">${perf.bestUnits.length > 0 ? `${perf.bestUnits[0]!.percentUsed.toFixed(1)}% USED` : 'SET A UNIT BUDGET TO RANK'}</div>
         </div>
-        <div data-testid="org-summary-worst" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+        <div data-testid="org-summary-worst" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:148px;">
           <div class="lab" style="font-size:14px;letter-spacing:0.12em;color:#AEBAC7;">WORST PERFORMING UNIT</div>
           <div style="font-size:24px;font-weight:400;line-height:1.15;">${perf.worstUnits.length > 0 ? this.escapeHtml(perf.worstUnits[0]!.name) : '—'}</div>
           <div class="lab" style="font-size:14px;color:#E8799B;">${perf.worstUnits.length > 0 ? `${perf.worstUnits[0]!.percentUsed.toFixed(1)}% USED` : 'SET A UNIT BUDGET TO RANK'}</div>

@@ -277,6 +277,20 @@ body.show-dev-bar #bar {
   position: absolute;
 }
 
+/* Overlay layers are .ch containers too, but their labels use normal document
+   flow (flex/grid stacks). Without this override the chapter rule above rips
+   every .lab out of flow and stacks label + number + sublabel on top of each
+   other — e.g. in the Budgets overlay "TOTAL MONTHLY BUDGET" printed over
+   "₦100,000". Overlay headers keep working: they carry inline
+   position:absolute, which still beats this stylesheet rule. */
+#o-budgets .lab,
+#o-compare .lab,
+#o-allocation .lab,
+#o-organisation .lab,
+#o-explore .lab {
+  position: static;
+}
+
 /* ---------- Chapter Header Stack (Anti-Clash Flex Layout) ---------- */
 .ch-header-stack {
   position: absolute;

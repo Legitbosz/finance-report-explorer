@@ -166,22 +166,22 @@ export class AllocationOverlay {
       </div>
 
       <div style="position:absolute;left:64px;right:64px;top:174px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;">
-        <div data-testid="allocation-summary-total" style="background:var(--c1);color:var(--ink);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+        <div data-testid="allocation-summary-total" style="background:var(--c1);color:var(--ink);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:148px;">
           <div class="lab" style="font-size:14px;letter-spacing:0.12em;">TOTAL BUDGET</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;">${this.escapeHtml(totalStr)}</div>
           <div class="lab" style="font-size:14px;opacity:0.85;">${computed.rows.length} DEPARTMENT${computed.rows.length === 1 ? '' : 'S'}</div>
         </div>
-        <div data-testid="allocation-summary-allocated" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+        <div data-testid="allocation-summary-allocated" style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:148px;">
           <div class="lab" style="font-size:14px;letter-spacing:0.12em;color:#AEBAC7;">ALLOCATED</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;">${this.escapeHtml(this.formatAmount(computed.totalAllocatedMinor))}</div>
           <div class="lab" style="font-size:14px;color:#AEBAC7;">${computed.totalAllocatedPct.toFixed(1)}% OF TOTAL</div>
         </div>
-        <div data-testid="allocation-summary-remaining" style="background:#131A21;border:1.5px solid ${computed.isOver ? '#E8799B' : '#3A4552'};color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+        <div data-testid="allocation-summary-remaining" style="background:#131A21;border:1.5px solid ${computed.isOver ? '#E8799B' : '#3A4552'};color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:148px;">
           <div class="lab" style="font-size:14px;letter-spacing:0.12em;color:#AEBAC7;">REMAINING UNALLOCATED</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;color:${computed.isOver ? '#E8799B' : '#B9F0C6'};">${this.escapeHtml(this.formatAmount(computed.remainingMinor))}</div>
           <div class="lab" style="font-size:14px;color:${computed.isOver ? '#E8799B' : '#AEBAC7'};">${computed.isOver ? 'OVER-ALLOCATED' : `${computed.remainingPct.toFixed(1)}% UNALLOCATED`}</div>
         </div>
-        <div style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
+        <div style="background:#131A21;border:1.5px solid #3A4552;color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:148px;">
           <div class="lab" style="font-size:14px;letter-spacing:0.12em;color:#AEBAC7;">SHARE THIS SPLIT</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
             <button type="button" class="btn" id="allocation-copy-btn" data-testid="allocation-copy-btn" style="border-color:var(--bone);color:var(--bone);text-align:left;">Copy text summary</button>
