@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Finance Story — Transform any Excel (.xlsx), CSV, JSON, or PDF ledger into an interactive finance story, processed 100% locally in your browser."
+    />
+    <title>Finance Story</title>
+    <script>
+      (function () {
+        var EXT_RE = /^(?:chrome|moz|safari)-extension:\/\//i;
+        function isExtensionError(filename, stack) {
+          if (typeof filename === 'string' && EXT_RE.test(filename)) return true;
+          if (typeof stack === 'string' && /(?:chrome|moz|safari)-extension:\/\//i.test(stack)) {
+            return !/https?:\/\/[^\s)]+\/(?:src|assets|@vite|node_modules)\//i.test(stack);
+          }
+          return false;
+        }
+        function isViteWsFailure(filename, message, stack) {
+          var msg = typeof message === 'string' ? message : '';
+          var stk = typeof stack === 'string' ? stack : '';
+          var file = typeof filename === 'string' ? filename : '';
+          var fromViteClient =
+            file.indexOf('/@vite/client') !== -1 ||
+            file.indexOf('vite/dist/client') !== -1 ||
+            stk.indexOf('/@vite/client') !== -1 ||
+            stk.indexOf('vite/dist/client') !== -1;
+          if (msg.indexOf('[vite] failed to connect to websocket') !== -1) {
+            return true;
+          }
+          if (msg.indexOf('WebSocket closed without opened') !== -1 && (fromViteClient || !stk)) {
+            return true;
+          }
+          if (fromViteClient && (msg.indexOf('WebSocket') !== -1 || stk.indexOf('WebSocket') !== -1)) {
+            return msg.indexOf('closed without opened') !== -1 || msg.indexOf('failed to connect') !== -1;
+          }
+          return false;
+        }
+        if (typeof console !== 'undefined' && typeof console.error === 'function') {
+          var origConsoleError = console.error;
+          console.error = function () {
+            try {
+              var first = arguments.length > 0 && arguments[0] != null ? String(arguments[0]) : '';
+              if (first.indexOf('[vite] failed to connect to websocket') !== -1) {
+                return;
+              }
+            } catch (_err) {
+              // Fall through to original console.error
+            }
+            return origConsoleError.apply(this, arguments);
+          };
+        }
+        window.addEventListener(
+          'error',
+          function (event) {
+            if (!event) return;
+            var stack = event.error && event.error.stack;
+            var msg = event.message || (event.error && event.error.message) || '';
+            if (isExtensionError(event.filename, stack) || isViteWsFailure(event.filename, msg, stack)) {
+              event.stopImmediatePropagation();
+              event.preventDefault();
+            }
+          },
+          true
+        );
+        window.addEventListener(
+          'unhandledrejection',
+          function (event) {
+            if (!event || !event.reason) return;
+            var reason = event.reason;
+            var msg =
+              typeof reason === 'string'
+                ? reason
+                : reason && typeof reason.message === 'string'
+                  ? reason.message
+                  : '';
+            var stack = reason && typeof reason.stack === 'string' ? reason.stack : '';
+            if (isExtensionError('', stack) || isViteWsFailure('', msg, stack)) {
+              event.stopImmediatePropagation();
+              event.preventDefault();
+            }
+          },
+          true
+        );
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

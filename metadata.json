@@ -1,0 +1,6 @@
+{
+  "name": "Finance Report & Explorer (Template)",
+  "description": "Transform any Excel (.xlsx), CSV, JSON, or PDF ledger into an interactive financial story and explorer — 100% offline and client-only in your browser.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
