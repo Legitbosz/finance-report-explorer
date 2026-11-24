@@ -663,18 +663,18 @@ export class StoryPlayer {
               </div>
             </div>
             <div style="position:relative;z-index:2;display:grid;grid-template-columns:1.1fr 0.9fr;gap:32px;align-items:stretch">
-              <div id="start-hero-block" data-ax="b" style="background:var(--c1);color:var(--ink);padding:52px 56px;display:flex;flex-direction:column;justify-content:space-between;min-height:510px;box-sizing:border-box;transform-origin:50% 100%">
+              <div id="start-hero-block" data-ax="b" style="background:var(--c1);color:var(--ink);padding:52px 56px;display:flex;flex-direction:column;justify-content:space-between;min-height:720px;box-sizing:border-box;transform-origin:50% 100%">
                 <div>
                   <div class="lab" id="start-hero-kicker" style="font-size:13px;letter-spacing:0.12em">${isB2BOrInteractive ? 'EXECUTIVE INTELLIGENCE' : 'AN APP BUILT JUST FOR YOU'}</div>
                   <h1 id="start-hero-title" style="font-size:152px;font-weight:300;letter-spacing:-0.055em;line-height:0.92;margin-top:18px">${heroTitleText}</h1>
                 </div>
-                <p id="start-hero-copy" style="font-size:24px;line-height:1.35;margin-top:28px;max-width:680px">${
+                <p id="start-hero-copy" style="font-size:24px;line-height:1.35;margin-top:28px;max-width:880px">${
                   byoAwaiting
                     ? 'Turn financial ledgers, Excel workbooks, CSV, JSON, or PDF statements into an interactive financial summary — 100% locally in your browser.'
                     : this.escapeHtml(this.resolveCopy(this.displayPlan.one_line))
                 }</p>
               </div>
-              <div id="start-cta-card" data-ax="b" style="background:var(--c4);color:var(--ink);padding:44px 48px;display:flex;flex-direction:column;justify-content:space-between;min-height:510px;box-sizing:border-box;transform-origin:50% 100%">
+              <div id="start-cta-card" data-ax="b" style="background:var(--c4);color:var(--ink);padding:44px 48px;display:flex;flex-direction:column;justify-content:space-between;min-height:720px;box-sizing:border-box;transform-origin:50% 100%">
                 <div>
                   <div class="lab" id="start-cta-kicker" style="font-size:13px;letter-spacing:0.12em">${byoAwaiting ? 'LOAD LOCAL DATA' : 'READY TO PLAY · 120 BPM'}</div>
                   <div id="start-stat-box" style="display:${byoAwaiting ? 'none' : 'block'};margin-top:10px;">
@@ -1526,9 +1526,30 @@ export class StoryPlayer {
     const baseW = hasNativePhoneStage ? 390 : 1920;
     const baseH = hasNativePhoneStage ? 844 : 1080;
 
+    // Fit: cover the viewport instead of letterboxing it, but only as far as
+    // the stage's own edge insets allow. Top-level content keeps at least a
+    // 40px inset from the stage edges (chrome/overlays 64px, chapter blocks
+    // 48px, tightest grid 40px), so the stage may overshoot the viewport by
+    // at most EDGE_CROP_PX per side horizontally without clipping any text,
+    // button or panel. There is NO vertical crop budget: the HUD nav sits
+    // 16px above the bottom edge and the chapter progress bar at the very
+    // top, so the stage never overshoots vertically — on a height-bound
+    // (e.g. 16:9) viewport the scale is unchanged and already fills the
+    // page exactly. Film mode keeps the exact contain fit for capture.
+    // Examples (desktop stage): 1440x900 -> 0.783 (was 0.75, +4.4%, fills
+    // the width, 54px total ink-on-ink gap top/bottom); 1920x1080 and
+    // 1366x768 -> unchanged (already exact); phone landing 390x844 ->
+    // 0.236 (was 0.203).
+    const EDGE_CROP_PX = 32;
+    const containScale = Math.min(availW / baseW, availH / baseH);
+    const coverScale = Math.max(availW / baseW, availH / baseH);
+    const maxScaleW = (availW + 2 * EDGE_CROP_PX) / baseW;
+    const maxScaleH = availH / baseH;
     this.stageScale = isFilm
-      ? Math.min(availW / baseW, availH / baseH)
-      : Math.max(0.18, Math.min(availW / baseW, availH / baseH));
+      ? containScale
+      : Math.max(0.18, Math.min(coverScale, maxScaleW, maxScaleH));
+    // min(cover, maxScaleW, maxScaleH) is always >= containScale, so the
+    // stage never gets smaller than the old letterboxed fit.
 
     this.stageWrapEl.style.setProperty('--s', String(this.stageScale));
     this.stageEl.style.setProperty('--s', String(this.stageScale));
