@@ -500,6 +500,10 @@ export class StoryPlayer {
       #stage-hud-nav .currency-select-wrap { border-left: 1.5px solid #3A4552; padding: 0 8px; gap: 4px; }
       #stage-hud-nav .currency-select-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
       #stage-hud-nav .currency-select { border: 1px solid #46536A; background: #11161C; color: var(--bone); padding: 4px 8px; font-size: 11px; }
+      body #app.tall-stage { justify-content: flex-start; }
+      body #app.scroll-stage { overflow-x: hidden; overflow-y: auto; }
+      #app > #prog { position: fixed; left: 0; top: 0; right: 0; z-index: 80; }
+      #app > #stage-hud-nav { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%) scale(var(--s, 1)); transform-origin: 50% 100%; z-index: 80; }
       #start-currency-wrap { display: inline-flex; align-items: center; gap: 8px; padding: 5px 10px; background: rgba(232, 238, 242, 0.06); border: 1.5px solid #3A4552; }
       #start-currency-wrap .currency-select { border-color: #46536A; background: #11161C; color: var(--c1); font-weight: 600; }
       body.film { padding: 0; background: var(--ink); overflow: hidden; }
@@ -550,9 +554,9 @@ export class StoryPlayer {
       'var(--mint)',
       'var(--blue)',
     ];
-    const startBgTilesHtml = Array.from({ length: 24 }, (_, idx) => {
-      const col = idx % 8;
-      const row = Math.floor(idx / 8);
+    const startBgTilesHtml = Array.from({ length: 36 }, (_, idx) => {
+      const col = idx % 12;
+      const row = Math.floor(idx / 12);
       const x = 96 + col * 232 + (row % 2 === 1 ? 36 : 0);
       const y = 136 + row * 340 + ((col % 3) - 1) * 28;
       const size = 28 + (idx % 4) * 14;
@@ -1081,6 +1085,9 @@ export class StoryPlayer {
     if (chlEl) {
       chlEl.textContent = 'FINANCE STORY · SOURCE';
     }
+    // Landing mode re-sizes the stage (wide landing on ultrawide screens).
+    this.fitViewport();
+    this.resetScroll();
   }
 
   private bindEvents(): void {
@@ -1526,33 +1533,84 @@ export class StoryPlayer {
     const baseW = hasNativePhoneStage ? 390 : 1920;
     const baseH = hasNativePhoneStage ? 844 : 1080;
 
-    // Fit: cover the viewport instead of letterboxing it, but only as far as
-    // the stage's own edge insets allow. Top-level content keeps at least a
-    // 40px inset from the stage edges (chrome/overlays 64px, chapter blocks
-    // 48px, tightest grid 40px), so the stage may overshoot the viewport by
-    // at most EDGE_CROP_PX per side horizontally without clipping any text,
-    // button or panel. There is NO vertical crop budget: the HUD nav sits
-    // 16px above the bottom edge and the chapter progress bar at the very
-    // top, so the stage never overshoots vertically — on a height-bound
-    // (e.g. 16:9) viewport the scale is unchanged and already fills the
-    // page exactly. Film mode keeps the exact contain fit for capture.
-    // Examples (desktop stage): 1440x900 -> 0.783 (was 0.75, +4.4%, fills
-    // the width, 54px total ink-on-ink gap top/bottom); 1920x1080 and
-    // 1366x768 -> unchanged (already exact); phone landing 390x844 ->
-    // 0.236 (was 0.203).
-    const EDGE_CROP_PX = 32;
-    const containScale = Math.min(availW / baseW, availH / baseH);
-    const coverScale = Math.max(availW / baseW, availH / baseH);
-    const maxScaleW = (availW + 2 * EDGE_CROP_PX) / baseW;
-    const maxScaleH = availH / baseH;
-    this.stageScale = isFilm
-      ? containScale
-      : Math.max(0.18, Math.min(coverScale, maxScaleW, maxScaleH));
+    // Sizing modes (desktop, non-film). The stage is a fixed 1920x1080
+    // film frame, so on a viewport wider than 16:9 a plain contain-fit
+    // leaves large black bands left and right (e.g. ~30% of the width on
+    // a 21:9 screen). Two different fills, by screen:
+    // - Landing ("start" mode): the stage grows WIDER to match the viewport
+    //   aspect (stageW = 1080 * viewportAR) and scales by height, so the
+    //   landing fills the whole page like a normal website — no bands, no
+    //   distortion, no cropping. This works because the start screen is a
+    //   fluid grid (inset:0, 1.1fr/0.9fr) that stretches with the stage.
+    // - Story / overlays: chapters are laid out in fixed 1920px coordinates
+    //   and cannot spread, so the frame instead scales to the full viewport
+    //   WIDTH and the page scrolls vertically to the rest of the frame — a
+    //   normal page view. The progress bar and HUD nav are moved out of the
+    //   scaled stage to fixed viewport positions (see placeFixedChrome) so
+    //   they are never scrolled or cropped away.
+    // - 16:9 or narrower: the previous contain/cover-capped fit, unchanged
+    //   (1440x900 -> 0.783, fills the width; 1920x1080 and 1366x768 exact;
+    //   phone landing 390x844 -> 0.236). Film mode keeps the exact contain
+    //   fit for capture.
+    const isLanding = this.mode === 'start';
+    const viewportAR = availW / Math.max(1, availH);
+    const isWide = !hasNativePhoneStage && viewportAR > 1920 / 1080;
+    const landingWide = isLanding && isWide && !isFilm;
+    const stageW = landingWide ? Math.round(1080 * viewportAR) : baseW;
+
+    if (isFilm) {
+      this.stageScale = Math.min(availW / baseW, availH / baseH);
+    } else if (landingWide) {
+      this.stageScale = availH / baseH;
+    } else if (isWide && !isLanding) {
+      this.stageScale = Math.max(0.18, availW / baseW);
+    } else {
+      const EDGE_CROP_PX = 32;
+      const coverScale = Math.max(availW / baseW, availH / baseH);
+      const maxScaleW = (availW + 2 * EDGE_CROP_PX) / baseW;
+      const maxScaleH = availH / baseH;
+      this.stageScale = Math.max(0.18, Math.min(coverScale, maxScaleW, maxScaleH));
+    }
     // min(cover, maxScaleW, maxScaleH) is always >= containScale, so the
     // stage never gets smaller than the old letterboxed fit.
 
+    // Apply the adaptive stage width (landing-wide only; otherwise the
+    // stylesheet's 1920px / 390px widths apply).
+    if (landingWide) {
+      this.stageEl.style.width = `${stageW}px`;
+      this.stageWrapEl.style.width = `${availW}px`;
+      this.stageWrapEl.style.height = `${availH}px`;
+    } else {
+      this.stageEl.style.width = '';
+      this.stageWrapEl.style.width = '';
+      this.stageWrapEl.style.height = '';
+    }
+
     this.stageWrapEl.style.setProperty('--s', String(this.stageScale));
     this.stageEl.style.setProperty('--s', String(this.stageScale));
+    document.documentElement.style.setProperty('--s', String(this.stageScale));
+
+    // On a wider stage the hero title/copy keep their 1920px sizes and the
+    // cards gain empty space, so grow them with the stage.
+    const heroTitleEl = this.startScreenEl?.querySelector<HTMLElement>('#start-hero-title');
+    const heroCopyEl = this.startScreenEl?.querySelector<HTMLElement>('#start-hero-copy');
+    if (landingWide && heroTitleEl && heroCopyEl) {
+      heroTitleEl.style.fontSize = stageW > 2300 ? '188px' : '168px';
+      heroCopyEl.style.maxWidth = stageW > 2300 ? '1080px' : '960px';
+    } else if (heroTitleEl && heroCopyEl) {
+      heroTitleEl.style.fontSize = '';
+      heroCopyEl.style.maxWidth = '';
+    }
+
+    // A story frame scaled to the viewport width is taller than the viewport
+    // on ultrawide screens, so the page scrolls (normal page behaviour).
+    // The landing never overflows: its stage is exactly viewport-sized.
+    const stageScreenH = baseH * this.stageScale;
+    const tall = stageScreenH > availH + 1;
+    const scrollable = tall && !isLanding && !isFilm && !hasNativePhoneStage;
+    this.rootEl.classList.toggle('tall-stage', tall);
+    this.rootEl.classList.toggle('scroll-stage', scrollable);
+    this.placeFixedChrome(scrollable);
 
     const dpr = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
     const bs = Math.min(2, Math.max(1, this.stageScale * dpr));
@@ -1563,6 +1621,41 @@ export class StoryPlayer {
       this.grid.canvas.width = targetW;
       this.grid.canvas.height = targetH;
     }
+  }
+
+  /**
+   * Moves the chapter progress bar and the HUD nav between the scaled stage
+   * (normal mode) and the app root as fixed viewport chrome (tall-story
+   * mode). A `position: fixed` element inside the transformed stage would
+   * be contained by the stage, so the move is required for the HUD to stay
+   * visible while the page scrolls. Moving DOM nodes preserves their event
+   * listeners; the CSS rules `#app > #prog` / `#app > #stage-hud-nav`
+   * re-position them, and the fixed HUD is scaled by --s so it stays in
+   * proportion with the scaled frame.
+   */
+  private placeFixedChrome(wantFixed: boolean): void {
+    const progEl = this.rootEl.querySelector<HTMLElement>('#prog');
+    const hudEl = this.rootEl.querySelector<HTMLElement>('#stage-hud-nav');
+    const chromeEl = this.chromeLayerEl;
+    if (!progEl || !hudEl || !chromeEl) return;
+    if (wantFixed) {
+      if (progEl.parentElement !== this.rootEl) this.rootEl.appendChild(progEl);
+      if (hudEl.parentElement !== this.rootEl) this.rootEl.appendChild(hudEl);
+    } else {
+      if (progEl.parentElement !== chromeEl) {
+        chromeEl.insertBefore(progEl, chromeEl.firstChild);
+      }
+      if (hudEl.parentElement !== chromeEl) {
+        const fclick = chromeEl.querySelector('#fclick');
+        if (fclick) chromeEl.insertBefore(hudEl, fclick);
+        else chromeEl.appendChild(hudEl);
+      }
+    }
+  }
+
+  /** Scrolls the page back to the top of the frame (no-op when it fits). */
+  private resetScroll(): void {
+    this.rootEl.scrollTop = 0;
   }
 
   public startStory(): void {
@@ -1589,6 +1682,9 @@ export class StoryPlayer {
   }
 
   public goToChapter(indexOrId: number | string): void {
+    // On ultrawide screens the frame is taller than the viewport and the
+    // page scrolls; a new chapter always starts at the top of its frame.
+    this.resetScroll();
     if (!this.started) {
       this.started = true;
       this.audioCue.unlock();
@@ -1870,9 +1966,8 @@ export class StoryPlayer {
     this.updatePauseButtonLabel();
     gsap.set(this.chapterHostEl, { autoAlpha: 0 });
     this.mode = 'explore';
-    if (this.stageEl.classList.contains('native-phone')) {
-      this.fitViewport();
-    }
+    this.fitViewport();
+    this.resetScroll();
     this.exploreOverlay.open(initialCategory);
     this.updateNavigationState();
   }
@@ -1914,9 +2009,8 @@ export class StoryPlayer {
     gsap.set(this.chapterHostEl, { autoAlpha: 0 });
     gsap.set(this.grid.canvas, { autoAlpha: 0 });
     this.mode = 'budgets';
-    if (this.stageEl.classList.contains('native-phone')) {
-      this.fitViewport();
-    }
+    this.fitViewport();
+    this.resetScroll();
     this.budgetsOverlay.open();
     this.updateNavigationState();
   }
@@ -1960,9 +2054,8 @@ export class StoryPlayer {
     gsap.set(this.chapterHostEl, { autoAlpha: 0 });
     gsap.set(this.grid.canvas, { autoAlpha: 0 });
     this.mode = mode;
-    if (this.stageEl.classList.contains('native-phone')) {
-      this.fitViewport();
-    }
+    this.fitViewport();
+    this.resetScroll();
     openOverlay();
     this.updateNavigationState();
   }
