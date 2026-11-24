@@ -97,7 +97,7 @@ export class ExploreOverlay {
       pill.dataset.testid = 'drag-pill';
       pill.style.cssText =
         'position:absolute;left:0;top:0;background:var(--c1, #6BE8F2);color:var(--ink, #111111);padding:10px 14px 9px;pointer-events:none;opacity:0;white-space:nowrap;border:1.5px solid #111;z-index:30;';
-      pill.innerHTML = `<div class="num" style="font-size:40px"><sup id="pillsup">₦</sup><span id="pillv">0</span></div><div class="lab" id="pilll" style="font-size:11px;position:static;margin-top:4px"></div>`;
+      pill.innerHTML = `<div class="num" style="font-size:40px"><sup id="pillsup">₦</sup><span id="pillv">0</span></div><div class="lab" id="pilll" style="font-size:14px;position:static;margin-top:4px"></div>`;
       chromeParent.appendChild(pill);
     }
 
@@ -197,7 +197,7 @@ export class ExploreOverlay {
 
     this.overLayerEl.innerHTML = `
       <div class="lab tx" style="position:absolute;left:64px;top:92px">EXPLORE YOUR YEAR</div>
-      <div class="lab tx" style="position:absolute;left:64px;top:122px;font-size:12px">Hover a day · click to flip · drag to add up · tap a lens · scrub to replay</div>
+      <div class="lab tx" style="position:absolute;left:64px;top:122px;font-size:15px">Hover a day · click to flip · drag to add up · tap a lens · scrub to replay</div>
       <div class="tx ia" style="position:absolute;right:64px;top:88px;display:flex;gap:10px;pointer-events:auto;">
         <button type="button" class="btn" id="explore-budgets-btn" data-testid="explore-budgets-btn" style="border-color:var(--bone);color:var(--bone)">Budgets [B]</button>
         <button type="button" class="btn" id="explore-lens-receipts-btn" data-testid="explore-receipts-btn" style="border-color:var(--bone);color:var(--bone)">Receipts</button>
@@ -215,10 +215,10 @@ export class ExploreOverlay {
       <div class="blk later" data-ax="b" id="exsel" data-testid="explore-selection-block" style="position:absolute;left:1220px;top:720px;width:636px;height:296px;background:var(--c1);color:var(--ink);transform-origin:50% 100%;transform:scaleY(0)">
         <div class="lab tx" style="position:absolute;left:28px;top:22px;right:28px;display:flex;justify-content:space-between;align-items:center">
           <span id="exsel-title">SELECTION</span>
-          <button type="button" id="exsel-receipts-btn" data-testid="selection-receipts-btn" style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 12px;background:#111;color:#E8EEF2;cursor:pointer;pointer-events:auto;">Receipts</button>
+          <button type="button" id="exsel-receipts-btn" data-testid="selection-receipts-btn" style="font-family:'JetBrains Mono',monospace;font-size:14px;padding:6px 12px;background:#111;color:#E8EEF2;cursor:pointer;pointer-events:auto;">Receipts</button>
         </div>
         <div class="num tx" style="position:absolute;left:22px;top:66px;font-size:120px"><sup id="exselsup">₦</sup><span id="exselv">0</span></div>
-        <div class="lab tx" id="exsell" style="position:absolute;left:28px;bottom:22px;font-size:12px"></div>
+        <div class="lab tx" id="exsell" style="position:absolute;left:28px;bottom:22px;font-size:15px"></div>
       </div>
     `;
 

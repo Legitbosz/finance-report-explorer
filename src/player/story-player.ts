@@ -441,14 +441,14 @@ export class StoryPlayer {
       #bar .brand { margin-right: auto; display: flex; flex-direction: column; gap: 2px; }
       #bar .brand b { font-weight: 500; font-size: 18px; letter-spacing: -0.01em; }
       #bar .brand span { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
-      .btn { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; padding: 9px 14px; border: 1.5px solid var(--ink); transition: scale 0.12s, background-color 0.2s, color 0.2s; }
+      .btn { font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; padding: 9px 14px; border: 1.5px solid var(--ink); transition: scale 0.12s, background-color 0.2s, color 0.2s; }
       .btn:active { scale: 0.94; }
       .btn.primary { background: var(--ink); color: var(--bone); }
       #chnav { display: flex; border: 1.5px solid var(--ink); flex-wrap: wrap; }
-      #chnav button { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 10px; }
+      #chnav button { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 10px; }
       #chnav button + button { border-left: 1.5px solid var(--ink); }
       #chnav button[aria-current="true"] { background: var(--ink); color: var(--bone); }
-      .tog { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; display: flex; gap: 6px; align-items: center; cursor: pointer; }
+      .tog { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; display: flex; gap: 6px; align-items: center; cursor: pointer; }
       .tog input { width: 15px; height: 15px; accent-color: #111; }
       #stagewrap { position: relative; margin: 0 auto; width: calc(1920px * var(--s, 0.5)); height: calc(1080px * var(--s, 0.5)); flex-shrink: 0; }
       #stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform: scale(var(--s, 0.5)); transform-origin: 0 0; background: var(--ink); color: var(--bone); overflow: hidden; contain: strict; user-select: none; -webkit-user-select: none; }
@@ -487,19 +487,19 @@ export class StoryPlayer {
       #prog button i { position: absolute; inset: 0; background: var(--bone); transform-origin: 0 50%; transform: scaleX(0); }
       #beatdot { display: inline-block; width: 9px; height: 9px; background: var(--c4); margin-right: 6px; }
       #stage-hud-nav { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; align-items: center; background: rgba(17, 17, 17, 0.88); border: 1.5px solid #3A4552; color: var(--bone); pointer-events: auto; z-index: 55; }
-      #stage-hud-nav button { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 12px; color: var(--bone); transition: background-color 0.16s, color 0.16s; white-space: nowrap; }
+      #stage-hud-nav button { font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; padding: 10px 16px; color: var(--bone); transition: background-color 0.16s, color 0.16s; white-space: nowrap; }
       #stage-hud-nav button + button { border-left: 1.5px solid #3A4552; }
       #stage-hud-nav button:hover { background: var(--bone); color: var(--ink); }
       #stage-hud-nav button.hud-primary { background: var(--c1); color: var(--ink); font-weight: 600; }
       #stage-hud-nav button[aria-pressed="true"], #bar .btn[aria-pressed="true"] { background: var(--bone); color: var(--ink); font-weight: 600; }
       .currency-select-wrap { display: inline-flex; align-items: center; gap: 8px; }
-      .currency-select-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.78; white-space: nowrap; }
-      .currency-select { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 10px; border: 1.5px solid #3A4552; background: #141A21; color: var(--bone); cursor: pointer; outline: none; }
+      .currency-select-label { font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.78; white-space: nowrap; }
+      .currency-select { font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 12px; border: 1.5px solid #3A4552; background: #141A21; color: var(--bone); cursor: pointer; outline: none; }
       .currency-select:focus-visible { outline: 2px solid var(--c1); outline-offset: 2px; }
       #bar .currency-select { border-color: var(--ink); background: var(--bone); color: var(--ink); padding: 8px 10px; }
       #stage-hud-nav .currency-select-wrap { border-left: 1.5px solid #3A4552; padding: 0 8px; gap: 4px; }
       #stage-hud-nav .currency-select-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
-      #stage-hud-nav .currency-select { border: 1px solid #46536A; background: #11161C; color: var(--bone); padding: 4px 8px; font-size: 11px; }
+      #stage-hud-nav .currency-select { border: 1px solid #46536A; background: #11161C; color: var(--bone); padding: 6px 10px; font-size: 14px; }
       body #app.tall-stage { justify-content: flex-start; }
       body #app.scroll-stage { overflow-x: hidden; overflow-y: auto; }
       #app > #prog { position: fixed; left: 0; top: 0; right: 0; z-index: 80; }
@@ -618,14 +618,14 @@ export class StoryPlayer {
           </div>
           <div id="chrome" class="layer" style="pointer-events:none">
             <div id="prog" data-testid="story-progress-bar">${progSegmentsHtml}</div>
-            <div class="lab" id="chrome-brand-label" style="position:absolute;left:64px;top:28px;font-size:13px">${
+            <div class="lab" id="chrome-brand-label" style="position:absolute;left:64px;top:28px;font-size:17px">${
               byoAwaiting
                 ? 'Finance Story · Interactive Summary'
                 : `${this.escapeHtml(this.displayPlan.person_name)} · ${this.escapeHtml(yearStr)} · Finance Story`
             }</div>
-            <div class="lab" id="chl" data-testid="chapter-indicator" style="position:absolute;right:64px;top:28px;font-size:13px;text-align:right">START</div>
-            <div class="lab" style="position:absolute;right:64px;bottom:24px;font-size:12px"><i id="beatdot"></i>120 BPM · BEAT <span id="beatn">000</span></div>
-            <div class="lab" style="position:absolute;left:64px;bottom:24px;font-size:12px">← → chapters · space pause · E explore · B budgets · C compare · A allocate · O organisation</div>
+            <div class="lab" id="chl" data-testid="chapter-indicator" style="position:absolute;right:64px;top:28px;font-size:17px;text-align:right">START</div>
+            <div class="lab" style="position:absolute;right:64px;bottom:24px;font-size:16px"><i id="beatdot"></i>120 BPM · BEAT <span id="beatn">000</span></div>
+            <div class="lab" style="position:absolute;left:64px;bottom:24px;font-size:16px">← → chapters · space pause · E explore · B budgets · C compare · A allocate · O organisation</div>
             <div id="stage-hud-nav" data-testid="stage-hud-nav">
               <button type="button" id="hud-prev-btn" data-testid="hud-prev-btn">← Prev</button>
               <button type="button" id="hud-pause-btn" data-testid="hud-pause-btn" class="hud-primary">❚❚ Pause</button>
@@ -655,9 +655,9 @@ export class StoryPlayer {
           <div id="start-screen" data-testid="start-screen" style="position:absolute;inset:0;background:var(--ink);color:var(--bone);z-index:60;display:flex;flex-direction:column;justify-content:space-between;padding:72px 96px;overflow:hidden;">
             <div id="start-bg-grid" data-testid="start-bg-grid" style="position:absolute;inset:0;pointer-events:none;z-index:0;">${startBgTilesHtml}</div>
             <div style="position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:16px">
-              <span class="lab" id="start-top-left-label">${isB2BOrInteractive ? 'FINANCE STORY · INTERACTIVE SUMMARY' : `${this.escapeHtml(this.displayPlan.person_name)} · FINANCIAL ARCHIVE`}</span>
+              <span class="lab" id="start-top-left-label" style="font-size:17px">${isB2BOrInteractive ? 'FINANCE STORY · INTERACTIVE SUMMARY' : `${this.escapeHtml(this.displayPlan.person_name)} · FINANCIAL ARCHIVE`}</span>
               <div style="display:flex;align-items:center;gap:16px">
-                <span class="lab" id="start-top-right-label">${byoAwaiting ? 'LEDGER ANALYSIS' : `${this.escapeHtml(txnsFact?.formatted ?? '1,000')} TRANSACTIONS · ${this.escapeHtml(yearStr)}`}</span>
+                <span class="lab" id="start-top-right-label" style="font-size:17px">${byoAwaiting ? 'LEDGER ANALYSIS' : `${this.escapeHtml(txnsFact?.formatted ?? '1,000')} TRANSACTIONS · ${this.escapeHtml(yearStr)}`}</span>
                 <label id="start-currency-wrap" class="currency-select-wrap" for="start-currency-select">
                   <span class="currency-select-label">Currency</span>
                   <select id="start-currency-select" class="currency-select" data-currency-select data-testid="currency-selector-landing" aria-label="Display currency">
@@ -669,10 +669,10 @@ export class StoryPlayer {
             <div style="position:relative;z-index:2;display:grid;grid-template-columns:1.1fr 0.9fr;gap:32px;align-items:stretch">
               <div id="start-hero-block" data-ax="b" style="background:var(--c1);color:var(--ink);padding:52px 56px;display:flex;flex-direction:column;justify-content:space-between;min-height:720px;box-sizing:border-box;transform-origin:50% 100%">
                 <div>
-                  <div class="lab" id="start-hero-kicker" style="font-size:13px;letter-spacing:0.12em">${isB2BOrInteractive ? 'EXECUTIVE INTELLIGENCE' : 'AN APP BUILT JUST FOR YOU'}</div>
-                  <h1 id="start-hero-title" style="font-size:152px;font-weight:300;letter-spacing:-0.055em;line-height:0.92;margin-top:18px">${heroTitleText}</h1>
+                  <div class="lab" id="start-hero-kicker" style="font-size:18px;letter-spacing:0.12em">${isB2BOrInteractive ? 'EXECUTIVE INTELLIGENCE' : 'AN APP BUILT JUST FOR YOU'}</div>
+                  <h1 id="start-hero-title" style="font-size:112px;font-weight:300;letter-spacing:-0.055em;line-height:0.92;margin-top:18px">${heroTitleText}</h1>
                 </div>
-                <p id="start-hero-copy" style="font-size:24px;line-height:1.35;margin-top:28px;max-width:880px">${
+                <p id="start-hero-copy" style="font-size:30px;line-height:1.35;margin-top:28px;max-width:880px">${
                   byoAwaiting
                     ? 'Turn financial ledgers, Excel workbooks, CSV, JSON, or PDF statements into an interactive financial summary — 100% locally in your browser.'
                     : this.escapeHtml(this.resolveCopy(this.displayPlan.one_line))
@@ -680,9 +680,9 @@ export class StoryPlayer {
               </div>
               <div id="start-cta-card" data-ax="b" style="background:var(--c4);color:var(--ink);padding:44px 48px;display:flex;flex-direction:column;justify-content:space-between;min-height:720px;box-sizing:border-box;transform-origin:50% 100%">
                 <div>
-                  <div class="lab" id="start-cta-kicker" style="font-size:13px;letter-spacing:0.12em">${byoAwaiting ? 'LOAD LOCAL DATA' : 'READY TO PLAY · 120 BPM'}</div>
+                  <div class="lab" id="start-cta-kicker" style="font-size:18px;letter-spacing:0.12em">${byoAwaiting ? 'LOAD LOCAL DATA' : 'READY TO PLAY · 120 BPM'}</div>
                   <div id="start-stat-box" style="display:${byoAwaiting ? 'none' : 'block'};margin-top:10px;">
-                    <div class="lab" id="start-stat-label" style="font-size:12px">TOTAL OPERATING OUTFLOW</div>
+                    <div class="lab" id="start-stat-label" style="font-size:16px">TOTAL OPERATING OUTFLOW</div>
                     <div class="num" style="font-size:72px;margin-top:4px"><sup id="start-stat-sup">${this.escapeHtml(currencySym)}</sup><span id="start-spend-val">${this.escapeHtml(stripCurrencyPrefix(spendFact?.formatted ?? ''))}</span></div>
                   </div>
                 </div>
@@ -694,10 +694,10 @@ export class StoryPlayer {
                     data-testid="byo-file-dropzone"
                     role="button"
                     tabindex="0"
-                    style="padding:20px 18px;background:var(--ink);color:var(--bone);border:2px solid var(--ink);font-family:'JetBrains Mono',monospace;cursor:pointer;text-align:center;transition:background-color 0.15s,color 0.15s;"
+                    style="padding:24px 20px;background:var(--ink);color:var(--bone);border:2px solid var(--ink);font-family:'JetBrains Mono',monospace;cursor:pointer;text-align:center;transition:background-color 0.15s,color 0.15s;"
                   >
-                    <div style="font-weight:600;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--c1)">Upload Excel (.xlsx), CSV, JSON, or PDF</div>
-                    <div style="font-size:11px;opacity:0.78;margin-top:5px;letter-spacing:0.03em">Drag &amp; drop files here or click to browse</div>
+                    <div style="font-weight:600;font-size:17px;letter-spacing:0.08em;text-transform:uppercase;color:var(--c1)">Upload Excel (.xlsx), CSV, JSON, or PDF</div>
+                    <div style="font-size:15px;opacity:0.78;margin-top:6px;letter-spacing:0.03em">Drag &amp; drop files here or click to browse</div>
                   </div>
                   <input
                     type="file"
@@ -712,7 +712,7 @@ export class StoryPlayer {
                   <div
                     id="byo-upload-disclaimer"
                     data-testid="byo-upload-disclaimer"
-                    style="padding:12px 14px;background:rgba(17,17,17,0.12);border-left:3px solid var(--ink);font-size:12px;line-height:1.45;color:var(--ink);font-family:'Inter Tight',system-ui,sans-serif;"
+                    style="padding:16px 18px;background:rgba(17,17,17,0.12);border-left:3px solid var(--ink);font-size:16px;line-height:1.45;color:var(--ink);font-family:'Inter Tight',system-ui,sans-serif;"
                   >
                     <p style="margin:0;font-weight:600;">
                       Processed 100% locally — your files never leave your computer.
@@ -725,7 +725,7 @@ export class StoryPlayer {
                   <div
                     id="byo-progress-box"
                     data-testid="byo-progress-box"
-                    style="display:none;padding:12px 14px;background:var(--ink);color:var(--bone);border:2px solid var(--ink);font-family:'JetBrains Mono',monospace;font-size:11.5px;"
+                    style="display:none;padding:12px 14px;background:var(--ink);color:var(--bone);border:2px solid var(--ink);font-family:'JetBrains Mono',monospace;font-size:14px;"
                   >
                     <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
                       <span id="byo-progress-label" style="color:var(--c1);font-weight:600;">Processing dataset...</span>
@@ -739,11 +739,11 @@ export class StoryPlayer {
                   <div
                     id="byo-status-msg"
                     data-testid="byo-status-msg"
-                    style="display:none;padding:9px 12px;background:var(--ink);color:var(--c1);font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;"
+                    style="display:none;padding:9px 12px;background:var(--ink);color:var(--c1);font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.05em;text-transform:uppercase;"
                   ></div>
                 </div>
 
-                <button type="button" id="start-open-btn" data-testid="start-open-btn" class="mag" style="width:100%;padding:20px 28px;background:var(--ink);color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:16px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;border:2px solid var(--ink);cursor:pointer;text-align:center;">
+                <button type="button" id="start-open-btn" data-testid="start-open-btn" class="mag" style="width:100%;padding:24px 32px;background:var(--ink);color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:20px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;border:2px solid var(--ink);cursor:pointer;text-align:center;">
                   ${openBtnText} <span class="start-cta-arrow" style="display:inline-block">→</span>
                 </button>
               </div>
@@ -1595,7 +1595,7 @@ export class StoryPlayer {
     const heroTitleEl = this.startScreenEl?.querySelector<HTMLElement>('#start-hero-title');
     const heroCopyEl = this.startScreenEl?.querySelector<HTMLElement>('#start-hero-copy');
     if (landingWide && heroTitleEl && heroCopyEl) {
-      heroTitleEl.style.fontSize = stageW > 2300 ? '188px' : '168px';
+      heroTitleEl.style.fontSize = stageW > 2300 ? '132px' : '124px';
       heroCopyEl.style.maxWidth = stageW > 2300 ? '1080px' : '960px';
     } else if (heroTitleEl && heroCopyEl) {
       heroTitleEl.style.fontSize = '';

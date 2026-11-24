@@ -183,17 +183,17 @@ export class ReceiptsDrawer {
   private render(): void {
     this.drawerEl.innerHTML = `
       <div style="padding:24px 28px 18px;border-bottom:2px solid #111;background:#6BE8F2;color:#111">
-        <div style="display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.12em;text-transform:uppercase;">
           <span>Ledger entries · click any row</span>
-          <button type="button" data-action="close-receipts" data-testid="close-receipts-btn" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;padding:6px 12px;border:1.5px solid #111;background:#111;color:#E8EEF2;cursor:pointer;">CLOSE [ESC]</button>
+          <button type="button" data-action="close-receipts" data-testid="close-receipts-btn" style="font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;padding:6px 12px;border:1.5px solid #111;background:#111;color:#E8EEF2;cursor:pointer;">CLOSE [ESC]</button>
         </div>
         <h2 style="font-size:32px;font-weight:400;letter-spacing:-0.03em;line-height:1.1;margin-top:12px">${this.escapeHtml(this.currentTitle)}</h2>
         <div id="receipts-summary-bar" style="margin-top:14px;font-family:'JetBrains Mono',monospace;"></div>
       </div>
       <div style="padding:14px 28px;border-bottom:1.5px solid #111;display:flex;gap:10px;align-items:center;background:#DDE6EE">
-        <input type="search" id="receipts-search" placeholder="Filter merchant, category, date, ID…" value="${this.escapeHtml(this.searchQuery)}" style="flex:1;padding:8px 12px;border:1.5px solid #111;background:#E8EEF2;font-family:'JetBrains Mono',monospace;font-size:12px;color:#111;outline:none;" />
-        <button type="button" data-sort="amount" style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;padding:8px 11px;border:1.5px solid #111;background:${this.sortMode === 'amount' ? '#111' : 'transparent'};color:${this.sortMode === 'amount' ? '#E8EEF2' : '#111'};cursor:pointer;">Amount ↓</button>
-        <button type="button" data-sort="date" style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;padding:8px 11px;border:1.5px solid #111;background:${this.sortMode === 'date' ? '#111' : 'transparent'};color:${this.sortMode === 'date' ? '#E8EEF2' : '#111'};cursor:pointer;">Date ↓</button>
+        <input type="search" id="receipts-search" placeholder="Filter merchant, category, date, ID…" value="${this.escapeHtml(this.searchQuery)}" style="flex:1;padding:8px 12px;border:1.5px solid #111;background:#E8EEF2;font-family:'JetBrains Mono',monospace;font-size:15px;color:#111;outline:none;" />
+        <button type="button" data-sort="amount" style="font-family:'JetBrains Mono',monospace;font-size:14px;text-transform:uppercase;padding:8px 11px;border:1.5px solid #111;background:${this.sortMode === 'amount' ? '#111' : 'transparent'};color:${this.sortMode === 'amount' ? '#E8EEF2' : '#111'};cursor:pointer;">Amount ↓</button>
+        <button type="button" data-sort="date" style="font-family:'JetBrains Mono',monospace;font-size:14px;text-transform:uppercase;padding:8px 11px;border:1.5px solid #111;background:${this.sortMode === 'date' ? '#111' : 'transparent'};color:${this.sortMode === 'date' ? '#E8EEF2' : '#111'};cursor:pointer;">Date ↓</button>
       </div>
       <div id="receipts-list" data-testid="receipts-list" style="flex:1;overflow-y:auto;padding:12px 28px 28px"></div>
     `;
@@ -250,7 +250,7 @@ export class ReceiptsDrawer {
           : '';
 
     const breakdownHtml = isMixed
-      ? `<div style="display:flex;justify-content:flex-end;gap:14px;margin-top:6px;font-size:11px;letter-spacing:0.04em;opacity:0.85">
+      ? `<div style="display:flex;justify-content:flex-end;gap:14px;margin-top:6px;font-size:14px;letter-spacing:0.04em;opacity:0.85">
            <span>+${this.escapeHtml(this.currencySymbol)}${inAmount} IN</span>
            <span>-${this.escapeHtml(this.currencySymbol)}${outAmount} OUT</span>
          </div>`
@@ -311,10 +311,10 @@ export class ReceiptsDrawer {
             <div style="flex:1;min-width:0">
               <div style="display:flex;gap:8px;align-items:baseline">
                 <strong style="font-weight:600;color:#111;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${this.escapeHtml(t.merchant)}</strong>
-                <span style="font-size:10px;padding:2px 6px;border:1px solid #111;text-transform:uppercase;background:#DDE6EE">${this.escapeHtml(catDisplay)}</span>
-                ${t.is_refund ? '<span style="font-size:10px;padding:2px 5px;background:#C9B8F0;color:#111;text-transform:uppercase">REFUND</span>' : ''}
+                <span style="font-size:13px;padding:2px 6px;border:1px solid #111;text-transform:uppercase;background:#DDE6EE">${this.escapeHtml(catDisplay)}</span>
+                ${t.is_refund ? '<span style="font-size:13px;padding:2px 5px;background:#C9B8F0;color:#111;text-transform:uppercase">REFUND</span>' : ''}
               </div>
-              <div style="font-size:11px;color:#5B6B7C;margin-top:3px;display:flex;gap:12px">
+              <div style="font-size:14px;color:#5B6B7C;margin-top:3px;display:flex;gap:12px">
                 <span>${this.escapeHtml(t.date)}</span>
                 <span>ID: ${this.escapeHtml(t.id)}</span>
               </div>

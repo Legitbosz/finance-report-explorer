@@ -124,9 +124,9 @@ export class YearComparisonOverlay {
         ${this.renderTotalCard(`THIS YEAR (${this.escapeHtml(currentLabel)})`, comparison.current, true)}
         ${this.renderTotalCard(`LAST YEAR (${this.escapeHtml(previousLabel)})`, comparison.previous, false)}
         <div data-testid="compare-change-card" style="background:#131A21;border:1.5px solid ${comparison.netImproved ? '#B9F0C6' : '#E8799B'};color:var(--bone);padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
-          <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;color:#AEBAC7;">CHANGE VS LAST YEAR</div>
+          <div class="lab" style="font-size:14px;letter-spacing:0.12em;color:#AEBAC7;">CHANGE VS LAST YEAR</div>
           <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;color:${comparison.netImproved ? '#B9F0C6' : '#E8799B'};">${comparison.netDeltaMinor >= 0 ? '+' : ''}${this.escapeHtml(this.formatAmount(comparison.netDeltaMinor))}</div>
-          <div class="lab" style="font-size:11px;color:#AEBAC7;">INCOME ${this.escapeHtml(this.formatPct(comparison.incomeDeltaPct))} · EXPENSES ${this.escapeHtml(this.formatPct(comparison.expenseDeltaPct))}</div>
+          <div class="lab" style="font-size:14px;color:#AEBAC7;">INCOME ${this.escapeHtml(this.formatPct(comparison.incomeDeltaPct))} · EXPENSES ${this.escapeHtml(this.formatPct(comparison.expenseDeltaPct))}</div>
         </div>
       </div>`
       : '';
@@ -134,10 +134,10 @@ export class YearComparisonOverlay {
     const tableHtml = comparison
       ? `
       <div style="position:absolute;left:64px;right:64px;top:${comparison ? 330 : 330}px;bottom:84px;overflow-y:auto;">
-        <div class="lab" style="font-size:12px;color:#AEBAC7;margin-bottom:12px;">${this.escapeHtml(comparison.summaryText)}</div>
+        <div class="lab" style="font-size:15px;color:#AEBAC7;margin-bottom:12px;">${this.escapeHtml(comparison.summaryText)}</div>
         <table data-testid="compare-table" style="width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:13px;">
           <thead>
-            <tr style="text-align:left;color:#AEBAC7;text-transform:uppercase;font-size:11px;letter-spacing:0.08em;">
+            <tr style="text-align:left;color:#AEBAC7;text-transform:uppercase;font-size:14px;letter-spacing:0.08em;">
               <th style="padding:10px 12px;border-bottom:1.5px solid #3A4552;">Category</th>
               <th style="padding:10px 12px;border-bottom:1.5px solid #3A4552;text-align:right;">${this.escapeHtml(currentLabel)} spend</th>
               <th style="padding:10px 12px;border-bottom:1.5px solid #3A4552;text-align:right;">${this.escapeHtml(previousLabel)} spend</th>
@@ -161,7 +161,7 @@ export class YearComparisonOverlay {
           </tbody>
         </table>
         <div style="margin-top:18px;">
-          <div class="lab" style="font-size:11px;color:#AEBAC7;margin-bottom:10px;">SPENDING BY CATEGORY — ${this.escapeHtml(currentLabel)} VS ${this.escapeHtml(previousLabel)}</div>
+          <div class="lab" style="font-size:14px;color:#AEBAC7;margin-bottom:10px;">SPENDING BY CATEGORY — ${this.escapeHtml(currentLabel)} VS ${this.escapeHtml(previousLabel)}</div>
           ${comparison.categoryRows.map((row) => this.renderCategoryBars(row)).join('')}
         </div>
       </div>`
@@ -169,13 +169,13 @@ export class YearComparisonOverlay {
       <div style="position:absolute;left:64px;right:64px;top:330px;bottom:84px;overflow-y:auto;">
         <div style="padding:48px;border:1.5px solid #3A4552;background:#131A21;text-align:center;">
           <div style="font-size:24px;font-weight:400;margin-bottom:10px;">No last-year file loaded yet.</div>
-          <div class="lab" style="font-size:12px;color:#AEBAC7">Load a ledger from last year to compare it with ${this.escapeHtml(currentLabel)} — the file is parsed locally in your browser and never uploaded.</div>
+          <div class="lab" style="font-size:15px;color:#AEBAC7">Load a ledger from last year to compare it with ${this.escapeHtml(currentLabel)} — the file is parsed locally in your browser and never uploaded.</div>
         </div>
       </div>`;
 
     this.layerEl.innerHTML = `
       <div class="lab" style="position:absolute;left:64px;top:92px;">THIS YEAR VS LAST YEAR</div>
-      <div class="lab" style="position:absolute;left:64px;top:122px;font-size:12px;color:#AEBAC7;">${current ? `${this.escapeHtml(current.txnCount.toString())} TRANSACTIONS IN ${this.escapeHtml(currentLabel)}` : 'LOAD A LEDGER TO COMPARE YEARS'} · SAVED LOCALLY IN YOUR BROWSER</div>
+      <div class="lab" style="position:absolute;left:64px;top:122px;font-size:15px;color:#AEBAC7;">${current ? `${this.escapeHtml(current.txnCount.toString())} TRANSACTIONS IN ${this.escapeHtml(currentLabel)}` : 'LOAD A LEDGER TO COMPARE YEARS'} · SAVED LOCALLY IN YOUR BROWSER</div>
 
       <div style="position:absolute;right:64px;top:86px;display:flex;gap:10px;align-items:center;pointer-events:auto;flex-wrap:wrap;justify-content:flex-end;">
         <button type="button" class="btn" id="compare-load-current-btn" data-testid="compare-load-current-btn" style="border-color:var(--bone);color:var(--bone)">Load this-year file</button>
@@ -188,8 +188,8 @@ export class YearComparisonOverlay {
       <input type="file" id="compare-file-input" data-testid="compare-file-input" accept=".xlsx,.xls,.csv,.json,.pdf,.tsv,.txt" style="display:none" />
       <input type="file" id="compare-current-file-input" data-testid="compare-current-file-input" accept=".xlsx,.xls,.csv,.json,.pdf,.tsv,.txt" style="display:none" />
 
-      ${this.loadingMessage ? `<div data-testid="compare-loading" style="position:absolute;left:64px;right:64px;top:150px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--c1);">${this.escapeHtml(this.loadingMessage)}</div>` : ''}
-      ${this.loadError ? `<div data-testid="compare-error" style="position:absolute;left:64px;right:64px;top:150px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#E8799B;">${this.escapeHtml(this.loadError)}</div>` : ''}
+      ${this.loadingMessage ? `<div data-testid="compare-loading" style="position:absolute;left:64px;right:64px;top:150px;font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--c1);">${this.escapeHtml(this.loadingMessage)}</div>` : ''}
+      ${this.loadError ? `<div data-testid="compare-error" style="position:absolute;left:64px;right:64px;top:150px;font-family:'JetBrains Mono',monospace;font-size:15px;color:#E8799B;">${this.escapeHtml(this.loadError)}</div>` : ''}
 
       ${summaryCards}
       ${tableHtml}
@@ -204,9 +204,9 @@ export class YearComparisonOverlay {
     const border = isCurrent ? 'var(--c1)' : '#3A4552';
     return `
       <div data-testid="compare-total-${isCurrent ? 'current' : 'previous'}" style="background:${accent};border:1.5px solid ${border};color:${fg};padding:20px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:132px;">
-        <div class="lab" style="font-size:11.5px;letter-spacing:0.12em;${isCurrent ? '' : 'color:#AEBAC7;'}">${this.escapeHtml(title)}</div>
+        <div class="lab" style="font-size:14px;letter-spacing:0.12em;${isCurrent ? '' : 'color:#AEBAC7;'}">${this.escapeHtml(title)}</div>
         <div style="font-size:40px;font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.05;">${this.escapeHtml(this.formatAmount(summary.netMinor))} net</div>
-        <div class="lab" style="font-size:11px;${isCurrent ? 'opacity:0.85;' : 'color:#AEBAC7;'}">${this.escapeHtml(this.formatAmount(summary.incomeMinor))} IN · ${this.escapeHtml(this.formatAmount(summary.expenseMinor))} OUT · ${summary.txnCount} TXNS</div>
+        <div class="lab" style="font-size:14px;${isCurrent ? 'opacity:0.85;' : 'color:#AEBAC7;'}">${this.escapeHtml(this.formatAmount(summary.incomeMinor))} IN · ${this.escapeHtml(this.formatAmount(summary.expenseMinor))} OUT · ${summary.txnCount} TXNS</div>
       </div>`;
   }
 
@@ -220,7 +220,7 @@ export class YearComparisonOverlay {
     const prevPct = (row.previousExpenseMinor / max) * 100;
     return `
       <div style="margin-bottom:12px;">
-        <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;color:#AEBAC7;margin-bottom:4px;">
+        <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:14px;color:#AEBAC7;margin-bottom:4px;">
           <span>${this.escapeHtml(row.label)}</span>
           <span>${this.escapeHtml(this.formatAmount(row.currentExpenseMinor))} vs ${this.escapeHtml(this.formatAmount(row.previousExpenseMinor))}</span>
         </div>
