@@ -16,6 +16,9 @@ import type {
 import { createCoreChapterModule } from '../chapters/core/index.js';
 import type { ExtendedChapterContext } from '../chapters/core/pour-chapter.js';
 import { BudgetsOverlay } from '../budgets/budgets-overlay.js';
+import { AllocationOverlay } from '../allocation/allocation-overlay.js';
+import { YearComparisonOverlay } from '../compare/year-comparison-overlay.js';
+import { OrganisationOverlay } from '../organisation/organisation-overlay.js';
 import {
   CURRENCY_OPTIONS,
   getCurrencySymbol,
@@ -116,6 +119,9 @@ export class StoryPlayer {
   public readonly receiptsDrawer: ReceiptsDrawer;
   public readonly exploreOverlay: ExploreOverlay;
   public readonly budgetsOverlay: BudgetsOverlay;
+  public readonly compareOverlay: YearComparisonOverlay;
+  public readonly allocationOverlay: AllocationOverlay;
+  public readonly organisationOverlay: OrganisationOverlay;
 
   private stageWrapEl!: HTMLElement;
   private stageEl!: HTMLElement;
@@ -130,7 +136,8 @@ export class StoryPlayer {
   private started = false;
   private currentChapterIdx = -1;
   private activeChapterModule: ChapterModule | null = null;
-  private mode: 'start' | 'story' | 'explore' | 'budgets' = 'start';
+  private mode: 'start' | 'story' | 'explore' | 'budgets' | 'compare' | 'allocation' | 'organisation' =
+    'start';
   private readonly customChapterRegistry = new Map<string, () => ChapterModule>();
   public manualStepping = false;
   public byoMode = false;
@@ -234,6 +241,47 @@ export class StoryPlayer {
       currencySym
     );
 
+    this.compareOverlay = new YearComparisonOverlay(this.overLayerEl, {
+      onCloseCompare: () => this.closeCompare(),
+      onOpenExplore: () => this.openExplore(),
+      onOpenBudgets: () => this.openBudgets(),
+      onLoadDataset: (bundle) => this.loadDataset(bundle, true),
+      onLogEvent: (type, val) => this.timeline.logEvent(type, val),
+    });
+    this.compareOverlay.setDataset(
+      data.days,
+      data.transactions,
+      this.displayPlan.category_labels,
+      Boolean(this.displayPlan.business_meta),
+      currencySym
+    );
+
+    this.allocationOverlay = new AllocationOverlay(this.overLayerEl, {
+      onCloseAllocation: () => this.closeAllocation(),
+      onOpenBudgets: () => this.openBudgets(),
+      onLogEvent: (type, val) => this.timeline.logEvent(type, val),
+    });
+    this.allocationOverlay.setDataset(
+      data.days,
+      data.transactions,
+      this.displayPlan.category_labels,
+      Boolean(this.displayPlan.business_meta),
+      currencySym
+    );
+
+    this.organisationOverlay = new OrganisationOverlay(this.overLayerEl, {
+      onCloseOrganisation: () => this.closeOrganisation(),
+      onOpenBudgets: () => this.openBudgets(),
+      onLogEvent: (type, val) => this.timeline.logEvent(type, val),
+    });
+    this.organisationOverlay.setDataset(
+      data.days,
+      data.transactions,
+      this.displayPlan.category_labels,
+      Boolean(this.displayPlan.business_meta),
+      currencySym
+    );
+
     this.bindEvents();
     this.fitViewport();
     this.grid.stepAndDraw(0);
@@ -264,6 +312,9 @@ export class StoryPlayer {
     this.receiptsDrawer.setCurrencySymbol(symbol);
     this.exploreOverlay.setCurrencySymbol(symbol);
     this.budgetsOverlay.setCurrencySymbol(symbol);
+    this.compareOverlay.setCurrencySymbol(symbol);
+    this.allocationOverlay.setCurrencySymbol(symbol);
+    this.organisationOverlay.setCurrencySymbol(symbol);
     this.refreshStartScreenCurrencyUi();
 
     if (this.started && this.mode === 'story' && this.currentChapterIdx >= 0) {
@@ -534,6 +585,9 @@ export class StoryPlayer {
           <button type="button" class="btn" id="nav-next-btn" data-testid="nav-next-btn">Next →</button>
           <button type="button" class="btn" id="nav-explore-btn" data-testid="nav-explore-btn">Explore [E]</button>
           <button type="button" class="btn" id="nav-budgets-btn" data-testid="nav-budgets-btn">Budgets [B]</button>
+          <button type="button" class="btn" id="nav-compare-btn" data-testid="nav-compare-btn">Compare [C]</button>
+          <button type="button" class="btn" id="nav-allocation-btn" data-testid="nav-allocation-btn">Allocate [A]</button>
+          <button type="button" class="btn" id="nav-organisation-btn" data-testid="nav-organisation-btn">Organisation [O]</button>
           <button type="button" class="btn" id="nav-receipts-btn" data-testid="nav-receipts-btn">Receipts</button>
           <button type="button" class="btn" id="nav-share-btn" data-testid="nav-share-btn">Share PNG</button>
           <button type="button" class="btn" id="nav-data-btn" data-testid="nav-data-btn" title="Return to landing page to upload a new dataset">Upload Data</button>
@@ -567,13 +621,16 @@ export class StoryPlayer {
             }</div>
             <div class="lab" id="chl" data-testid="chapter-indicator" style="position:absolute;right:64px;top:28px;font-size:13px;text-align:right">START</div>
             <div class="lab" style="position:absolute;right:64px;bottom:24px;font-size:12px"><i id="beatdot"></i>120 BPM · BEAT <span id="beatn">000</span></div>
-            <div class="lab" style="position:absolute;left:64px;bottom:24px;font-size:12px">← → chapters · space pause · E explore · B budgets</div>
+            <div class="lab" style="position:absolute;left:64px;bottom:24px;font-size:12px">← → chapters · space pause · E explore · B budgets · C compare · A allocate · O organisation</div>
             <div id="stage-hud-nav" data-testid="stage-hud-nav">
               <button type="button" id="hud-prev-btn" data-testid="hud-prev-btn">← Prev</button>
               <button type="button" id="hud-pause-btn" data-testid="hud-pause-btn" class="hud-primary">❚❚ Pause</button>
               <button type="button" id="hud-next-btn" data-testid="hud-next-btn">Next →</button>
               <button type="button" id="hud-explore-btn" data-testid="hud-explore-btn">Explore [E]</button>
               <button type="button" id="hud-budgets-btn" data-testid="hud-budgets-btn">Budgets [B]</button>
+              <button type="button" id="hud-compare-btn" data-testid="hud-compare-btn">Compare [C]</button>
+              <button type="button" id="hud-allocation-btn" data-testid="hud-allocation-btn">Allocate [A]</button>
+              <button type="button" id="hud-organisation-btn" data-testid="hud-organisation-btn">Organisation [O]</button>
               <button type="button" id="hud-receipts-btn" data-testid="hud-receipts-btn">Receipts</button>
               <button type="button" id="hud-share-btn" data-testid="hud-share-btn">Share</button>
               <button type="button" id="hud-data-btn" data-testid="hud-data-btn" title="Return to landing page to upload a new dataset">Upload Data</button>
@@ -851,6 +908,27 @@ export class StoryPlayer {
       Boolean(this.displayPlan.business_meta),
       currencySym
     );
+    this.compareOverlay.setDataset(
+      bundle.days,
+      bundle.transactions,
+      this.displayPlan.category_labels,
+      Boolean(this.displayPlan.business_meta),
+      currencySym
+    );
+    this.allocationOverlay.setDataset(
+      bundle.days,
+      bundle.transactions,
+      this.displayPlan.category_labels,
+      Boolean(this.displayPlan.business_meta),
+      currencySym
+    );
+    this.organisationOverlay.setDataset(
+      bundle.days,
+      bundle.transactions,
+      this.displayPlan.category_labels,
+      Boolean(this.displayPlan.business_meta),
+      currencySym
+    );
 
     const yearStr =
       this.factMap.get(this.displayPlan.year_fact_id)?.formatted ?? String(this.displayPlan.year);
@@ -970,6 +1048,15 @@ export class StoryPlayer {
       this.exploreOverlay.close();
     } else if (this.mode === 'budgets') {
       this.budgetsOverlay.close();
+      gsap.set(this.grid.canvas, { autoAlpha: 1 });
+    } else if (this.mode === 'compare') {
+      this.compareOverlay.close();
+      gsap.set(this.grid.canvas, { autoAlpha: 1 });
+    } else if (this.mode === 'allocation') {
+      this.allocationOverlay.close();
+      gsap.set(this.grid.canvas, { autoAlpha: 1 });
+    } else if (this.mode === 'organisation') {
+      this.organisationOverlay.close();
       gsap.set(this.grid.canvas, { autoAlpha: 1 });
     }
     this.mode = 'start';
@@ -1101,6 +1188,24 @@ export class StoryPlayer {
         else this.openBudgets();
       });
     this.rootEl
+      .querySelector('#nav-compare-btn')
+      ?.addEventListener('click', () => {
+        if (this.mode === 'compare') this.closeCompare();
+        else this.openCompare();
+      });
+    this.rootEl
+      .querySelector('#nav-allocation-btn')
+      ?.addEventListener('click', () => {
+        if (this.mode === 'allocation') this.closeAllocation();
+        else this.openAllocation();
+      });
+    this.rootEl
+      .querySelector('#nav-organisation-btn')
+      ?.addEventListener('click', () => {
+        if (this.mode === 'organisation') this.closeOrganisation();
+        else this.openOrganisation();
+      });
+    this.rootEl
       .querySelector('#nav-receipts-btn')
       ?.addEventListener('click', openCurrentChapterReceipts);
     this.rootEl.querySelector('#nav-share-btn')?.addEventListener('click', () => {
@@ -1124,6 +1229,24 @@ export class StoryPlayer {
       ?.addEventListener('click', () => {
         if (this.mode === 'budgets') this.closeBudgets();
         else this.openBudgets();
+      });
+    this.rootEl
+      .querySelector('#hud-compare-btn')
+      ?.addEventListener('click', () => {
+        if (this.mode === 'compare') this.closeCompare();
+        else this.openCompare();
+      });
+    this.rootEl
+      .querySelector('#hud-allocation-btn')
+      ?.addEventListener('click', () => {
+        if (this.mode === 'allocation') this.closeAllocation();
+        else this.openAllocation();
+      });
+    this.rootEl
+      .querySelector('#hud-organisation-btn')
+      ?.addEventListener('click', () => {
+        if (this.mode === 'organisation') this.closeOrganisation();
+        else this.openOrganisation();
       });
     this.rootEl
       .querySelector('#hud-receipts-btn')
@@ -1240,6 +1363,12 @@ export class StoryPlayer {
           this.exploreOverlay.flipCard.close();
         } else if (this.mode === 'budgets') {
           this.closeBudgets();
+        } else if (this.mode === 'compare') {
+          this.closeCompare();
+        } else if (this.mode === 'allocation') {
+          this.closeAllocation();
+        } else if (this.mode === 'organisation') {
+          this.closeOrganisation();
         } else if (this.mode === 'explore') {
           this.closeExplore();
         } else if (this.mode === 'start' && this.started) {
@@ -1270,6 +1399,18 @@ export class StoryPlayer {
         if (this.byoMode && !this.byoLoaded && !this.started) return;
         if (this.mode === 'budgets') this.closeBudgets();
         else this.openBudgets();
+      } else if (e.key === 'c' || e.key === 'C') {
+        if (this.byoMode && !this.byoLoaded && !this.started) return;
+        if (this.mode === 'compare') this.closeCompare();
+        else this.openCompare();
+      } else if (e.key === 'a' || e.key === 'A') {
+        if (this.byoMode && !this.byoLoaded && !this.started) return;
+        if (this.mode === 'allocation') this.closeAllocation();
+        else this.openAllocation();
+      } else if (e.key === 'o' || e.key === 'O') {
+        if (this.byoMode && !this.byoLoaded && !this.started) return;
+        if (this.mode === 'organisation') this.closeOrganisation();
+        else this.openOrganisation();
       }
     };
     window.addEventListener('keydown', this.keydownBound);
@@ -1447,6 +1588,15 @@ export class StoryPlayer {
       this.exploreOverlay.close();
     } else if (this.mode === 'budgets') {
       this.budgetsOverlay.close();
+      gsap.set(this.grid.canvas, { autoAlpha: 1 });
+    } else if (this.mode === 'compare') {
+      this.compareOverlay.close();
+      gsap.set(this.grid.canvas, { autoAlpha: 1 });
+    } else if (this.mode === 'allocation') {
+      this.allocationOverlay.close();
+      gsap.set(this.grid.canvas, { autoAlpha: 1 });
+    } else if (this.mode === 'organisation') {
+      this.organisationOverlay.close();
       gsap.set(this.grid.canvas, { autoAlpha: 1 });
     }
 
@@ -1685,6 +1835,15 @@ export class StoryPlayer {
     if (this.mode === 'budgets') {
       this.budgetsOverlay.close();
     }
+    if (this.mode === 'compare') {
+      this.compareOverlay.close();
+    }
+    if (this.mode === 'allocation') {
+      this.allocationOverlay.close();
+    }
+    if (this.mode === 'organisation') {
+      this.organisationOverlay.close();
+    }
     gsap.set(this.grid.canvas, { autoAlpha: 1 });
     this.timeline.pause();
     this.updatePauseButtonLabel();
@@ -1720,6 +1879,15 @@ export class StoryPlayer {
     if (this.mode === 'explore') {
       this.exploreOverlay.close();
     }
+    if (this.mode === 'compare') {
+      this.compareOverlay.close();
+    }
+    if (this.mode === 'allocation') {
+      this.allocationOverlay.close();
+    }
+    if (this.mode === 'organisation') {
+      this.organisationOverlay.close();
+    }
     this.timeline.pause();
     this.updatePauseButtonLabel();
     gsap.set(this.chapterHostEl, { autoAlpha: 0 });
@@ -1743,6 +1911,79 @@ export class StoryPlayer {
     } else {
       this.goToChapter(this.currentChapterIdx);
     }
+  }
+
+  private closeOtherOverlays(except: 'explore' | 'budgets' | 'compare' | 'allocation' | 'organisation'): void {
+    if (except !== 'explore' && this.mode === 'explore') this.exploreOverlay.close();
+    if (except !== 'budgets' && this.mode === 'budgets') this.budgetsOverlay.close();
+    if (except !== 'compare' && this.mode === 'compare') this.compareOverlay.close();
+    if (except !== 'allocation' && this.mode === 'allocation') this.allocationOverlay.close();
+    if (except !== 'organisation' && this.mode === 'organisation')
+      this.organisationOverlay.close();
+  }
+
+  private enterOverlayMode(
+    mode: 'compare' | 'allocation' | 'organisation',
+    openOverlay: () => void
+  ): void {
+    if (this.byoMode && !this.byoLoaded && !this.started) {
+      return;
+    }
+    if (!this.started) {
+      this.started = true;
+      this.startScreenEl.style.display = 'none';
+    }
+    this.closeOtherOverlays(mode);
+    this.timeline.pause();
+    this.updatePauseButtonLabel();
+    gsap.set(this.chapterHostEl, { autoAlpha: 0 });
+    gsap.set(this.grid.canvas, { autoAlpha: 0 });
+    this.mode = mode;
+    if (this.stageEl.classList.contains('native-phone')) {
+      this.fitViewport();
+    }
+    openOverlay();
+    this.updateNavigationState();
+  }
+
+  private exitOverlayMode(
+    mode: 'compare' | 'allocation' | 'organisation',
+    closeOverlay: () => void
+  ): void {
+    if (this.mode !== mode) return;
+    closeOverlay();
+    gsap.set(this.grid.canvas, { autoAlpha: 1 });
+    this.mode = 'story';
+    gsap.set(this.chapterHostEl, { autoAlpha: 1 });
+    if (this.currentChapterIdx < 0) {
+      this.goToChapter(0);
+    } else {
+      this.goToChapter(this.currentChapterIdx);
+    }
+  }
+
+  public openCompare(): void {
+    this.enterOverlayMode('compare', () => this.compareOverlay.open());
+  }
+
+  public closeCompare(): void {
+    this.exitOverlayMode('compare', () => this.compareOverlay.close());
+  }
+
+  public openAllocation(): void {
+    this.enterOverlayMode('allocation', () => this.allocationOverlay.open());
+  }
+
+  public closeAllocation(): void {
+    this.exitOverlayMode('allocation', () => this.allocationOverlay.close());
+  }
+
+  public openOrganisation(): void {
+    this.enterOverlayMode('organisation', () => this.organisationOverlay.open());
+  }
+
+  public closeOrganisation(): void {
+    this.exitOverlayMode('organisation', () => this.organisationOverlay.close());
   }
 
   public openReceipts(title: string, txnIds: readonly string[]): void {
@@ -1842,6 +2083,12 @@ export class StoryPlayer {
         chlEl.textContent = 'EXPLORE MODE · 365 DAYS';
       } else if (this.mode === 'budgets') {
         chlEl.textContent = 'BUDGETS · MONTHLY TRACKER';
+      } else if (this.mode === 'compare') {
+        chlEl.textContent = 'COMPARE · THIS YEAR VS LAST YEAR';
+      } else if (this.mode === 'allocation') {
+        chlEl.textContent = 'ALLOCATION · DEPARTMENTS & UNITS';
+      } else if (this.mode === 'organisation') {
+        chlEl.textContent = 'ORGANISATION · STAFF & BRANCHES';
       } else if (ch) {
         const badge =
           !this.displayPlan.business_meta && ch.params.badge
@@ -1867,6 +2114,24 @@ export class StoryPlayer {
     this.rootEl
       .querySelector('#hud-budgets-btn')
       ?.setAttribute('aria-pressed', this.mode === 'budgets' ? 'true' : 'false');
+    this.rootEl
+      .querySelector('#nav-compare-btn')
+      ?.setAttribute('aria-pressed', this.mode === 'compare' ? 'true' : 'false');
+    this.rootEl
+      .querySelector('#hud-compare-btn')
+      ?.setAttribute('aria-pressed', this.mode === 'compare' ? 'true' : 'false');
+    this.rootEl
+      .querySelector('#nav-allocation-btn')
+      ?.setAttribute('aria-pressed', this.mode === 'allocation' ? 'true' : 'false');
+    this.rootEl
+      .querySelector('#hud-allocation-btn')
+      ?.setAttribute('aria-pressed', this.mode === 'allocation' ? 'true' : 'false');
+    this.rootEl
+      .querySelector('#nav-organisation-btn')
+      ?.setAttribute('aria-pressed', this.mode === 'organisation' ? 'true' : 'false');
+    this.rootEl
+      .querySelector('#hud-organisation-btn')
+      ?.setAttribute('aria-pressed', this.mode === 'organisation' ? 'true' : 'false');
 
     this.rootEl.querySelectorAll<HTMLButtonElement>('[data-ch-index]').forEach((btn) => {
       const idx = Number(btn.dataset.chIndex);
@@ -1900,7 +2165,7 @@ export class StoryPlayer {
     started: boolean;
     chapterIndex: number;
     chapterId: string | null;
-    mode: 'start' | 'story' | 'explore' | 'budgets';
+    mode: 'start' | 'story' | 'explore' | 'budgets' | 'compare' | 'allocation' | 'organisation';
     reducedMotion: boolean;
     paused: boolean;
   } {
